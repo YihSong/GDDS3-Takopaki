@@ -7,7 +7,7 @@ public class EnemyController : MonoBehaviour
 
     public Transform target;
     public float moveSpeed;
-    public float damping;
+    public float turnSpeed;
     
     // Start is called before the first frame update
     void Start()
@@ -20,11 +20,22 @@ public class EnemyController : MonoBehaviour
     {
         if(target != null)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+            //Move to target
+            if (Vector3.Distance(transform.position, target.position) > 1)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+            }
+
+            else
+            {
+                //TODO: attack
+            }
+
+            //Look at target
             Vector3 lookPos = target.position - transform.position;
             lookPos.y = 0;
             Quaternion rotation = Quaternion.LookRotation(lookPos);
-            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * damping);
+            transform.rotation = Quaternion.Slerp(transform.rotation, rotation, Time.deltaTime * turnSpeed);
         }
 
         else
@@ -42,6 +53,7 @@ public class EnemyController : MonoBehaviour
             {
                 temp = player;
             }
+
             if(Vector3.Distance(transform.position, player.transform.position) < Vector3.Distance(transform.position, temp.transform.position))
             {
                 temp = player;

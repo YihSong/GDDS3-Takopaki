@@ -897,7 +897,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   moveSpeed: 1
-  damping: 1
+  turnSpeed: 50
 --- !u!54 &1183372135
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1325,7 +1325,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   moveSpeed: 1
-  damping: 1
+  turnSpeed: 50
 --- !u!1 &1495585986
 GameObject:
   m_ObjectHideFlags: 0
@@ -1455,7 +1455,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   moveSpeed: 1
-  damping: 1
+  turnSpeed: 25
 --- !u!54 &1529571813
 Rigidbody:
   m_ObjectHideFlags: 0
