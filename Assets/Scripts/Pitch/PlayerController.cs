@@ -4,27 +4,48 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 5f;
+    public float speed = 5f;
 
-    public Rigidbody rb;
 
-    Vector2 movement;
 
-    // Start is called before the first frame update
+
     void Start()
     {
-        
+
     }
 
-    // Update is called once per frame
     void Update()
     {
-        movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
+        // PLAYER MOVEMENT
+        // ----------------------------------------------------------------------------------------
+        // ----------------------------------------------------------------------------------------
+
+        float xMov = Input.GetAxisRaw("Horizontal");
+        float zMov = Input.GetAxisRaw("Vertical");
+        
+        Vector3 movementDirection = new Vector3(xMov, 0, zMov).normalized * speed * Time.deltaTime;
+        movementDirection.Normalize();
+
+        transform.Translate(movementDirection * speed * Time.deltaTime, Space.World);
+
+        if (movementDirection != Vector3.zero)
+        {
+            transform.forward = movementDirection;
+        }
+
+        // ----------------------------------------------------------------------------------------
+        //-----------------------------------------------------------------------------------------
+
+
+
+        
+
+        // PLAYER ABILITY
+        // ----------------------------------------------------------------------------------------
+        // ----------------------------------------------------------------------------------------
+
+        // ----------------------------------------------------------------------------------------
+        // ----------------------------------------------------------------------------------------
     }
 
-    void FixedUpdate()
-    {
-        //rb.MoveRotation(rb.position + movement * moveSpeed * Time.fixedDeltaTime);
-    }
 }
