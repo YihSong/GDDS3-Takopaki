@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Shooting : MonoBehaviour
 {
-    //public Transform firePoint;
-    //public GameObject bulletPrefab;
+    public Transform firePoint;
+    public GameObject bulletPrefab;
 
-    //void Update ()
-    //{
-    //    if (Input.GetKey("Fire"))
-    //    {
-    //        GameObject bulletPrefab = Instantiate(bulletPrefab, firePoint.transform.position, firePoint.transform.rotation);
-    //    }
-    //}
+    void Update()
+    {
+        if (Input.GetKey("Fire1"))
+        {
+            Instantiate(bulletPrefab, firePoint.transform.position, firePoint.transform.rotation);
+        }
+    }
 }
