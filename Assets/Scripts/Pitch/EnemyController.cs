@@ -5,10 +5,13 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
-
+    //AI
     public Transform target;
     NavMeshAgent agent;
     Vector3 prevTargetPos;
+
+    //Attributes
+    [SerializeField]int health;
     
     // Start is called before the first frame update
     void Start()
@@ -56,6 +59,19 @@ public class EnemyController : MonoBehaviour
         {
             agent.SetDestination(target.position);
             prevTargetPos = target.position;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Bullet")
+        {
+            health--;
+            if (health <= 0)
+            {
+                Destroy(gameObject);
+            }
+            Destroy(other.gameObject);
         }
     }
 }
