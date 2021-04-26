@@ -7,11 +7,20 @@ public class Shooting : MonoBehaviour
     public Transform firePoint;
     public GameObject bulletPrefab;
 
+    public float bulletForce = 20f;
+
     void Update()
     {
-        if (Input.GetKey("Fire1"))
+        if (Input.GetButton("Fire1"))
         {
-            Instantiate(bulletPrefab, firePoint.transform.position, firePoint.transform.rotation);
+            Shoot();
         }
+    }
+
+    void Shoot()
+    {
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.transform.position, firePoint.transform.rotation);
+        bullet.GetComponent<Rigidbody>().velocity = transform.forward * bulletForce;
+        Destroy(bullet, 2);
     }
 }

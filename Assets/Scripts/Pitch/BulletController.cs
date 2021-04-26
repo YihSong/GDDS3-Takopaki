@@ -5,10 +5,11 @@ using UnityEngine;
 public class BulletController : MonoBehaviour
 {
 
+
     void OnTriggerEnter(Collider other)
     {
         print("hit" + other.name + "!");
-        Destroy(gameObject);
+        //Destroy(gameObject);
     }
 
 }
