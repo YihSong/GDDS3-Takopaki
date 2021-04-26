@@ -6,9 +6,6 @@ public class PlayerController : MonoBehaviour
 {
     public float speed = 5f;
 
-
-
-
     void Start()
     {
 
@@ -28,17 +25,18 @@ public class PlayerController : MonoBehaviour
 
         transform.Translate(movementDirection * speed * Time.deltaTime, Space.World);
 
-        if (movementDirection != Vector3.zero)
-        {
-            transform.forward = movementDirection;
-        }
-
         // ----------------------------------------------------------------------------------------
         //-----------------------------------------------------------------------------------------
 
+        // PLAYER ROTATION
+        // ----------------------------------------------------------------------------------------
+        // ----------------------------------------------------------------------------------------
 
+        float heading = Mathf.Atan2(Input.GetAxisRaw("Horizontal Look"), Input.GetAxisRaw("Vertical Look"));
+        transform.rotation = Quaternion.Euler(0f, heading * Mathf.Rad2Deg, 0f);
 
-        
+        // ----------------------------------------------------------------------------------------
+        //-----------------------------------------------------------------------------------------
 
         // PLAYER ABILITY
         // ----------------------------------------------------------------------------------------
