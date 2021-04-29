@@ -33,7 +33,10 @@ public class PlayerController : MonoBehaviour
         // ----------------------------------------------------------------------------------------
 
         float heading = Mathf.Atan2(Input.GetAxisRaw("Horizontal Look"), Input.GetAxisRaw("Vertical Look"));
-        transform.rotation = Quaternion.Euler(0f, heading * Mathf.Rad2Deg, 0f);
+        if (Input.GetAxisRaw("Horizontal Look") + Input.GetAxisRaw("Vertical Look") != 0)
+        {
+            transform.rotation = Quaternion.Euler(0f, heading * Mathf.Rad2Deg, 0f);
+        }
 
         // ----------------------------------------------------------------------------------------
         //-----------------------------------------------------------------------------------------
