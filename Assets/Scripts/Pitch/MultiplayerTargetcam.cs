@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Camera))]
 public class MultiplayerTargetcam : MonoBehaviour
 {
     public List<Transform> targets;
@@ -9,8 +10,22 @@ public class MultiplayerTargetcam : MonoBehaviour
     public Vector3 offset;
     public float minZoom = 40f;
     public float maxZoom = 10f;
+    public float zoomLimiter = 50f;
     private Vector3 velocity;
 
+    private Camera cam;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        cam = GetComponent<Camera>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+
+    }
 
     private void LateUpdate()
     {
@@ -22,7 +37,18 @@ public class MultiplayerTargetcam : MonoBehaviour
 
     void Zoom()
     {
-        
+        float newZoom = Mathf.Lerp(maxZoom, minZoom, GetGreatestDistance() / zoomLimiter);
+        cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, newZoom, Time.deltaTime);
+    }
+
+    float GetGreatestDistance()
+    {
+        var bounds = new Bounds(targets[0].position, Vector3.zero);
+        for (int i = 0; i < targets.Count; i++)
+        {
+            bounds.Encapsulate(targets[i].position);
+        }
+        return bounds.size.x;
     }
 
     void Move()
@@ -49,15 +75,5 @@ public class MultiplayerTargetcam : MonoBehaviour
 
         return bounds.center;
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
