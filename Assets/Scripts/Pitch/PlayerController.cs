@@ -81,6 +81,7 @@ public class PlayerController : MonoBehaviour
         if (controllerInput.x + controllerInput.y != 0)
         {
             transform.rotation = Quaternion.Euler(0f, heading * Mathf.Rad2Deg, 0f);
+            Debug.Log(transform.rotation.y);
         }
     }
 }
