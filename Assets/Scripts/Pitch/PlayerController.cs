@@ -40,11 +40,11 @@ public class PlayerController : MonoBehaviour
 
 
 
-        float heading = Mathf.Atan2(Input.GetAxisRaw("Horizontal Look"), Input.GetAxisRaw("Vertical Look"));
-        if (Input.GetAxisRaw("Horizontal Look") + Input.GetAxisRaw("Vertical Look") != 0)
-        {
-            transform.rotation = Quaternion.Euler(0f, heading * Mathf.Rad2Deg, 0f);
-        }
+        //float heading = Mathf.Atan2(Input.GetAxisRaw("Horizontal Look"), Input.GetAxisRaw("Vertical Look"));
+        //if (Input.GetAxisRaw("Horizontal Look") + Input.GetAxisRaw("Vertical Look") != 0)
+        //{
+        //    transform.rotation = Quaternion.Euler(0f, heading * Mathf.Rad2Deg, 0f);
+        //}
 
         // PLAYER ABILITY
         // ----------------------------------------------------------------------------------------
@@ -59,10 +59,10 @@ public class PlayerController : MonoBehaviour
     {
         transform.Translate(movementDirection * speed * Time.deltaTime, Space.World);
 
-        if (heading != 0)
-        {
-            transform.rotation = Quaternion.Euler(0f, heading * Mathf.Rad2Deg, 0f);
-        }
+        //if (heading != 0)
+        //{
+        //    transform.rotation = Quaternion.Euler(0f, heading * Mathf.Rad2Deg, 0f);
+        //}
 
     }
 
@@ -78,6 +78,9 @@ public class PlayerController : MonoBehaviour
         Vector2 controllerInput = input.Get<Vector2>();
 
         heading = Mathf.Atan2(controllerInput.x, controllerInput.y);
-
+        if (controllerInput.x + controllerInput.y != 0)
+        {
+            transform.rotation = Quaternion.Euler(0f, heading * Mathf.Rad2Deg, 0f);
+        }
     }
 }
