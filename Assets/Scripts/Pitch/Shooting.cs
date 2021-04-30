@@ -9,9 +9,9 @@ public class Shooting : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey("Fire1"))
-        {
-            Instantiate(bulletPrefab, firePoint.transform.position, firePoint.transform.rotation);
-        }
+        //if (Input.GetKey("Fire1"))
+        //{
+        //    Instantiate(bulletPrefab, firePoint.transform.position, firePoint.transform.rotation);
+        //}
     }
 }
