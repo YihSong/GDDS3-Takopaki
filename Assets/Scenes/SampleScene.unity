@@ -1077,8 +1077,6 @@ MonoBehaviour:
   targets:
   - {fileID: 4404741947372424984, guid: 45da37af6b96af34382c050b7bbd1d10, type: 3}
   - {fileID: 4404741947372424984, guid: b9a87c7597fcd56468f7418a539501b3, type: 3}
-  - {fileID: 0}
-  - {fileID: 0}
   smoothTime: 0.5
   offset: {x: 0, y: 0, z: 0}
   minZoom: 40

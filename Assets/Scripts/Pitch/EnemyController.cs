@@ -5,6 +5,15 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
+    public BulletController bullet;
+
+    int damageToTake;
+
+    public bool electrocuted;
+    public bool burn;
+    public bool wet;
+    public bool grounded;
+
     //AI
     public Transform target;
     NavMeshAgent agent;
@@ -17,11 +26,20 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        damageToTake = GetComponent<BulletController>().damage;
     }
 
     // Update is called once per frame
     void Update()
     {
+        // Elemental Triggers
+        if (burn && electrocuted == true)
+        {
+            damageToTake = damageToTake * 2;
+        }
+
+
+
         if(target != null)
         {
             UpdateMovingTarget();
@@ -66,7 +84,8 @@ public class EnemyController : MonoBehaviour
     {
         if (other.tag == "Bullet")
         {
-            health--;
+            health = health - damageToTake;
+
             if (health <= 0)
             {
                 Destroy(gameObject);
