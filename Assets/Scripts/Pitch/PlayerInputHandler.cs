@@ -13,11 +13,14 @@ public class PlayerInputHandler : MonoBehaviour
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
-        foreach(PlayerController controller in FindObjectsOfType<PlayerController>())
+        Debug.Log("Looking for player " + playerInput.playerIndex);
+        foreach (PlayerController controller in FindObjectsOfType<PlayerController>())
         {
+            Debug.Log("Found player " + controller.index);
             if(controller.index == playerInput.playerIndex)
             {
                 playerController = controller;
+                break;
             }
         }
     }
@@ -49,5 +52,10 @@ public class PlayerInputHandler : MonoBehaviour
         {
             playerController.RotatePlayer(Mathf.Atan2(controllerInput.x, controllerInput.y));
         }
+    }
+
+    void OnShoot()
+    {
+        playerController.shooting = !playerController.shooting;
     }
 }

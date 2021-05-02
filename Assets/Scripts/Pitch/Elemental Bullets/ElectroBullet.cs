@@ -6,7 +6,7 @@ public class ElectroBullet : BulletController
 {
     //public int electroBulletDamage;
 
-    private void OnTriggerEnter(Collider other)
+    protected override void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {

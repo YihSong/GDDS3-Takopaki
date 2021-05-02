@@ -16,6 +16,13 @@ public class PlayerController : MonoBehaviour
     public bool wet;
     public bool grounded;
 
+    public Transform firePoint;
+    public GameObject bulletPrefab;
+    public bool shooting;
+    float timeElapsed;
+    public float fireRate;
+    public float bulletSpeed;
+
     void Start()
     {
 
@@ -23,7 +30,15 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-
+        if (shooting)
+        {
+            if (timeElapsed >= fireRate)
+            {
+                Shoot();
+                timeElapsed = 0;
+            }
+        }
+        timeElapsed += Time.deltaTime;
     }
 
 
@@ -60,5 +75,12 @@ public class PlayerController : MonoBehaviour
     public void RotatePlayer(float angle)
     {
         transform.rotation = Quaternion.Euler(0f, angle * Mathf.Rad2Deg, 0f);
+    }
+
+    void Shoot()
+    {
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.transform.position, firePoint.transform.rotation);
+        bullet.GetComponent<Rigidbody>().velocity = transform.forward * bulletSpeed;
+        Destroy(bullet, 1f);
     }
 }

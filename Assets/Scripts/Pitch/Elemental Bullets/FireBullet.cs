@@ -5,7 +5,7 @@ using UnityEngine;
 public class FireBullet : BulletController
 {
     //public int fireBulletDamage;
-    private void OnTriggerEnter(Collider other)
+    protected override void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
