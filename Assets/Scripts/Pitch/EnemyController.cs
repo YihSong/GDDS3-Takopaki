@@ -5,6 +5,11 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
+    public GameObject fireParticle;
+    //public GameObject groundParticle;
+    //public GameObject waterParticle;
+    public GameObject electricParticle;
+
     public BulletController bullet;
 
     int damageToTake;
@@ -33,15 +38,34 @@ public class EnemyController : MonoBehaviour
     void Update()
     {
         // Elemental Triggers
+
         if (burn && electrocuted == true)
         {
             damageToTake = damageToTake * 2;
             print("Fire Electric Combo");
         }
 
+        if (burn == true)
+        {
+            fireParticle.SetActive(true);
+        }
+        else
+        {
+            fireParticle.SetActive(false);
+        }
 
+        if (electrocuted == true)
+        {
+            electricParticle.SetActive(true);
+        }
+        else
+        {
+            electricParticle.SetActive(false);
+        }
 
-        if(target != null)
+        //----------------------------------------------------
+
+        if (target != null)
         {
             UpdateMovingTarget();
         }
