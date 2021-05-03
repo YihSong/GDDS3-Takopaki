@@ -6,19 +6,17 @@ public class ElectroBullet : BulletController
 {
     //public int electroBulletDamage;
 
-    protected override void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            StartCoroutine("applyStatic");
-            print("Electrocuted Applied");
-        }
-    }
-
     IEnumerator applyStatic()
     {
         theEnemy.electrocuted = true;
         yield return new WaitForSeconds(5);
         theEnemy.electrocuted = false;
+    }
+
+    protected override void HitEnemy()
+    {
+        base.HitEnemy();
+        StartCoroutine("applyStatic");
+        print("Electrocuted Applied");
     }
 }

@@ -5,14 +5,6 @@ using UnityEngine;
 public class FireBullet : BulletController
 {
     //public int fireBulletDamage;
-    protected override void OnTriggerEnter(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            StartCoroutine("applyBurn");
-            print("Burn Applied");
-        }
-    }
 
     IEnumerator applyBurn()
     {
@@ -21,4 +13,10 @@ public class FireBullet : BulletController
         theEnemy.burn = false;
     }
 
+    protected override void HitEnemy()
+    {
+        base.HitEnemy();
+        StartCoroutine("applyBurn");
+        print("Burn Applied");
+    }
 }

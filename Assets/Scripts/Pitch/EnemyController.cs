@@ -26,7 +26,7 @@ public class EnemyController : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        damageToTake = GetComponent<BulletController>().damage;
+        
     }
 
     // Update is called once per frame
@@ -36,6 +36,7 @@ public class EnemyController : MonoBehaviour
         if (burn && electrocuted == true)
         {
             damageToTake = damageToTake * 2;
+            print("Fire Electric Combo");
         }
 
 
@@ -82,6 +83,8 @@ public class EnemyController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        damageToTake = other.GetComponent<BulletController>().damage;
+
         if (other.tag == "Bullet")
         {
             health = health - damageToTake;
