@@ -35,6 +35,10 @@ public class EnemyDetection : MonoBehaviour
             {
                 thePlayer.health = thePlayer.health - 10;
                 parent.GetComponent<Animator>().SetTrigger("Punch");
+                if(thePlayer.health <= 0)
+                {
+                    Destroy(thePlayer.gameObject, 1); 
+                }
                 timeElapsed = 0;
             }
             timeElapsed += Time.deltaTime;

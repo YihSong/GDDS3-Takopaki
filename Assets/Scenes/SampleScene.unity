@@ -286,6 +286,7 @@ GameObject:
   - component: {fileID: 113818282}
   - component: {fileID: 113818281}
   - component: {fileID: 113818280}
+  - component: {fileID: 113818284}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -376,6 +377,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &113818284
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 113818279}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9ddac5fb49ef7f488943dc58bec7ed3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player1HP: {fileID: 1053718260}
+  player2HP: {fileID: 2020537176}
 --- !u!1 &190265507
 GameObject:
   m_ObjectHideFlags: 0
@@ -568,7 +583,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Player 2
+  m_Text: Electric
 --- !u!222 &324660908
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1403,9 +1418,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Player 1
-
-'
+  m_Text: Fire
 --- !u!222 &871365828
 CanvasRenderer:
   m_ObjectHideFlags: 0
