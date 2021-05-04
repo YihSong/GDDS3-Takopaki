@@ -11,6 +11,8 @@ public class EnemyDetection : MonoBehaviour
     public PlayerController thePlayer;
     float timeElapsed;
 
+    public GameObject parent;
+
     private void OnTriggerEnter(Collider other)
     {
 
@@ -32,6 +34,7 @@ public class EnemyDetection : MonoBehaviour
             if (timeElapsed >= enemyAttackSpeed)
             {
                 thePlayer.health = thePlayer.health - 10;
+                parent.GetComponent<Animator>().SetTrigger("Punch");
                 timeElapsed = 0;
             }
             timeElapsed += Time.deltaTime;
