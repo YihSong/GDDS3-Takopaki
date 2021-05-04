@@ -2,9 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
+
+    public int health;
+    public int maxHealth;
+
     public float speed = 5f;
 
     public Vector3 movementDirection;
@@ -23,13 +28,19 @@ public class PlayerController : MonoBehaviour
     public float fireRate;
     public float bulletSpeed;
 
+    public Slider playerHP;
+
     void Start()
     {
-
+        playerHP.value = 100;
+        maxHealth = 100;
+        health = maxHealth;
     }
 
     void Update()
     {
+        playerHP.value = health;
+
         if (shooting)
         {
             if (timeElapsed >= fireRate)
