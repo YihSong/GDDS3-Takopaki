@@ -5033,6 +5033,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63b8a8ded8cc5454da15dfa9062612f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  floatingTextPrefab: {fileID: 5001060737382390973, guid: 351807ca07e334c4dac7213b4d1692ce,
+    type: 3}
   fireParticle: {fileID: 2605173067276922424}
   electricParticle: {fileID: 7120749030398453415}
   bullet: {fileID: 0}

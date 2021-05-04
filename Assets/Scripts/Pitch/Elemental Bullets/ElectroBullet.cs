@@ -9,6 +9,10 @@ public class ElectroBullet : BulletController
     IEnumerator applyStatic()
     {
         theEnemy.electrocuted = true;
+        if (theEnemy.burn)
+        {
+            theEnemy.ShowCombustionTrigger();
+        }
         yield return new WaitForSeconds(5);
         theEnemy.electrocuted = false;
     }

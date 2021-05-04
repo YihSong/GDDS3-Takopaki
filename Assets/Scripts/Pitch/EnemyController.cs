@@ -5,6 +5,8 @@ using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
+    public GameObject floatingTextPrefab;
+
     public GameObject fireParticle;
     //public GameObject groundParticle;
     //public GameObject waterParticle;
@@ -34,15 +36,27 @@ public class EnemyController : MonoBehaviour
         
     }
 
+     public void ShowCombustionTrigger ()
+    {
+        if (floatingTextPrefab)
+        {
+            var go = Instantiate(floatingTextPrefab, transform.position, Quaternion.identity, transform);
+            go.GetComponent<TextMesh>().text = "Combustion";
+
+        }
+    }
+
     // Update is called once per frame
     void Update()
     {
         // Elemental Triggers
-
+        // (have to manually change floating text name)
         if (burn && electrocuted == true)
         {
             damageToTake = damageToTake * 2;
             print("Fire Electric Combo");
+
+            
         }
 
         if (burn == true)
@@ -75,6 +89,8 @@ public class EnemyController : MonoBehaviour
             FindTarget();
         }
     }
+
+
 
     void FindTarget()
     {
