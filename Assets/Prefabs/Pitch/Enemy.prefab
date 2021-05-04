@@ -60,6 +60,7 @@ MonoBehaviour:
   enemyAttackSpeed: 1
   playerInRadius: 0
   thePlayer: {fileID: 0}
+  parent: {fileID: 4969313077075493940}
 --- !u!1 &2605173067276922424
 GameObject:
   m_ObjectHideFlags: 0
