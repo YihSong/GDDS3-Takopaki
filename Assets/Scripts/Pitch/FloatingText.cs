@@ -19,7 +19,7 @@ public class FloatingText : MonoBehaviour
     void Update()
     {
         transform.LookAt(Camera.main.transform.position);
-        transform.Rotate(Vector2.up, 180);
+        //transform.Rotate(Vector2.up, 180);
     }
 }
 

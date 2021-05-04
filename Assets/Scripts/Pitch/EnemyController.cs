@@ -41,7 +41,7 @@ public class EnemyController : MonoBehaviour
         if (floatingTextPrefab)
         {
             var go = Instantiate(floatingTextPrefab, transform.position, Quaternion.identity, transform);
-            go.GetComponent<TextMesh>().text = "Combustion";
+            go.GetComponentInChildren<TextMesh>().text = "Combuustion";
 
         }
     }
