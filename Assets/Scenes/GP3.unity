@@ -3876,6 +3876,21 @@ MonoBehaviour:
   - {fileID: 4896963979328597242, guid: e9d99f09e9f859a41b0ea057c44aff35, type: 3}
   - {fileID: 3511149815881093577, guid: d2988783c13d20246afeaaef8cd146e3, type: 3}
   - {fileID: 4083294511393167534, guid: 399f0882052fc654c828d463bd60de8e, type: 3}
+  tiles:
+  - {fileID: 1109724457}
+  - {fileID: 2130503234}
+  - {fileID: 875678907}
+  - {fileID: 505213229}
+  - {fileID: 649584483}
+  - {fileID: 1761235912}
+  - {fileID: 223408089}
+  - {fileID: 981369285}
+  - {fileID: 210943525}
+  - {fileID: 2001599839}
+  - {fileID: 479799320}
+  - {fileID: 1530205124}
+  - {fileID: 747408962}
+  - {fileID: 2140471135}
   layer:
     serializedVersion: 2
     m_Bits: 256
@@ -4254,7 +4269,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 684857327}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 631965848}
+        m_MethodName: BuildTower
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &684857327
 MonoBehaviour:
   m_ObjectHideFlags: 0
