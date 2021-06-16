@@ -8,6 +8,8 @@ public class TowerBuilder : MonoBehaviour
     public Transform[] tiles;
     public LayerMask layer;
     public float offset;
+    public bool onCooldown = false;
+    public float cooldown;
     int j = 0;
 
     // Start is called before the first frame update
@@ -35,9 +37,17 @@ public class TowerBuilder : MonoBehaviour
 
     public void BuildTower()
     {
-        if (j > tiles.Length) return;
+        if (j > tiles.Length || onCooldown) return;
         GameObject towerToBuild = towerPrefabs[Random.Range(0, towerPrefabs.Length)];
         Instantiate(towerToBuild, tiles[j].position + Vector3.up * offset, Quaternion.identity);
         j++;
+        StartCoroutine("CooldownCo");
+    }
+
+    IEnumerator CooldownCo()
+    {
+        onCooldown = true;
+        yield return new WaitForSeconds(cooldown);
+        onCooldown = false;
     }
 }
