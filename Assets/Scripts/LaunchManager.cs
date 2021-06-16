@@ -84,14 +84,14 @@ public class LaunchManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-        Debug.Log(PhotonNetwork.NickName + " joined to" + PhotonNetwork.CurrentRoom.Name);
+        Debug.Log(PhotonNetwork.NickName + " joined to " + PhotonNetwork.CurrentRoom.Name);
         PhotonNetwork.LoadLevel("GP3");
     }
 
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        Debug.Log(newPlayer.NickName + " joined to" + PhotonNetwork.CurrentRoom.Name +" "+ PhotonNetwork.CurrentRoom.PlayerCount);
+        Debug.Log(newPlayer.NickName + " joined to " + PhotonNetwork.CurrentRoom.Name + " "+ PhotonNetwork.CurrentRoom.PlayerCount);
     }
 
 

@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
 public class Spawner : MonoBehaviour
 {
-    public GameObject[] enemies;
+    public string[] enemies;
 
 
     public void Start()
@@ -18,6 +20,6 @@ public class Spawner : MonoBehaviour
 
     public void Spawn()
     {
-        Instantiate(enemies[Random.Range(0, enemies.Length)], transform.position, Quaternion.identity);
+        PhotonNetwork.Instantiate(enemies[Random.Range(0, enemies.Length)], transform.position, Quaternion.identity);
     }
 }

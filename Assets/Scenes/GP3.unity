@@ -3711,9 +3711,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemies:
-  - {fileID: 4849827546360446895, guid: f003eec3960a48543a605aaee56d3b83, type: 3}
-  - {fileID: 2395168451301841066, guid: 53d4f6be8d6ffab4c817062f4df6d66d, type: 3}
-  - {fileID: 895576513989437223, guid: a501b4ec6e90ae746865eb336b33196f, type: 3}
+  - Green Enemy
+  - Puple Enemy
+  - Red Enemy
 --- !u!1 &631965845
 GameObject:
   m_ObjectHideFlags: 0
@@ -3797,6 +3797,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   offset: 0.5
+  onCooldown: 0
   cooldown: 30
 --- !u!1 &635019631
 GameObject:
