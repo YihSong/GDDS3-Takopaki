@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Photon.Pun;   //access photon classes to connect to server
 using Photon.Realtime;
 
@@ -9,6 +10,9 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     public GameObject EnterGamePanel;
     public GameObject ConnectionStatusPanel;
     public GameObject LobbyPanel;
+
+    [SerializeField]
+    private InputField CreateRoomInput, JoinRoomInput;
 
 
     #region Unity Methods
@@ -84,14 +88,19 @@ public class LaunchManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
+<<<<<<< Updated upstream
         Debug.Log(PhotonNetwork.NickName + " joined to" + PhotonNetwork.CurrentRoom.Name);
         PhotonNetwork.LoadLevel("GameScene");
+=======
+        Debug.Log(PhotonNetwork.NickName + " joined to " + PhotonNetwork.CurrentRoom.Name);
+        PhotonNetwork.LoadLevel("GP3");
+>>>>>>> Stashed changes
     }
 
 
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
-        Debug.Log(newPlayer.NickName + " joined to" + PhotonNetwork.CurrentRoom.Name +" "+ PhotonNetwork.CurrentRoom.PlayerCount);
+        Debug.Log(newPlayer.NickName + " joined to " + PhotonNetwork.CurrentRoom.Name +" "+ PhotonNetwork.CurrentRoom.PlayerCount);
     }
 
 
@@ -101,7 +110,7 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     #region Private methods
     void CreateAndJoinRoom()
     {
-        string randomRoomName = "Room " + Random.Range(0,10000);
+        string randomRoomName = CreateRoomInput.text;
 
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.IsOpen = true;
@@ -109,6 +118,13 @@ public class LaunchManager : MonoBehaviourPunCallbacks
         roomOptions.MaxPlayers = 20;
 
         PhotonNetwork.CreateRoom(randomRoomName, roomOptions);
+    }
+
+    public void Onclick_JoinRoom()
+    {
+        RoomOptions ro = new RoomOptions();
+        ro.MaxPlayers = 4;
+        PhotonNetwork.JoinOrCreateRoom(JoinRoomInput.text, ro, TypedLobby.Default);
     }
 
 
