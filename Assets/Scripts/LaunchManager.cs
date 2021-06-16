@@ -88,13 +88,8 @@ public class LaunchManager : MonoBehaviourPunCallbacks
 
     public override void OnJoinedRoom()
     {
-<<<<<<< Updated upstream
         Debug.Log(PhotonNetwork.NickName + " joined to" + PhotonNetwork.CurrentRoom.Name);
         PhotonNetwork.LoadLevel("GameScene");
-=======
-        Debug.Log(PhotonNetwork.NickName + " joined to " + PhotonNetwork.CurrentRoom.Name);
-        PhotonNetwork.LoadLevel("GP3");
->>>>>>> Stashed changes
     }
 
 
