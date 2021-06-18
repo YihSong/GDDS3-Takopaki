@@ -3714,7 +3714,7 @@ MonoBehaviour:
   pv: {fileID: 0}
   enemies:
   - Green Enemy
-  - Puple Enemy
+  - Purple Enemy
   - Red Enemy
 --- !u!114 &631732940
 MonoBehaviour:

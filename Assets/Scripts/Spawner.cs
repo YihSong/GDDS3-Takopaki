@@ -8,7 +8,7 @@ public class Spawner : MonoBehaviour
 {
 
     public PhotonView pv;
-    public string[] enemies;
+    public string [] enemies;
 
 
     public void Start()
@@ -24,10 +24,6 @@ public class Spawner : MonoBehaviour
 
     public void Spawn()
     {
-        if (pv.IsMine)
-        {
             PhotonNetwork.Instantiate(enemies[Random.Range(0, enemies.Length)], transform.position, Quaternion.identity);
-        }
-        
     }
 }

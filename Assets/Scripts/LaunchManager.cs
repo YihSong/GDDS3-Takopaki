@@ -110,7 +110,7 @@ public class LaunchManager : MonoBehaviourPunCallbacks
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.IsOpen = true;
         roomOptions.IsVisible = true;
-        roomOptions.MaxPlayers = 20;
+        roomOptions.MaxPlayers = 2;
 
         PhotonNetwork.CreateRoom(CreateRoomInput.text, roomOptions);
     }
@@ -118,7 +118,7 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     public void Onclick_JoinRoom()
     {
         RoomOptions ro = new RoomOptions();
-        ro.MaxPlayers = 4;
+        ro.MaxPlayers = 2;
         PhotonNetwork.JoinOrCreateRoom(JoinRoomInput.text, ro, TypedLobby.Default);
     }
 
