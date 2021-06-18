@@ -24,6 +24,9 @@ public class Spawner : MonoBehaviour
 
     public void Spawn()
     {
+        if (PhotonNetwork.IsMasterClient)
+        {
             PhotonNetwork.Instantiate(enemies[Random.Range(0, enemies.Length)], transform.position, Quaternion.identity);
+        }
     }
 }
