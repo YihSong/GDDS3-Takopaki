@@ -8,12 +8,17 @@ using Photon.Realtime;
 public class EndZone : MonoBehaviour
 {
     public GameMaster gM;
+    PhotonView pv;
+
 
     // Start is called before the first frame update
     void Start()
     {
         //if (!PhotonNetwork.IsMasterClient) Destroy(gameObject);
-        gM = FindObjectOfType<GameMaster>();
+        if (pv.IsMine)
+        {
+            gM = FindObjectOfType<GameMaster>();
+        }
     }
 
     // Update is called once per frame
