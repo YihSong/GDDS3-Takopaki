@@ -15,9 +15,13 @@ public class EndZone : MonoBehaviour
     void Start()
     {
         //if (!PhotonNetwork.IsMasterClient) Destroy(gameObject);
-        if (pv.IsMine)
+        if (PhotonNetwork.IsMasterClient)
         {
             gM = FindObjectOfType<GameMaster>();
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 
@@ -27,8 +31,6 @@ public class EndZone : MonoBehaviour
         
     }
 
-
-    [PunRPC]
     public void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Enemy")
