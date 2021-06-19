@@ -12,7 +12,7 @@ public class EndZone : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        if (!PhotonNetwork.IsMasterClient) Destroy(gameObject);
+        //if (!PhotonNetwork.IsMasterClient) Destroy(gameObject);
         gM = FindObjectOfType<GameMaster>();
     }
 
@@ -22,6 +22,8 @@ public class EndZone : MonoBehaviour
         
     }
 
+
+    [PunRPC]
     public void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Enemy")
