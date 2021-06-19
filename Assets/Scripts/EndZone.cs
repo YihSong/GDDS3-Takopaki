@@ -15,7 +15,7 @@ public class EndZone : MonoBehaviour
     void Start()
     {
         //if (!PhotonNetwork.IsMasterClient) Destroy(gameObject);
-        if (PhotonNetwork.IsMasterClient)
+        if (pv.IsMine)
         {
             gM = FindObjectOfType<GameMaster>();
         }
