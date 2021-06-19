@@ -21,7 +21,9 @@ public class EndZone : MonoBehaviour
         }
         else
         {
+            print("removing other endzone");
             Destroy(gameObject);
+
         }
     }
 
