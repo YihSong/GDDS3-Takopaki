@@ -90,6 +90,7 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     {
         Debug.Log(PhotonNetwork.NickName + " joined to " + PhotonNetwork.CurrentRoom.Name);
         PhotonNetwork.LoadLevel("GP3");
+
     }
 
 

@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using Photon.Pun;
 using Photon.Realtime;
+using System.IO;
+
 
 public class GameMaster : MonoBehaviour
 {
@@ -12,10 +15,15 @@ public class GameMaster : MonoBehaviour
     public GameObject heart2;
     public GameObject heart3;
 
-    // Start is called before the first frame update
+    public PhotonView pv;
+
+    
+
     void Start()
     {
         collectiveHealth = 3;
+
+        pv = GetComponent<PhotonView>();
     }
 
     // Update is called once per frame
