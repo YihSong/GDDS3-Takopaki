@@ -15,16 +15,9 @@ public class EndZone : MonoBehaviour
     void Start()
     {
         //if (!PhotonNetwork.IsMasterClient) Destroy(gameObject);
-        if (pv.IsMine)
-        {
-            gM = FindObjectOfType<GameMaster>();
-        }
-        else
-        {
-            print("removing other endzone");
-            Destroy(gameObject);
 
-        }
+            gM = FindObjectOfType<GameMaster>();
+
     }
 
     // Update is called once per frame
