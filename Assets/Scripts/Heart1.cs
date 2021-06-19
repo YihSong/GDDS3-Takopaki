@@ -20,17 +20,14 @@ public class Heart1 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (PhotonNetwork.IsMasterClient)
+        if (gm.collectiveHealth >= 1)
         {
-            if (gm.collectiveHealth >= 1)
-            {
-                gameObject.SetActive(true);
-            }
-            else
-            {
-                gameObject.SetActive(false);
-            }
+            gameObject.SetActive(true);
         }
-
+        else
+        {
+            gameObject.SetActive(false);
+        }
+         
     }
 }
