@@ -24,6 +24,10 @@ public class GameMaster : MonoBehaviour
         collectiveHealth = 3;
 
         pv = GetComponent<PhotonView>();
+        if (!PhotonNetwork.IsMasterClient)
+        {
+            Destroy(gameObject);
+        }
     }
 
     // Update is called once per frame
