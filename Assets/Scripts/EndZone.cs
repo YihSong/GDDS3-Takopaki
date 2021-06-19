@@ -33,6 +33,7 @@ public class EndZone : MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
+            print("Enemy has entered Endzone");
             Destroy(other.gameObject);
             gM.collectiveHealth -= 1;
         }
