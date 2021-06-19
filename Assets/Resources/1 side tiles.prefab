@@ -1312,6 +1312,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5787266798635809685}
   - component: {fileID: 7043683086703434521}
+  - component: {fileID: 511502689281615096}
   m_Layer: 0
   m_Name: 1 side tiles
   m_TagString: Untagged
@@ -1369,3 +1370,40 @@ MonoBehaviour:
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &511502689281615096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6198215120814614551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f986e229f607131408d1cc9c213da542, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  towerPrefabs:
+  - Default Turret
+  - Bomb Turret
+  - Double Shot Turret
+  tiles:
+  - {fileID: 6192099501023579794}
+  - {fileID: 6192099500684296462}
+  - {fileID: 6192099500988410357}
+  - {fileID: 6192099501431597289}
+  - {fileID: 6192099501129872587}
+  - {fileID: 6192099500526053318}
+  - {fileID: 6192099499938798898}
+  - {fileID: 6192099499505572555}
+  - {fileID: 6192099500356975660}
+  - {fileID: 6192099499848825865}
+  - {fileID: 6192099500520008298}
+  - {fileID: 6192099500785884357}
+  - {fileID: 6192099500572737871}
+  - {fileID: 6192099500832198083}
+  layer:
+    serializedVersion: 2
+    m_Bits: 256
+  offset: 0.5
+  onCooldown: 0
+  cooldown: 15

@@ -1,20 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class TowerBuilder : MonoBehaviour
 {
-    public GameObject[] towerPrefabs;
+    public string[] towerPrefabs;
     public Transform[] tiles;
     public LayerMask layer;
     public float offset;
     public bool onCooldown = false;
     public float cooldown;
     int j = 0;
+    PhotonView pv;
 
     // Start is called before the first frame update
     void Start()
     {
+        pv = GetComponent<PhotonView>();
+        if (!pv.IsMine)
+        {
+            Destroy(this);
+        }
         Shuffle();
     }
 
@@ -38,8 +45,8 @@ public class TowerBuilder : MonoBehaviour
     public void BuildTower()
     {
         if (j > tiles.Length || onCooldown) return;
-        GameObject towerToBuild = towerPrefabs[Random.Range(0, towerPrefabs.Length)];
-        Instantiate(towerToBuild, tiles[j].position + Vector3.up * offset, Quaternion.identity);
+        string towerToBuild = towerPrefabs[Random.Range(0, towerPrefabs.Length)];
+        PhotonNetwork.Instantiate(towerToBuild, tiles[j].position + Vector3.up * offset, Quaternion.identity);
         j++;
         StartCoroutine("CooldownCo");
     }
