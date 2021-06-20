@@ -5405,7 +5405,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'Conmfirm
+  m_Text: 'Confirm
 
 '
 --- !u!222 &1071890812
@@ -5445,7 +5445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2be274d4a996d1243bbfa6d43fad5093, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player1Confirmation: {fileID: 0}
+  player1Confirmation: {fileID: 472720568}
   td: {fileID: 0}
   tradeButton: {fileID: 359189508}
   confirmation: {fileID: 0}
