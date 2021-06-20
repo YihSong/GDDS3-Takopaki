@@ -5096,6 +5096,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   firePoint: {fileID: 4891186314467194224}
+  shootFX: {fileID: 4697791466395531116}
   partToRotate: {fileID: 4899739181702671912}
   towerInfo: {fileID: 11400000, guid: 320a44b97ac08b24fa10295760ce2bdf, type: 2}
 --- !u!114 &3543629875690633656
@@ -5119,6 +5120,7 @@ MonoBehaviour:
   ObservedComponents:
   - {fileID: 151296524132572137}
   - {fileID: 3793530561723270163}
+  - {fileID: 4117527704705524081}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0

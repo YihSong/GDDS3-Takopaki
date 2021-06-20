@@ -267,6 +267,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   firePoint: {fileID: 3508914105310246135}
+  shootFX: {fileID: 3638323719338845899}
   partToRotate: {fileID: 3509169490055405135}
   towerInfo: {fileID: 11400000, guid: 320a44b97ac08b24fa10295760ce2bdf, type: 2}
 --- !u!114 &1978017879031894764

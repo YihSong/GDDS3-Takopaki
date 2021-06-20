@@ -12,4 +12,5 @@ public class TowerInfo : ScriptableObject
     public float turnSpeed = 10f;
     public int damage;
     public float fireRate;
+    public GameObject bullet;
 }

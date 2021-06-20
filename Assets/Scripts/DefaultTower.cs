@@ -7,6 +7,7 @@ public class DefaultTower : MonoBehaviour
 {
     public Transform target;
     [SerializeField] Transform firePoint;
+    [SerializeField] ParticleSystem shootFX;
 
     public Transform partToRotate;
 
@@ -17,6 +18,7 @@ public class DefaultTower : MonoBehaviour
     void Start()
     {
         pv = GetComponent<PhotonView>();
+        InvokeRepeating("FireFX", 0f, towerInfo.fireRate);
         if (!pv.IsMine) return;
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
         InvokeRepeating("Fire", 0f, towerInfo.fireRate);
@@ -73,5 +75,10 @@ public class DefaultTower : MonoBehaviour
             Debug.Log("Hit Enemy");
             hit.transform.gameObject.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.All, towerInfo.damage);
         }
+    }
+
+    void FireFX()
+    {
+        shootFX.Play();
     }
 }
