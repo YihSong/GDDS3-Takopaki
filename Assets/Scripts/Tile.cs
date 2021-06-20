@@ -59,27 +59,36 @@ public class Tile : MonoBehaviour
     {
         if (pv.IsMine)
         {
-            if (towerPresent == true)
+            if (selected == true)
             {
-                selected = true;
+                Debug.Log("Unselecting");
+                selected = false;
+                gameObject.GetComponent<Renderer>().material.color = Color.white;
             }
             else
             {
-                selected = false;
+                if (towerPresent == true)
+                {
+                    selected = true;
+                }
+                else
+                {
+                    selected = false;
+                }
             }
         }
 
-        if (!pv.IsMine)
-        {
-            if (towerPresent == true)
-            {
-                otherSelected = true;
-            }
-            else
-            {
-                otherSelected = false;
-            }
-        }
+        //if (!pv.IsMine)
+        //{
+        //    if (towerPresent == true)
+        //    {
+        //        otherSelected = true;
+        //    }
+        //    else
+        //    {
+        //        otherSelected = false;
+        //    }
+        //}
     }
 
     private void OnTriggerEnter(Collider other)
