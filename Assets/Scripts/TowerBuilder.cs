@@ -17,6 +17,9 @@ public class TowerBuilder : MonoBehaviour
 
     public bool tilesAreSelected;
 
+    int tileToSpawn;
+    public GameObject turretToSpawn;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,12 +57,6 @@ public class TowerBuilder : MonoBehaviour
             {
                 tilesAreSelected = false;
             }
-
-            if(pv.IsMine && t.selected == true)
-            {
-
-            }
-
         }
     }
 
@@ -78,4 +75,24 @@ public class TowerBuilder : MonoBehaviour
         yield return new WaitForSeconds(cooldown);
         onCooldown = false;
     }
+
+    public void TradeTowers()
+    {
+        foreach (Tile t in tileFunction)
+        {
+            if (t.selected == true && !t.pv.IsMine)
+            {
+                //take the order number of player2's selected tile and save that number into "tileToSpawn"
+                t.tileNumber = tileToSpawn;
+            }
+
+            if (t.selected == true && t.pv.IsMine)
+            {
+                t.ClearCurrentTower();
+            }
+
+            //PhotonNetwork.Instantiate("Default Turret", tiles[tileToSpawn] + Vector3.up * offset, Quaternion.identity);
+        }
+    }
+
 }

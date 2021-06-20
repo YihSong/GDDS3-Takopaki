@@ -124,6 +124,9 @@ MonoBehaviour:
   otherSelected: 0
   selected: 0
   towerPresent: 0
+  doubleshot: 0
+  defaulttower: 0
+  bombtower: 0
   pv: {fileID: 0}
 --- !u!114 &5735122816158261092
 MonoBehaviour:
@@ -271,6 +274,9 @@ MonoBehaviour:
   otherSelected: 0
   selected: 0
   towerPresent: 0
+  doubleshot: 0
+  defaulttower: 0
+  bombtower: 0
   pv: {fileID: 0}
 --- !u!114 &2025715167116638798
 MonoBehaviour:
@@ -418,6 +424,9 @@ MonoBehaviour:
   otherSelected: 0
   selected: 0
   towerPresent: 0
+  doubleshot: 0
+  defaulttower: 0
+  bombtower: 0
   pv: {fileID: 0}
 --- !u!114 &2693211643268306069
 MonoBehaviour:
@@ -565,6 +574,9 @@ MonoBehaviour:
   otherSelected: 0
   selected: 0
   towerPresent: 0
+  doubleshot: 0
+  defaulttower: 0
+  bombtower: 0
   pv: {fileID: 0}
 --- !u!114 &3955057847886175208
 MonoBehaviour:
@@ -712,6 +724,9 @@ MonoBehaviour:
   otherSelected: 0
   selected: 0
   towerPresent: 0
+  doubleshot: 0
+  defaulttower: 0
+  bombtower: 0
   pv: {fileID: 0}
 --- !u!114 &3064420364732140587
 MonoBehaviour:
@@ -859,6 +874,9 @@ MonoBehaviour:
   otherSelected: 0
   selected: 0
   towerPresent: 0
+  doubleshot: 0
+  defaulttower: 0
+  bombtower: 0
   pv: {fileID: 0}
 --- !u!114 &2799889436729580895
 MonoBehaviour:
@@ -1006,6 +1024,9 @@ MonoBehaviour:
   otherSelected: 0
   selected: 0
   towerPresent: 0
+  doubleshot: 0
+  defaulttower: 0
+  bombtower: 0
   pv: {fileID: 0}
 --- !u!114 &8485840215070508071
 MonoBehaviour:
@@ -1153,6 +1174,9 @@ MonoBehaviour:
   otherSelected: 0
   selected: 0
   towerPresent: 0
+  doubleshot: 0
+  defaulttower: 0
+  bombtower: 0
   pv: {fileID: 0}
 --- !u!114 &7555337364963830923
 MonoBehaviour:
@@ -1300,6 +1324,9 @@ MonoBehaviour:
   otherSelected: 0
   selected: 0
   towerPresent: 0
+  doubleshot: 0
+  defaulttower: 0
+  bombtower: 0
   pv: {fileID: 0}
 --- !u!114 &2596348073344293476
 MonoBehaviour:
@@ -1447,6 +1474,9 @@ MonoBehaviour:
   otherSelected: 0
   selected: 0
   towerPresent: 0
+  doubleshot: 0
+  defaulttower: 0
+  bombtower: 0
   pv: {fileID: 0}
 --- !u!114 &1033728238220726708
 MonoBehaviour:
@@ -1594,6 +1624,9 @@ MonoBehaviour:
   otherSelected: 0
   selected: 0
   towerPresent: 0
+  doubleshot: 0
+  defaulttower: 0
+  bombtower: 0
   pv: {fileID: 0}
 --- !u!114 &1752844338068861595
 MonoBehaviour:
@@ -1741,6 +1774,9 @@ MonoBehaviour:
   otherSelected: 0
   selected: 0
   towerPresent: 0
+  doubleshot: 0
+  defaulttower: 0
+  bombtower: 0
   pv: {fileID: 0}
 --- !u!114 &1842219559013943305
 MonoBehaviour:
@@ -1888,6 +1924,9 @@ MonoBehaviour:
   otherSelected: 0
   selected: 0
   towerPresent: 0
+  doubleshot: 0
+  defaulttower: 0
+  bombtower: 0
   pv: {fileID: 0}
 --- !u!114 &9152036245388953711
 MonoBehaviour:
@@ -2035,6 +2074,9 @@ MonoBehaviour:
   otherSelected: 0
   selected: 0
   towerPresent: 0
+  doubleshot: 0
+  defaulttower: 0
+  bombtower: 0
   pv: {fileID: 0}
 --- !u!114 &8787044396943779719
 MonoBehaviour:

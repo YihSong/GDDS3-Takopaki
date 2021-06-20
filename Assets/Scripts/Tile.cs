@@ -6,26 +6,19 @@ using Photon.Pun;
 public class Tile : MonoBehaviour
 {
 
-    public bool tile1;
-    public bool tile2;
-    public bool tile3;
-    public bool tile4;
-    public bool tile5;
-    public bool tile6;
-    public bool tile7;
-    public bool tile8;
-    public bool tile9;
-    public bool tile10;
-    public bool tile11;
-    public bool tile12;
-    public bool tile13;
-    public bool tile14;
+    public int tileNumber;
 
     public bool otherSelected;
     public bool selected;
     public bool towerPresent;
 
+    public bool doubleshot;
+    public bool defaulttower;
+    public bool bombtower;
+
     public PhotonView pv;
+
+    bool clearTower;
 
     void Start()
     {
@@ -37,7 +30,6 @@ public class Tile : MonoBehaviour
         {
             gameObject.GetComponent<Renderer>().material.color = Color.green;
         }
-
     }
     private void OnMouseOver()
     {
@@ -77,18 +69,6 @@ public class Tile : MonoBehaviour
                 }
             }
         }
-
-        //if (!pv.IsMine)
-        //{
-        //    if (towerPresent == true)
-        //    {
-        //        otherSelected = true;
-        //    }
-        //    else
-        //    {
-        //        otherSelected = false;
-        //    }
-        //}
     }
 
     private void OnTriggerEnter(Collider other)
@@ -100,9 +80,30 @@ public class Tile : MonoBehaviour
         else
         {
             towerPresent = false;
+            clearTower = false;
         }
            
+        if (other.name == "Default Turret(Clone)")
+        {
+            defaulttower = true;
+        }
+        else if (other.name == "Double Shot Turret(Clone)")
+        {
+            doubleshot = true;
+        }
+        else if (other.name == "Bomb Turret(Clone)")
+        {
+            bombtower = true;
+        }
 
+        if (clearTower == true)
+        {
+            Destroy(other.gameObject);
+        }
     }
 
+    public void ClearCurrentTower()
+    {
+        clearTower = true;
+    }
 }

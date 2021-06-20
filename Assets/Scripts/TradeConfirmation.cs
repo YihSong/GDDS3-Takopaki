@@ -44,9 +44,5 @@ public class TradeConfirmation : MonoBehaviour
         otherSideConfirm = !otherSideConfirm;
     }
 
-    [PunRPC]
-    public void SendTowers()
-    {
 
-    }
 }
