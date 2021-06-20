@@ -2157,9 +2157,25 @@ MonoBehaviour:
   - {fileID: 6192099500785884357}
   - {fileID: 6192099500572737871}
   - {fileID: 6192099500832198083}
+  tileFunction:
+  - {fileID: 3400641459148248557}
+  - {fileID: 3802868098470397715}
+  - {fileID: 4221201230477237362}
+  - {fileID: 5572786677308805887}
+  - {fileID: 5414189589491970477}
+  - {fileID: 6005290343882737632}
+  - {fileID: 5317552103144306883}
+  - {fileID: 4577815233548613801}
+  - {fileID: 846654314250465652}
+  - {fileID: 4210670577937733779}
+  - {fileID: 586202620066022554}
+  - {fileID: 8349696309388735566}
+  - {fileID: 6539211119869235859}
+  - {fileID: 0}
   layer:
     serializedVersion: 2
     m_Bits: 256
   offset: 0.5
   onCooldown: 0
   cooldown: 15
+  tilesAreSelected: 0

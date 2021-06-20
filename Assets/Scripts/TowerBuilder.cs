@@ -7,12 +7,15 @@ public class TowerBuilder : MonoBehaviour
 {
     public string[] towerPrefabs;
     public Transform[] tiles;
+    public Tile[] tileFunction;
     public LayerMask layer;
     public float offset;
     public bool onCooldown = false;
     public float cooldown;
     int j = 0;
     PhotonView pv;
+
+    public bool tilesAreSelected;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +26,7 @@ public class TowerBuilder : MonoBehaviour
             Destroy(this);
         }
         Shuffle();
+
     }
 
     void Shuffle()
@@ -39,7 +43,18 @@ public class TowerBuilder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        foreach (Tile t in tileFunction)
+        {
+            if (t.selected == true)
+            {
+                tilesAreSelected = true;
+                break;
+            }
+            else
+            {
+                tilesAreSelected = false;
+            }
+        }
     }
 
     public void BuildTower()
