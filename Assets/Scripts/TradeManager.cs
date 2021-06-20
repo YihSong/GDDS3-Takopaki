@@ -30,6 +30,7 @@ public class TradeManager : MonoBehaviour
 
         if (confirmation.mySideConfirm == true && confirmation.otherSideConfirm == true)
         {
+            Debug.Log("Both sides confirmed");
             tradeButton.SetActive(true);
         }
         else
