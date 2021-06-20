@@ -15,9 +15,8 @@ public class EndZone : MonoBehaviour
     void Start()
     {
         //if (!PhotonNetwork.IsMasterClient) Destroy(gameObject);
-
-            gM = FindObjectOfType<GameMaster>();
-
+        gM = FindObjectOfType<GameMaster>();
+        pv = GetComponent<PhotonView>();
     }
 
     // Update is called once per frame
@@ -30,9 +29,15 @@ public class EndZone : MonoBehaviour
     {
         if (other.tag == "Enemy")
         {
-            print("Enemy has entered Endzone");
+            pv.RPC("PlayerDamage", RpcTarget.All);
             Destroy(other.gameObject);
-            gM.collectiveHealth -= 1;
         }
+    }
+
+    [PunRPC]
+    public void PlayerDamage()
+    {
+        print("Enemy has entered Endzone");
+        gM.collectiveHealth -= 1;
     }
 }
