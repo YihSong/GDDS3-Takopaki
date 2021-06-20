@@ -7,6 +7,7 @@ using Photon.Pun;
 public class TradeConfirmation : MonoBehaviour
 {
     TowerBuilder towerBuilder;
+    Tile tile;
 
     public bool mySideConfirm;
     public bool otherSideConfirm;
@@ -22,6 +23,7 @@ public class TradeConfirmation : MonoBehaviour
                 break;
             }
         }
+
     }
 
     void Update()
@@ -40,5 +42,11 @@ public class TradeConfirmation : MonoBehaviour
     public void OtherConfirmTrade()
     {
         otherSideConfirm = !otherSideConfirm;
+    }
+
+    [PunRPC]
+    public void SendTowers()
+    {
+
     }
 }

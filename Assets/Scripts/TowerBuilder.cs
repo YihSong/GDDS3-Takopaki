@@ -54,6 +54,12 @@ public class TowerBuilder : MonoBehaviour
             {
                 tilesAreSelected = false;
             }
+
+            if(pv.IsMine && t.selected == true)
+            {
+
+            }
+
         }
     }
 
