@@ -9972,6 +9972,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 2128777099813793039}
+  - {fileID: 1069552584165486245}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -10060,6 +10061,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4080345389768630774}
+  - component: {fileID: 1069552584165486245}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -10083,6 +10085,22 @@ Transform:
   m_Father: {fileID: 4088809614111111384}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1069552584165486245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4083322656167458004}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 0
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &4083590743452277998
 GameObject:
   m_ObjectHideFlags: 0
