@@ -155,6 +155,7 @@ GameObject:
   - component: {fileID: 8797176438664199199}
   - component: {fileID: 8348932637407998163}
   - component: {fileID: 6037660325305308048}
+  - component: {fileID: 6800676062149411144}
   m_Layer: 0
   m_Name: Bomb Turret
   m_TagString: Tower
@@ -229,6 +230,22 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 1.1238455
   m_Center: {x: 0, y: 1.1406966, z: 0}
+--- !u!114 &6800676062149411144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3511149815881093577}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe67887176b693947b3b11b7a66f8663, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  firePoint: {fileID: 3508914105310246135}
+  partToRotate: {fileID: 3509169490055405135}
+  towerInfo: {fileID: 11400000, guid: 320a44b97ac08b24fa10295760ce2bdf, type: 2}
 --- !u!1 &3511154552551152095
 GameObject:
   m_ObjectHideFlags: 0

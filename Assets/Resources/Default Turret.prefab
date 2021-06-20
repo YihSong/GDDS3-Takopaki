@@ -5077,6 +5077,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+  firePoint: {fileID: 4891186314467194224}
   partToRotate: {fileID: 4899739181702671912}
   towerInfo: {fileID: 11400000, guid: 320a44b97ac08b24fa10295760ce2bdf, type: 2}
 --- !u!114 &3543629875690633656
