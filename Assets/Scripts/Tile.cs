@@ -21,9 +21,9 @@ public class Tile : MonoBehaviour
     public bool tile13;
     public bool tile14;
 
-    bool otherSelected;
-    bool selected;
-    bool towerPresent;
+    public bool otherSelected;
+    public bool selected;
+    public bool towerPresent;
 
     public PhotonView pv;
 
@@ -38,10 +38,6 @@ public class Tile : MonoBehaviour
             gameObject.GetComponent<Renderer>().material.color = Color.green;
         }
 
-        if (selected == true && otherSelected == true)
-        {
-
-        }
     }
     private void OnMouseOver()
     {
