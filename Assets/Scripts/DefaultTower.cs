@@ -69,7 +69,7 @@ public class DefaultTower : MonoBehaviour
         RaycastHit hit;
         if(Physics.Raycast(firePoint.position, target.position - firePoint.position, out hit, towerInfo.range, towerInfo.layerMask))
         {
-            Debug.DrawRay(firePoint.position, target.position - firePoint.position, Color.white);
+            Debug.DrawRay(firePoint.position, target.position - firePoint.position * towerInfo.range, Color.white);
             Debug.Log("Hit Enemy");
             hit.transform.gameObject.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.All, towerInfo.damage);
         }
