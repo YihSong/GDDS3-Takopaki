@@ -724,6 +724,7 @@ GameObject:
   - component: {fileID: 7427174187218571696}
   - component: {fileID: 5418719844927743251}
   - component: {fileID: 1261375150322140809}
+  - component: {fileID: 4032140194845830222}
   m_Layer: 10
   m_Name: Purple Enemy
   m_TagString: Enemy
@@ -867,6 +868,7 @@ MonoBehaviour:
   observableSearch: 2
   ObservedComponents:
   - {fileID: 1261375150322140809}
+  - {fileID: 4032140194845830222}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
@@ -886,6 +888,30 @@ MonoBehaviour:
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
   m_UseLocal: 1
+--- !u!114 &4032140194845830222
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2395168451301841066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ShowLayerWeightsInspector: 1
+  ShowParameterInspector: 1
+  m_SynchronizeParameters:
+  - Type: 9
+    SynchronizeType: 2
+    Name: Die
+  - Type: 9
+    SynchronizeType: 2
+    Name: Take Damage
+  m_SynchronizeLayers:
+  - SynchronizeType: 0
+    LayerIndex: 0
 --- !u!1 &2395185965184176154
 GameObject:
   m_ObjectHideFlags: 0
