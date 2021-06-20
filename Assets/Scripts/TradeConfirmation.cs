@@ -32,13 +32,13 @@ public class TradeConfirmation : MonoBehaviour
     public void ConfirmTrade()
     {
 
-        mySideConfirm = true;
+        mySideConfirm = !mySideConfirm;
         GetComponent<PhotonView>().RPC("OtherConfirmTrade", RpcTarget.Others);
     }
 
     [PunRPC]
     public void OtherConfirmTrade()
     {
-        otherSideConfirm = true;
+        otherSideConfirm = !otherSideConfirm;
     }
 }
