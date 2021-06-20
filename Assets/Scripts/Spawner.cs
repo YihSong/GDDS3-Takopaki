@@ -24,14 +24,14 @@ public class Spawner : MonoBehaviour
 
     public void Spawn()
     {
-        if (PhotonNetwork.CurrentRoom.PlayerCount >= 2)
-        {
+        //if (PhotonNetwork.CurrentRoom.PlayerCount >= 2)
+        //{
             if (PhotonNetwork.IsMasterClient)
             {
                 PhotonNetwork.Instantiate(enemies[Random.Range(0, enemies.Length)], transform.position, Quaternion.identity);
             }
 
-        }
+        //}
 
     }
 }

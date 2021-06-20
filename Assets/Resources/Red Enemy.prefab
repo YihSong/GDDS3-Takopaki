@@ -785,7 +785,7 @@ GameObject:
   - component: {fileID: 2649588839481839674}
   - component: {fileID: 793938677487177487}
   - component: {fileID: 6709415399209863796}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Red Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -834,7 +834,7 @@ Animator:
   m_GameObject: {fileID: 895576513989437223}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 66ca9bf0145725543a1e8a693589f362, type: 3}
-  m_Controller: {fileID: 9100000, guid: e761ace889a78a946967af8d6890f71d, type: 2}
+  m_Controller: {fileID: 9100000, guid: d74d7402ae2a70746b7ca10c85e08b0c, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -878,7 +878,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goal: {fileID: 0}
-  startHealth: 0
+  startHealth: 50
 --- !u!65 &4864380847645361537
 BoxCollider:
   m_ObjectHideFlags: 0

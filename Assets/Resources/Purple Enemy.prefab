@@ -724,7 +724,7 @@ GameObject:
   - component: {fileID: 7427174187218571696}
   - component: {fileID: 5418719844927743251}
   - component: {fileID: 1261375150322140809}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Purple Enemy
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -773,7 +773,7 @@ Animator:
   m_GameObject: {fileID: 2395168451301841066}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 66ca9bf0145725543a1e8a693589f362, type: 3}
-  m_Controller: {fileID: 9100000, guid: e761ace889a78a946967af8d6890f71d, type: 2}
+  m_Controller: {fileID: 9100000, guid: d74d7402ae2a70746b7ca10c85e08b0c, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -817,7 +817,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goal: {fileID: 0}
-  startHealth: 0
+  startHealth: 50
 --- !u!54 &5197709738092035278
 Rigidbody:
   m_ObjectHideFlags: 0

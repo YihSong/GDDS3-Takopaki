@@ -6,12 +6,13 @@ using Photon.Pun;
 public class DefaultTower : MonoBehaviour
 {
     public Transform target;
+    [SerializeField] Transform firePoint;
 
     public Transform partToRotate;
 
-    [SerializeField] TowerInfo towerInfo;
+    [SerializeField] protected TowerInfo towerInfo;
 
-    PhotonView pv;
+    protected PhotonView pv;
 
     void Start()
     {
@@ -61,12 +62,15 @@ public class DefaultTower : MonoBehaviour
         partToRotate.rotation = Quaternion.Euler (0f, rotation.y, 0f);
     }
 
-    void Fire()
+    protected virtual void Fire()
     {
         if (target == null) return;
+        Debug.Log("Shooting");
         RaycastHit hit;
-        if(Physics.Raycast(transform.position, transform.position - target.position, out hit, towerInfo.range, towerInfo.layerMask))
+        if(Physics.Raycast(firePoint.position, target.position - firePoint.position, out hit, towerInfo.range, towerInfo.layerMask))
         {
+            Debug.DrawRay(firePoint.position, target.position - firePoint.position, Color.white);
+            Debug.Log("Hit Enemy");
             hit.transform.gameObject.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.All, towerInfo.damage);
         }
     }
