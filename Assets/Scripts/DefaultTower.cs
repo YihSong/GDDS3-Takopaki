@@ -1,27 +1,29 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class DefaultTower : MonoBehaviour
 {
     public Transform target;
-    public float range;
-
-    public string enemyTag = "Enemy";
 
     public Transform partToRotate;
 
+    [SerializeField] TowerInfo towerInfo;
 
-    float turnSpeed = 10f;
+    PhotonView pv;
 
     void Start()
     {
+        pv = GetComponent<PhotonView>();
+        if (!pv.IsMine) return;
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
+        InvokeRepeating("Fire", 0f, towerInfo.fireRate);
     }
 
     void UpdateTarget ()
     {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag);
+        GameObject[] enemies = GameObject.FindGameObjectsWithTag(towerInfo.enemyTag);
         float shortestDistance = Mathf.Infinity;
         GameObject nearestEnemy = null;
 
@@ -36,7 +38,7 @@ public class DefaultTower : MonoBehaviour
         }
 
         // Found enemy in our range
-        if (nearestEnemy != null && shortestDistance <= range)
+        if (nearestEnemy != null && shortestDistance <= towerInfo.range)
         {
             target = nearestEnemy.transform;
         }
@@ -48,13 +50,24 @@ public class DefaultTower : MonoBehaviour
 
     void Update()
     {
+        if (!pv.IsMine) return;
         if (target == null)
             return;
 
         // Tracking the enemy 
         Vector3 dir = target.position - transform.position;
         Quaternion lookRotation = Quaternion.LookRotation(dir);
-        Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
+        Vector3 rotation = Quaternion.Lerp(partToRotate.rotation, lookRotation, Time.deltaTime * towerInfo.turnSpeed).eulerAngles;
         partToRotate.rotation = Quaternion.Euler (0f, rotation.y, 0f);
+    }
+
+    void Fire()
+    {
+        if (target == null) return;
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, transform.position - target.position, out hit, towerInfo.range, towerInfo.layerMask))
+        {
+            hit.transform.gameObject.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.All, towerInfo.damage);
+        }
     }
 }
