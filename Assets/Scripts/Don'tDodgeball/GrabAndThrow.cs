@@ -17,7 +17,7 @@ public class GrabAndThrow : MonoBehaviour
 
     public Vector3 myDirection;
 
-    bool inRadius;
+    [SerializeField]bool inRadius;
     bool grabbing;
 
     
@@ -34,11 +34,11 @@ public class GrabAndThrow : MonoBehaviour
     {
         if (db.beingGrabbed == true && db.pv.IsMine && pv.IsMine)
         {
-            crosshair.gameObject.SetActive(true);
+            //crosshair.gameObject.SetActive(true);
         }
         else
         {
-            crosshair.gameObject.SetActive(false);
+            //crosshair.gameObject.SetActive(false);
         }
 
         if (db.beingGrabbed == true && pv.IsMine && db.pv.IsMine && Input.GetButtonDown("Shoot"))
@@ -57,16 +57,19 @@ public class GrabAndThrow : MonoBehaviour
 
         if (pv.IsMine)
         {
-            if (Input.GetKeyDown(KeyCode.E) && !grabbing && !db.beingGrabbed)
+            if (Input.GetKeyDown(KeyCode.E) && !grabbing && !db.beingGrabbed && inRadius)
             {
                 db.transform.position = ballPositon.transform.position;
                 grabbing = true;
                 db.beingGrabbed = true;
+                db.pv.RPC("EnableDisableRB", RpcTarget.MasterClient, false);
             }
             else if (Input.GetKeyDown(KeyCode.E) && grabbing)
             {
                 db.transform.position = db.actualBall.transform.position;
                 grabbing = false;
+                db.beingGrabbed = false;
+                db.pv.RPC("EnableDisableRB", RpcTarget.MasterClient, true);
             }
 
             if (grabbing)

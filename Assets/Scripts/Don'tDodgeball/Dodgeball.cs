@@ -66,4 +66,17 @@ public class Dodgeball : MonoBehaviour
         //    transform.position = grabScript.ballPositon.transform.position;
         //}
     }
+
+    [PunRPC]
+    public void EnableDisableRB(bool enable)
+    {
+        if (enable)
+        {
+            rb.constraints = RigidbodyConstraints.FreezeAll;
+        }
+        else
+        {
+            rb.constraints = RigidbodyConstraints.None;
+        }
+    }
 }
