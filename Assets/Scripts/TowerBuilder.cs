@@ -90,6 +90,8 @@ public class TowerBuilder : MonoBehaviour
 
     public void TradeTowers()
     {
+        GameObject myTower = null;
+        GameObject otherTower = null;
         Debug.Log("Trying to trade");
         foreach (Transform t in tiles)
         {
@@ -97,7 +99,7 @@ public class TowerBuilder : MonoBehaviour
             if (tile.selected == true && tile.pv.IsMine)
             {
                 Debug.Log("Found tile");
-                tile.ClearCurrentTower();
+                myTower = tile.tower;
             }
 
             //PhotonNetwork.Instantiate("Default Turret", tiles[tileToSpawn] + Vector3.up * offset, Quaternion.identity);
@@ -110,7 +112,12 @@ public class TowerBuilder : MonoBehaviour
             {
                 //take the order number of player2's selected tile and save that number into "tileToSpawn"
                 tile.tileNumber = tileToSpawn;
+                otherTower = tile.tower;
             }
+
+            Vector3 temp = myTower.transform.position;
+            myTower.transform.position = otherTower.transform.position;
+            otherTower.transform.position = temp;
         }
     }
 

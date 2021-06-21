@@ -129,5 +129,6 @@ public class Tile : MonoBehaviour
         selected = false;
         towerBuilder.selectedTile = null;
         gameObject.GetComponent<Renderer>().material.color = Color.white;
+        towerPresent = false;
     }
 }
