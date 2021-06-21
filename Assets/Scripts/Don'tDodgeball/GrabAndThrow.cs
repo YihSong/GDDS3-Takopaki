@@ -59,22 +59,20 @@ public class GrabAndThrow : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E) && !grabbing && !db.beingGrabbed && inRadius)
             {
-                db.transform.position = ballPositon.transform.position;
                 grabbing = true;
-                db.beingGrabbed = true;
+                db.pv.RPC("GrabReleaseBall", RpcTarget.AllBuffered, false, ballPositon.transform.position);
                 db.pv.RPC("EnableDisableRB", RpcTarget.MasterClient, true);
             }
             else if (Input.GetKeyDown(KeyCode.E) && grabbing)
             {
-                db.transform.position = db.actualBall.transform.position;
                 grabbing = false;
-                db.beingGrabbed = false;
+                db.pv.RPC("GrabReleaseBall", RpcTarget.AllBuffered, false, Vector3.zero);
                 db.pv.RPC("EnableDisableRB", RpcTarget.MasterClient, false);
             }
 
             if (grabbing)
             {
-                db.transform.position = ballPositon.transform.position;
+                db.pv.RPC("BallGrabbed", RpcTarget.AllBuffered, ballPositon.transform.position);
             }
         }
     }

@@ -68,9 +68,9 @@ public class Dodgeball : MonoBehaviour
     }
 
     [PunRPC]
-    public void EnableDisableRB(bool enable)
+    public void EnableDisableRB(bool isDisabling)
     {
-        if (enable)
+        if (isDisabling)
         {
             rb.constraints = RigidbodyConstraints.FreezeAll;
         }
@@ -78,5 +78,25 @@ public class Dodgeball : MonoBehaviour
         {
             rb.constraints = RigidbodyConstraints.None;
         }
+    }
+
+    [PunRPC]
+    public void GrabReleaseBall(bool isGrabbing, Vector3 holdPos)
+    {
+        beingGrabbed = isGrabbing;
+        if (isGrabbing)
+        {
+            transform.position = holdPos;
+        }
+        else
+        {
+            transform.position = actualBall.transform.position;
+        }
+    }
+
+    [PunRPC]
+    public void BallGrabbed(Vector3 holdPos)
+    {
+        transform.position = holdPos;
     }
 }
