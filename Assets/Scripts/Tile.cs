@@ -55,46 +55,39 @@ public class Tile : MonoBehaviour
     {
         if (pv.IsMine)
         {
-            if (selected == true)
-            {
-                Debug.Log("Unselecting");
-                selected = false;
-                towerBuilder.selectedTile = null;
-                gameObject.GetComponent<Renderer>().material.color = Color.white;
-            }
-            else
-            {
-                if (towerPresent == true)
-                {
-                    pv.RPC("PlayerSelected", RpcTarget.Others);
-                    selected = true;
-                    if (towerBuilder.selectedTile != null)
-                    {
-                        towerBuilder.selectedTile.selected = false;
-                        towerBuilder.selectedTile.gameObject.GetComponent<Renderer>().material.color = Color.white;
-                    }
-                    towerBuilder.selectedTile = this;
-                }
-                else
-                {
-                    selected = false;
-                    towerBuilder.selectedTile = null;
-                }
-            }
+            pv.RPC("OtherPlayerSelected", RpcTarget.All);
         }
     }
 
     [PunRPC]
     public void OtherPlayerSelected()
     {
-        Debug.Log("RPC Received");
-        selected = true;
-        if (towerBuilder.selectedTile != null)
+        if (selected == true)
         {
-            towerBuilder.selectedTile.selected = false;
-            towerBuilder.selectedTile.gameObject.GetComponent<Renderer>().material.color = Color.white;
+            Debug.Log("Unselecting");
+            selected = false;
+            towerBuilder.selectedTile = null;
+            gameObject.GetComponent<Renderer>().material.color = Color.white;
         }
-        towerBuilder.selectedTile = this;
+        else
+        {
+            if (towerPresent == true)
+            {
+
+                selected = true;
+                if (towerBuilder.selectedTile != null)
+                {
+                    towerBuilder.selectedTile.selected = false;
+                    towerBuilder.selectedTile.gameObject.GetComponent<Renderer>().material.color = Color.white;
+                }
+                towerBuilder.selectedTile = this;
+            }
+            else
+            {
+                selected = false;
+                towerBuilder.selectedTile = null;
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)

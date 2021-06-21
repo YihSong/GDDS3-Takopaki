@@ -27,10 +27,6 @@ public class TowerBuilder : MonoBehaviour
     void Start()
     {
         pv = GetComponent<PhotonView>();
-        if (!pv.IsMine)
-        {
-            Destroy(this);
-        }
         Shuffle();
 
     }
