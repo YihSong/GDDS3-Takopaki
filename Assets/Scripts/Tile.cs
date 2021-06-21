@@ -49,8 +49,8 @@ public class Tile : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (pv.IsMine)
-        {
+        //if (pv.IsMine)
+        //{
             if (selected == true)
             {
                 Debug.Log("Unselecting");
@@ -68,7 +68,7 @@ public class Tile : MonoBehaviour
                     selected = false;
                 }
             }
-        }
+        //}
     }
 
     private void OnTriggerEnter(Collider other)

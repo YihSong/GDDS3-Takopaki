@@ -7,7 +7,6 @@ public class TowerBuilder : MonoBehaviour
 {
     public string[] towerPrefabs;
     public Transform[] tiles;
-    public Tile[] tileFunction;
     public LayerMask layer;
     public float offset;
     public bool onCooldown = false;
@@ -19,6 +18,8 @@ public class TowerBuilder : MonoBehaviour
 
     int tileToSpawn;
     public GameObject turretToSpawn;
+
+    TowerBuilder otherPlayer = null;
 
     // Start is called before the first frame update
     void Start()
@@ -46,8 +47,9 @@ public class TowerBuilder : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        foreach (Tile t in tileFunction)
+        foreach (Transform tile in tiles)
         {
+            Tile t = tile.GetComponent<Tile>();
             if (t.selected == true)
             {
                 tilesAreSelected = true;
@@ -56,6 +58,18 @@ public class TowerBuilder : MonoBehaviour
             else
             {
                 tilesAreSelected = false;
+            }
+        }
+
+        if(otherPlayer == null)
+        {
+            foreach (TowerBuilder tb in FindObjectsOfType<TowerBuilder>())
+            {
+                if (!tb.GetComponent<PhotonView>().IsMine)
+                {
+                    otherPlayer = tb;
+                    break;
+                }
             }
         }
     }
@@ -78,20 +92,25 @@ public class TowerBuilder : MonoBehaviour
 
     public void TradeTowers()
     {
-        foreach (Tile t in tileFunction)
+        foreach (Transform t in otherPlayer.tiles)
         {
-            if (t.selected == true && !t.pv.IsMine)
+            Tile tile = t.GetComponent<Tile>();
+            if (tile.selected == true && tile.pv.IsMine)
             {
-                //take the order number of player2's selected tile and save that number into "tileToSpawn"
-                t.tileNumber = tileToSpawn;
-            }
-
-            if (t.selected == true && t.pv.IsMine)
-            {
-                t.ClearCurrentTower();
+                tile.ClearCurrentTower();
             }
 
             //PhotonNetwork.Instantiate("Default Turret", tiles[tileToSpawn] + Vector3.up * offset, Quaternion.identity);
+        }
+
+        foreach(Transform t in otherPlayer.tiles)
+        {
+            Tile tile = t.GetComponent<Tile>();
+            if (tile.selected == true && !tile.pv.IsMine)
+            {
+                //take the order number of player2's selected tile and save that number into "tileToSpawn"
+                tile.tileNumber = tileToSpawn;
+            }
         }
     }
 
