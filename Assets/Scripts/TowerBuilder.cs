@@ -92,11 +92,13 @@ public class TowerBuilder : MonoBehaviour
 
     public void TradeTowers()
     {
+        Debug.Log("Trying to trade");
         foreach (Transform t in otherPlayer.tiles)
         {
             Tile tile = t.GetComponent<Tile>();
             if (tile.selected == true && tile.pv.IsMine)
             {
+                Debug.Log("Found tile");
                 tile.ClearCurrentTower();
             }
 
