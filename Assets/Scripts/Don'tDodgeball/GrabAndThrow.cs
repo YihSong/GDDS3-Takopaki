@@ -17,10 +17,11 @@ public class GrabAndThrow : MonoBehaviour
 
     public Vector3 myDirection;
 
-    [SerializeField]bool inRadius;
+    bool inRadius;
     bool grabbing;
 
-    
+    [SerializeField] float shootForce = 50f;
+    Vector3 prevPos;
 
     // Start is called before the first frame update
     void Start()
@@ -68,11 +69,14 @@ public class GrabAndThrow : MonoBehaviour
                 grabbing = false;
                 db.pv.RPC("GrabReleaseBall", RpcTarget.AllBuffered, false, Vector3.zero);
                 db.pv.RPC("EnableDisableRB", RpcTarget.MasterClient, false);
+                db.pv.RPC("ShootBall", RpcTarget.MasterClient, transform.forward * shootForce);
+                
             }
 
-            if (grabbing)
+            if (grabbing && ballPositon.transform.position != prevPos)
             {
                 db.pv.RPC("BallGrabbed", RpcTarget.AllBuffered, ballPositon.transform.position);
+                prevPos = ballPositon.transform.position;
             }
         }
     }

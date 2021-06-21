@@ -27,7 +27,7 @@ public class Dodgeball : MonoBehaviour
     void Start()
     {
         grabScript = null;
-        rb = GetComponentInChildren<Rigidbody>();
+        rb = GetComponentInParent<Rigidbody>();
         pv = GetComponent<PhotonView>();
         if (!pv.IsMine)
         {
@@ -86,17 +86,23 @@ public class Dodgeball : MonoBehaviour
         beingGrabbed = isGrabbing;
         if (isGrabbing)
         {
-            transform.position = holdPos;
+            transform.parent.position = holdPos;
         }
         else
         {
-            transform.position = actualBall.transform.position;
+            transform.parent.position = actualBall.transform.position;
         }
     }
 
     [PunRPC]
     public void BallGrabbed(Vector3 holdPos)
     {
-        transform.position = holdPos;
+        transform.parent.position = holdPos;
+    }
+
+    [PunRPC]
+    public void ShootBall(Vector3 force)
+    {
+        rb.AddForce(force);
     }
 }

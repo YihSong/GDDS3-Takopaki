@@ -49,6 +49,9 @@ MonoBehaviour:
   - UpdateUI
   - SendBallFlying
   - EnableDisableRB
+  - BallGrabbed
+  - GrabReleaseBall
+  - ShootBall
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
