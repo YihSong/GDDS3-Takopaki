@@ -11,8 +11,7 @@ public class Dodgeball : MonoBehaviour
     [SerializeField]
     Rigidbody rb;
 
-    [SerializeField]
-    GameObject actualBall;
+    public GameObject actualBall;
     //GameObject grabCommand;
 
     //Vector3 cameraPosition;
@@ -39,32 +38,32 @@ public class Dodgeball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!grabScript.pv.IsMine) return;
-        if (inRadius == true)
-        { 
-            if (Input.GetKeyDown(KeyCode.E) && beingGrabbed == false) 
-            {
-                transform.position = grabScript.ballPositon.transform.position;
-                beingGrabbed = true;
-                if (PhotonNetwork.IsMasterClient)
-                {
-                    rb.constraints = RigidbodyConstraints.FreezeAll;
-                }
-            }
-            else if (Input.GetKeyDown(KeyCode.E) && beingGrabbed == true)
-            {
-                transform.position = actualBall.transform.position;
-                beingGrabbed = false;
-                if (PhotonNetwork.IsMasterClient)
-                {
-                    rb.constraints = RigidbodyConstraints.None;
-                }
-            }
-        }
+        //if (!grabScript.pv.IsMine) return;
+        //if (inRadius == true)
+        //{ 
+        //    if (Input.GetKeyDown(KeyCode.E) && beingGrabbed == false) 
+        //    {
+        //        transform.position = grabScript.ballPositon.transform.position;
+        //        beingGrabbed = true;
+        //        if (PhotonNetwork.IsMasterClient)
+        //        {
+        //            rb.constraints = RigidbodyConstraints.FreezeAll;
+        //        }
+        //    }
+        //    else if (Input.GetKeyDown(KeyCode.E) && beingGrabbed == true)
+        //    {
+        //        transform.position = actualBall.transform.position;
+        //        beingGrabbed = false;
+        //        if (PhotonNetwork.IsMasterClient)
+        //        {
+        //            rb.constraints = RigidbodyConstraints.None;
+        //        }
+        //    }
+        //}
 
-        if (beingGrabbed)
-        {
-            transform.position = grabScript.ballPositon.transform.position;
-        }
+        //if (beingGrabbed)
+        //{
+        //    transform.position = grabScript.ballPositon.transform.position;
+        //}
     }
 }

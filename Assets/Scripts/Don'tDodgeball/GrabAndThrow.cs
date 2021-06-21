@@ -17,6 +17,9 @@ public class GrabAndThrow : MonoBehaviour
 
     public Vector3 myDirection;
 
+    bool inRadius;
+    bool grabbing;
+
     
 
     // Start is called before the first frame update
@@ -38,18 +41,38 @@ public class GrabAndThrow : MonoBehaviour
             crosshair.gameObject.SetActive(false);
         }
 
-        if (db.beingGrabbed == true && pv.IsMine && db.pv.IsMine && Input.GetKeyDown("Shoot"))
+        if (db.beingGrabbed == true && pv.IsMine && db.pv.IsMine && Input.GetButtonDown("Shoot"))
         {
             pv.RPC("SendBallFlying", RpcTarget.AllBuffered);
         }
 
-        if (db.inRadius == true)
+        if (inRadius == true)
         {
             ballCommand.SetActive(true);
         }
         else
         {
             ballCommand.SetActive(false);
+        }
+
+        if (pv.IsMine)
+        {
+            if (Input.GetKeyDown(KeyCode.E) && !grabbing && !db.beingGrabbed)
+            {
+                db.transform.position = ballPositon.transform.position;
+                grabbing = true;
+                db.beingGrabbed = true;
+            }
+            else if (Input.GetKeyDown(KeyCode.E) && grabbing)
+            {
+                db.transform.position = db.actualBall.transform.position;
+                grabbing = false;
+            }
+
+            if (grabbing)
+            {
+                db.transform.position = ballPositon.transform.position;
+            }
         }
     }
 
@@ -64,7 +87,7 @@ public class GrabAndThrow : MonoBehaviour
         if (!pv.IsMine) return;
         if (other.TryGetComponent(out Dodgeball d))
         {
-            d.inRadius = true;
+            inRadius = true;
             d.grabScript = this;
         }
     }
@@ -74,7 +97,7 @@ public class GrabAndThrow : MonoBehaviour
         if (!pv.IsMine) return;
         if (other.TryGetComponent(out Dodgeball d))
         {
-            d.inRadius = false;
+            inRadius = false;
             d.grabScript = null;
         }
     }
