@@ -85,7 +85,7 @@ public class Tile : MonoBehaviour
     }
 
     [PunRPC]
-    public void PlayerSelected()
+    public void OtherPlayerSelected()
     {
         Debug.Log("RPC Received");
         selected = true;
