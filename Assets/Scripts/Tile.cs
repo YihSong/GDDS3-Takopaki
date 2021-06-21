@@ -55,32 +55,32 @@ public class Tile : MonoBehaviour
     {
         if (pv.IsMine)
         {
-            pv.RPC("PlayerSelected", RpcTarget.All);
-            //if (selected == true)
-            //{
-            //    Debug.Log("Unselecting");
-            //    selected = false;
-            //    towerBuilder.selectedTile = null;
-            //    gameObject.GetComponent<Renderer>().material.color = Color.white;
-            //}
-            //else
-            //{
-            //    if (towerPresent == true)
-            //    {
-            //        selected = true;
-            //        if(towerBuilder.selectedTile != null)
-            //        {
-            //            towerBuilder.selectedTile.selected = false;
-            //            towerBuilder.selectedTile.gameObject.GetComponent<Renderer>().material.color = Color.white;
-            //        }
-            //        towerBuilder.selectedTile = this;
-            //    }
-            //    else
-            //    {
-            //        selected = false;
-            //        towerBuilder.selectedTile = null;
-            //    }
-            //}
+            pv.RPC("PlayerSelected", RpcTarget.Others);
+            if (selected == true)
+            {
+                Debug.Log("Unselecting");
+                selected = false;
+                towerBuilder.selectedTile = null;
+                gameObject.GetComponent<Renderer>().material.color = Color.white;
+            }
+            else
+            {
+                if (towerPresent == true)
+                {
+                    selected = true;
+                    if (towerBuilder.selectedTile != null)
+                    {
+                        towerBuilder.selectedTile.selected = false;
+                        towerBuilder.selectedTile.gameObject.GetComponent<Renderer>().material.color = Color.white;
+                    }
+                    towerBuilder.selectedTile = this;
+                }
+                else
+                {
+                    selected = false;
+                    towerBuilder.selectedTile = null;
+                }
+            }
         }
     }
 
