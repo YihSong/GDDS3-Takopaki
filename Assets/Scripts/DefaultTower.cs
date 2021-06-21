@@ -19,8 +19,8 @@ public class DefaultTower : MonoBehaviour
     {
         pv = GetComponent<PhotonView>();
         InvokeRepeating("FireFX", 0f, towerInfo.fireRate);
-        if (!pv.IsMine) return;
         InvokeRepeating("UpdateTarget", 0f, 0.5f);
+        if (!pv.IsMine) return;
         InvokeRepeating("Fire", 0f, towerInfo.fireRate);
     }
 
@@ -79,6 +79,7 @@ public class DefaultTower : MonoBehaviour
 
     void FireFX()
     {
+        if (target == null) return;
         shootFX.Play();
     }
 }

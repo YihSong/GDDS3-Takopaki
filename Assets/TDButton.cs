@@ -31,4 +31,9 @@ public class TDButton : MonoBehaviour
     {
         towerBuilder.BuildTower();
     }
+
+    public void TradeTower()
+    {
+        towerBuilder.TradeTowers();
+    }
 }
