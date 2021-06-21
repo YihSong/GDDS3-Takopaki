@@ -9,10 +9,13 @@ public class PlayerManager : MonoBehaviour
     [SerializeField] Vector3 spawnPos1;
     [SerializeField] Vector3 spawnPos2;
     [SerializeField] GameObject playerPrefab;
+    PhotonView pv;
 
     // Start is called before the first frame update
     void Start()
     {
+        pv = GetComponent<PhotonView>();
+        if (!pv.IsMine) return;
         if(PhotonNetwork.IsConnected && playerPrefab != null)
         {
             if (PhotonNetwork.IsMasterClient)
