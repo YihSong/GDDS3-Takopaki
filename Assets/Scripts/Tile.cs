@@ -87,6 +87,7 @@ public class Tile : MonoBehaviour
     [PunRPC]
     public void PlayerSelected()
     {
+        Debug.Log("RPC Received");
         if (selected == true)
         {
             Debug.Log("Unselecting");
@@ -148,5 +149,9 @@ public class Tile : MonoBehaviour
     public void ClearCurrentTower()
     {
         Destroy(tower);
+        Debug.Log("Unselecting");
+        selected = false;
+        towerBuilder.selectedTile = null;
+        gameObject.GetComponent<Renderer>().material.color = Color.white;
     }
 }
