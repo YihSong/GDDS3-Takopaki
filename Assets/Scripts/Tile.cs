@@ -37,7 +37,7 @@ public class Tile : MonoBehaviour
     }
     private void OnMouseOver()
     {
-        if (towerPresent == true && selected == false)
+        if (towerPresent == true && selected == false && pv.IsMine)
         {
             gameObject.GetComponent<Renderer>().material.color = Color.yellow;
         }
@@ -45,7 +45,7 @@ public class Tile : MonoBehaviour
 
     private void OnMouseExit()
     {
-        if (towerPresent == true && selected == false)
+        if (towerPresent == true && selected == false && pv.IsMine)
         {
             gameObject.GetComponent<Renderer>().material.color = Color.white;
         }
@@ -55,29 +55,61 @@ public class Tile : MonoBehaviour
     {
         if (pv.IsMine)
         {
-            if (selected == true)
+            pv.RPC("PlayerSelected", RpcTarget.All);
+            //if (selected == true)
+            //{
+            //    Debug.Log("Unselecting");
+            //    selected = false;
+            //    towerBuilder.selectedTile = null;
+            //    gameObject.GetComponent<Renderer>().material.color = Color.white;
+            //}
+            //else
+            //{
+            //    if (towerPresent == true)
+            //    {
+            //        selected = true;
+            //        if(towerBuilder.selectedTile != null)
+            //        {
+            //            towerBuilder.selectedTile.selected = false;
+            //            towerBuilder.selectedTile.gameObject.GetComponent<Renderer>().material.color = Color.white;
+            //        }
+            //        towerBuilder.selectedTile = this;
+            //    }
+            //    else
+            //    {
+            //        selected = false;
+            //        towerBuilder.selectedTile = null;
+            //    }
+            //}
+        }
+    }
+
+    [PunRPC]
+    public void PlayerSelected()
+    {
+        if (selected == true)
+        {
+            Debug.Log("Unselecting");
+            selected = false;
+            towerBuilder.selectedTile = null;
+            gameObject.GetComponent<Renderer>().material.color = Color.white;
+        }
+        else
+        {
+            if (towerPresent == true)
             {
-                Debug.Log("Unselecting");
-                selected = false;
-                towerBuilder.selectedTile = null;
-                gameObject.GetComponent<Renderer>().material.color = Color.white;
+                selected = true;
+                if (towerBuilder.selectedTile != null)
+                {
+                    towerBuilder.selectedTile.selected = false;
+                    towerBuilder.selectedTile.gameObject.GetComponent<Renderer>().material.color = Color.white;
+                }
+                towerBuilder.selectedTile = this;
             }
             else
             {
-                if (towerPresent == true)
-                {
-                    selected = true;
-                    if(towerBuilder.selectedTile != null)
-                    {
-                        towerBuilder.selectedTile.gameObject.GetComponent<Renderer>().material.color = Color.white;
-                    }
-                    towerBuilder.selectedTile = this;
-                }
-                else
-                {
-                    selected = false;
-                    towerBuilder.selectedTile = null;
-                }
+                selected = false;
+                towerBuilder.selectedTile = null;
             }
         }
     }
