@@ -46,32 +46,25 @@ public class Dodgeball : MonoBehaviour
             {
                 transform.position = grabScript.ballPositon.transform.position;
                 beingGrabbed = true;
+                if (PhotonNetwork.IsMasterClient)
+                {
+                    rb.constraints = RigidbodyConstraints.FreezeAll;
+                }
             }
             else if (Input.GetKeyDown(KeyCode.E) && beingGrabbed == true)
             {
                 transform.position = actualBall.transform.position;
                 beingGrabbed = false;
+                if (PhotonNetwork.IsMasterClient)
+                {
+                    rb.constraints = RigidbodyConstraints.None;
+                }
             }
         }
 
         if (beingGrabbed)
         {
             transform.position = grabScript.ballPositon.transform.position;
-        }
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!pv.IsMine) return;
-        if (other.tag == "Player")
-        {
-            inRadius = true;
-            grabScript = other.GetComponent<GrabAndThrow>();
-        }
-        else
-        {
-            inRadius = false;
-            grabScript = null;
         }
     }
 }

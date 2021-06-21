@@ -58,4 +58,24 @@ public class GrabAndThrow : MonoBehaviour
     {
 
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!pv.IsMine) return;
+        if (other.TryGetComponent(out Dodgeball d))
+        {
+            d.inRadius = true;
+            d.grabScript = this;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (!pv.IsMine) return;
+        if (other.TryGetComponent(out Dodgeball d))
+        {
+            d.inRadius = false;
+            d.grabScript = null;
+        }
+    }
 }
