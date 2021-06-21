@@ -19,6 +19,8 @@ public class TowerBuilder : MonoBehaviour
     int tileToSpawn;
     public GameObject turretToSpawn;
 
+    public Tile selectedTile;
+
     TowerBuilder otherPlayer = null;
 
     // Start is called before the first frame update
@@ -93,7 +95,7 @@ public class TowerBuilder : MonoBehaviour
     public void TradeTowers()
     {
         Debug.Log("Trying to trade");
-        foreach (Transform t in otherPlayer.tiles)
+        foreach (Transform t in tiles)
         {
             Tile tile = t.GetComponent<Tile>();
             if (tile.selected == true && tile.pv.IsMine)

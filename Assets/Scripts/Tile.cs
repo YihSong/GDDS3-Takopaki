@@ -21,6 +21,7 @@ public class Tile : MonoBehaviour
     bool clearTower;
 
     public GameObject tower;
+    TowerBuilder towerBuilder;
 
     void Start()
     {
@@ -51,12 +52,13 @@ public class Tile : MonoBehaviour
 
     private void OnMouseDown()
     {
-        //if (pv.IsMine)
-        //{
+        if (pv.IsMine)
+        {
             if (selected == true)
             {
                 Debug.Log("Unselecting");
                 selected = false;
+                towerBuilder.selectedTile = null;
                 gameObject.GetComponent<Renderer>().material.color = Color.white;
             }
             else
@@ -64,13 +66,19 @@ public class Tile : MonoBehaviour
                 if (towerPresent == true)
                 {
                     selected = true;
+                    if(towerBuilder.selectedTile != null)
+                    {
+                        towerBuilder.selectedTile.gameObject.GetComponent<Renderer>().material.color = Color.white;
+                    }
+                    towerBuilder.selectedTile = this;
                 }
                 else
                 {
                     selected = false;
+                    towerBuilder.selectedTile = null;
                 }
             }
-        //}
+        }
     }
 
     private void OnTriggerEnter(Collider other)
