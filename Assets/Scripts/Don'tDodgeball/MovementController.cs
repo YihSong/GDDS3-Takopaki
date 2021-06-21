@@ -34,12 +34,14 @@ public class MovementController : MonoBehaviour
     private float CurrentCameraUpAndDownRotation = 0f;
 
     private Rigidbody rb;
+    Animator anim;
     PhotonView pv;
 
     // Start is called before the first frame update
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        anim = GetComponentInChildren<Animator>();
         dashSpeed = 5 * speed;
         dashGauge = startDashGauge;
         pv = GetComponent<PhotonView>();
@@ -84,6 +86,7 @@ public class MovementController : MonoBehaviour
 
         //Final movement velocty vector
         Vector3 _movementVelocity = (_movementHorizontal + _movementVertical).normalized * moveSpeed;
+        anim.SetFloat("Move Speed", _zMovement * moveSpeed);
 
         //Apply movement
         Move(_movementVelocity);
