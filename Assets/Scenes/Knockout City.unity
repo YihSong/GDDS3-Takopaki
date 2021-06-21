@@ -301,7 +301,6 @@ GameObject:
   - component: {fileID: 211504749}
   - component: {fileID: 211504748}
   - component: {fileID: 211504747}
-  - component: {fileID: 211504746}
   - component: {fileID: 211504751}
   m_Layer: 0
   m_Name: Dodgeball
@@ -310,24 +309,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &211504746
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 211504745}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77c8b0a73f302a747ac2da820bb6f19a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pv: {fileID: 0}
-  rb: {fileID: 0}
-  actualBall: {fileID: 0}
-  grabScript: {fileID: 0}
-  inRadius: 0
-  beingGrabbed: 0
 --- !u!135 &211504747
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -682,6 +663,7 @@ GameObject:
   - component: {fileID: 592837184}
   - component: {fileID: 592837183}
   - component: {fileID: 592837186}
+  - component: {fileID: 592837187}
   m_Layer: 0
   m_Name: DB Holder
   m_TagString: Untagged
@@ -697,7 +679,7 @@ SphereCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 592837182}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 1.72
@@ -753,10 +735,27 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 592837187}
   sceneViewId: 1
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &592837187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 592837182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
 --- !u!1 &706886179
 GameObject:
   m_ObjectHideFlags: 0

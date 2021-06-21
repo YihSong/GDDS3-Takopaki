@@ -44,12 +44,12 @@ public class Dodgeball : MonoBehaviour
         { 
             if (Input.GetKeyDown(KeyCode.E) && beingGrabbed == false) 
             {
-                actualBall.transform.position = grabScript.ballPositon.transform.position;
+                transform.position = grabScript.ballPositon.transform.position;
                 beingGrabbed = true;
             }
             else if (Input.GetKeyDown(KeyCode.E) && beingGrabbed == true)
             {
-                actualBall.transform.position = actualBall.transform.position;
+                transform.position = actualBall.transform.position;
                 beingGrabbed = false;
             }
         }
