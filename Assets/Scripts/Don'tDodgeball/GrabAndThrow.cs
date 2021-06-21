@@ -62,14 +62,14 @@ public class GrabAndThrow : MonoBehaviour
                 db.transform.position = ballPositon.transform.position;
                 grabbing = true;
                 db.beingGrabbed = true;
-                db.pv.RPC("EnableDisableRB", RpcTarget.MasterClient, false);
+                db.pv.RPC("EnableDisableRB", RpcTarget.MasterClient, true);
             }
             else if (Input.GetKeyDown(KeyCode.E) && grabbing)
             {
                 db.transform.position = db.actualBall.transform.position;
                 grabbing = false;
                 db.beingGrabbed = false;
-                db.pv.RPC("EnableDisableRB", RpcTarget.MasterClient, true);
+                db.pv.RPC("EnableDisableRB", RpcTarget.MasterClient, false);
             }
 
             if (grabbing)

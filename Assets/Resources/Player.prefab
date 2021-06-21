@@ -499,6 +499,7 @@ MonoBehaviour:
   crosshair: {fileID: 0}
   db: {fileID: 0}
   myDirection: {x: 0, y: 0, z: 0}
+  inRadius: 0
 --- !u!1 &7514343211638640538
 GameObject:
   m_ObjectHideFlags: 0
