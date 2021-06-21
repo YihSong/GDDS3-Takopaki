@@ -78,7 +78,7 @@ public class TowerBuilder : MonoBehaviour
     {
         if (j > tiles.Length || onCooldown) return;
         string towerToBuild = towerPrefabs[Random.Range(0, towerPrefabs.Length)];
-        PhotonNetwork.Instantiate(towerToBuild, tiles[j].position + Vector3.up * offset, Quaternion.identity);
+        tiles[j].GetComponent<Tile>().tower =  PhotonNetwork.Instantiate(towerToBuild, tiles[j].position + Vector3.up * offset, Quaternion.identity);
         j++;
         StartCoroutine("CooldownCo");
     }

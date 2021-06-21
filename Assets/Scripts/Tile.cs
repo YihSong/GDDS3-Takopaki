@@ -20,6 +20,8 @@ public class Tile : MonoBehaviour
 
     bool clearTower;
 
+    public GameObject tower;
+
     void Start()
     {
         pv = GetComponent<PhotonView>();
@@ -104,6 +106,6 @@ public class Tile : MonoBehaviour
 
     public void ClearCurrentTower()
     {
-        clearTower = true;
+        Destroy(tower);
     }
 }
