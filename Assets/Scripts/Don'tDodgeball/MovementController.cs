@@ -87,7 +87,7 @@ public class MovementController : MonoBehaviour
         //Final movement velocty vector
         Vector3 _movementVelocity = (_movementHorizontal + _movementVertical).normalized * moveSpeed;
         anim.SetFloat("Move Speed", _zMovement * moveSpeed);
-
+        anim.SetFloat("Horizontal", _xMovement * moveSpeed);
         //Apply movement
         Move(_movementVelocity);
 
