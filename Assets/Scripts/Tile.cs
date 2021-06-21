@@ -55,7 +55,6 @@ public class Tile : MonoBehaviour
     {
         if (pv.IsMine)
         {
-            pv.RPC("PlayerSelected", RpcTarget.Others);
             if (selected == true)
             {
                 Debug.Log("Unselecting");
@@ -67,6 +66,7 @@ public class Tile : MonoBehaviour
             {
                 if (towerPresent == true)
                 {
+                    pv.RPC("PlayerSelected", RpcTarget.Others);
                     selected = true;
                     if (towerBuilder.selectedTile != null)
                     {
@@ -88,31 +88,13 @@ public class Tile : MonoBehaviour
     public void PlayerSelected()
     {
         Debug.Log("RPC Received");
-        if (selected == true)
+        selected = true;
+        if (towerBuilder.selectedTile != null)
         {
-            Debug.Log("Unselecting");
-            selected = false;
-            towerBuilder.selectedTile = null;
-            gameObject.GetComponent<Renderer>().material.color = Color.white;
+            towerBuilder.selectedTile.selected = false;
+            towerBuilder.selectedTile.gameObject.GetComponent<Renderer>().material.color = Color.white;
         }
-        else
-        {
-            if (towerPresent == true)
-            {
-                selected = true;
-                if (towerBuilder.selectedTile != null)
-                {
-                    towerBuilder.selectedTile.selected = false;
-                    towerBuilder.selectedTile.gameObject.GetComponent<Renderer>().material.color = Color.white;
-                }
-                towerBuilder.selectedTile = this;
-            }
-            else
-            {
-                selected = false;
-                towerBuilder.selectedTile = null;
-            }
-        }
+        towerBuilder.selectedTile = this;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -146,6 +128,7 @@ public class Tile : MonoBehaviour
         }
     }
 
+    [PunRPC]
     public void ClearCurrentTower()
     {
         Destroy(tower);
