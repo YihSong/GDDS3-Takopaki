@@ -9,6 +9,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 {
 
     public static RoomManager Instance;
+    [SerializeField] GameObject playerManager;
 
     void Awake()
     {
@@ -38,17 +39,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         if(scene.buildIndex == 1)
         {
-            //print("found scene");
-                if(PhotonNetwork.CurrentRoom.PlayerCount >= 2)
-                {
-                    PhotonNetwork.Instantiate("1 side tiles", Vector3.zero, Quaternion.Euler(0, 180, 0));
-                }
-                else
-                {
-                    PhotonNetwork.Instantiate("1 side tiles", Vector3.zero, Quaternion.identity);
-                }
-                
-            
+            PhotonNetwork.Instantiate(playerManager.name, Vector3.zero, Quaternion.identity);
         }
     }
 }

@@ -89,7 +89,7 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Debug.Log(PhotonNetwork.NickName + " joined to " + PhotonNetwork.CurrentRoom.Name);
-        PhotonNetwork.LoadLevel("GP3");
+        PhotonNetwork.LoadLevel(1);
 
     }
 

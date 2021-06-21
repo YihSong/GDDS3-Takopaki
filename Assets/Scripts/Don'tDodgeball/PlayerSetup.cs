@@ -7,8 +7,8 @@ using TMPro;
 public class PlayerSetup : MonoBehaviourPunCallbacks
 {
 
-    //[SerializeField]
-    //GameObject FPSCamera;
+    [SerializeField]
+    GameObject FPSCamera;
 
     [SerializeField]
     TextMeshProUGUI playerNameText;
@@ -19,13 +19,13 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
 
         if (photonView.IsMine)
         {
-            //transform.GetComponent<MovementController>().enabled = true;
-            //FPSCamera.GetComponent<Camera>().enabled = true;
+            transform.GetComponent<MovementController>().enabled = true;
+            FPSCamera.GetComponent<Camera>().enabled = true;
         }
         else
         {
-            //transform.GetComponent<MovementController>().enabled = false;
-            //FPSCamera.GetComponent<Camera>().enabled = false;
+            transform.GetComponent<MovementController>().enabled = false;
+            FPSCamera.GetComponent<Camera>().enabled = false;
         }
 
 
