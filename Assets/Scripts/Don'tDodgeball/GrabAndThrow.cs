@@ -10,7 +10,8 @@ public class GrabAndThrow : MonoBehaviour
 
     public GameObject ballPositon;
 
-    public Image crosshair;
+    public GameObject ballCommand;
+    public GameObject crosshair;
 
     public Dodgeball db;
 
@@ -21,7 +22,7 @@ public class GrabAndThrow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        pv = FindObjectOfType<PhotonView>();
+        pv = GetComponent<PhotonView>();
         db = FindObjectOfType<Dodgeball>();
     }
 
@@ -40,6 +41,15 @@ public class GrabAndThrow : MonoBehaviour
         if (db.beingGrabbed == true && pv.IsMine && db.pv.IsMine && Input.GetKeyDown("Shoot"))
         {
             pv.RPC("SendBallFlying", RpcTarget.AllBuffered);
+        }
+
+        if (db.inRadius == true)
+        {
+            ballCommand.SetActive(true);
+        }
+        else
+        {
+            ballCommand.SetActive(false);
         }
     }
 

@@ -13,14 +13,13 @@ public class Dodgeball : MonoBehaviour
 
     [SerializeField]
     GameObject actualBall;
-    GameObject grabCommand;
+    //GameObject grabCommand;
+
+    //Vector3 cameraPosition;
+    //Camera playerCamera;
 
     [SerializeField]
-    Vector3 cameraPosition;
-    Camera playerCamera;
-
-    [SerializeField]
-    GrabAndThrow grabScript;
+    public GrabAndThrow grabScript;
 
     public bool inRadius;
     public bool beingGrabbed;
@@ -29,8 +28,8 @@ public class Dodgeball : MonoBehaviour
     void Start()
     {
         grabScript = FindObjectOfType<GrabAndThrow>();
-        rb = FindObjectOfType<Rigidbody>();
-        pv = FindObjectOfType<PhotonView>();
+        rb = GetComponentInChildren<Rigidbody>();
+        pv = GetComponent<PhotonView>();
     }
 
     // Update is called once per frame
@@ -38,18 +37,13 @@ public class Dodgeball : MonoBehaviour
     {
         if (!grabScript.pv.IsMine) return;
         if (inRadius == true)
-        {
-            // Get Command on the ball to constantly be looking at the player cameras;
-            cameraPosition = playerCamera.transform.position;
-            Transform commandPosition = grabCommand.transform;
-            commandPosition.LookAt(cameraPosition);
-
-            if (Input.GetKeyDown("Grab") && beingGrabbed == false) 
+        { 
+            if (Input.GetKeyDown(KeyCode.E) && beingGrabbed == false) 
             {
                 actualBall.transform.position = grabScript.ballPositon.transform.position;
                 beingGrabbed = true;
             }
-            else if (Input.GetKeyDown("Grab") && beingGrabbed == true)
+            else if (Input.GetKeyDown(KeyCode.E) && beingGrabbed == true)
             {
                 actualBall.transform.position = actualBall.transform.position;
                 beingGrabbed = false;
