@@ -26,6 +26,7 @@ public class Tile : MonoBehaviour
     void Start()
     {
         pv = GetComponent<PhotonView>();
+        towerBuilder = GetComponentInParent<TowerBuilder>();
     }
     void Update()
     {
