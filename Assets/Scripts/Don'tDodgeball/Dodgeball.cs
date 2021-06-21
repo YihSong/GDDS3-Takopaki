@@ -54,10 +54,15 @@ public class Dodgeball : MonoBehaviour
             }
         }
 
+        if (beingGrabbed)
+        {
+            transform.position = grabScript.ballPositon.transform.position;
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        if (!pv.IsMine) return;
         if (other.tag == "Player")
         {
             inRadius = true;
