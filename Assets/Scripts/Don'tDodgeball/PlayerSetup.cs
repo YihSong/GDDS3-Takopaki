@@ -35,7 +35,7 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
 
     }
 
-    void SetPlayerUI()
+    public void SetPlayerUI()
     {
         if (playerNameText!=null)
         {

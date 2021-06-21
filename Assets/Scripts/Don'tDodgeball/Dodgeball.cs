@@ -27,9 +27,13 @@ public class Dodgeball : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        grabScript = FindObjectOfType<GrabAndThrow>();
+        grabScript = null;
         rb = GetComponentInChildren<Rigidbody>();
         pv = GetComponent<PhotonView>();
+        if (!pv.IsMine)
+        {
+            Destroy(rb); //Only have master client apply rigidbody
+        }
     }
 
     // Update is called once per frame
@@ -57,10 +61,12 @@ public class Dodgeball : MonoBehaviour
         if (other.tag == "Player")
         {
             inRadius = true;
+            grabScript = other.GetComponent<GrabAndThrow>();
         }
         else
         {
             inRadius = false;
+            grabScript = null;
         }
     }
 }
