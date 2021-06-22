@@ -36,16 +36,6 @@ public class GrabAndThrow : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (grabbing == true)
-        {
-            movement.anim.SetBool("Pick Up", true);
-        }
-        else
-        {
-            movement.anim.SetBool("Pick Up", false);
-        }
-
         if (db.beingGrabbed == true && pv.IsMine && db.pv.IsMine && Input.GetButtonDown("Shoot"))
         {
             movement.anim.SetBool("Throw", true);
@@ -69,15 +59,15 @@ public class GrabAndThrow : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E) && !grabbing && !db.beingGrabbed && inRadius)
             {
-                StartCoroutine("PickupToHoldCo");
                 grabbing = true;
+                movement.anim.SetBool("Pick Up", true);
                 db.pv.RPC("GrabReleaseBall", RpcTarget.AllBuffered, false, ballPositon.transform.position);
                 db.pv.RPC("EnableDisableRB", RpcTarget.MasterClient, true);
             }
             else if (Input.GetKeyDown(KeyCode.E) && grabbing)
             {
-                movement.anim.SetFloat("Animation Pause", 1f);
                 grabbing = false;
+                movement.anim.SetBool("Pick Up", false);
                 db.pv.RPC("GrabReleaseBall", RpcTarget.AllBuffered, false, Vector3.zero);
                 db.pv.RPC("EnableDisableRB", RpcTarget.MasterClient, false);
                 db.pv.RPC("ShootBall", RpcTarget.MasterClient, transform.forward * shootForce);
@@ -101,13 +91,6 @@ public class GrabAndThrow : MonoBehaviour
     public void SendBallFlying()
     {
 
-    }
-
-    public IEnumerator PickupToHoldCo()
-    {
-        movement.anim.Play("Pick Up");
-        yield return new WaitForSeconds(0.25f);
-        movement.anim.SetFloat("Animation Pause", 0f);
     }
 
     private void OnTriggerEnter(Collider other)

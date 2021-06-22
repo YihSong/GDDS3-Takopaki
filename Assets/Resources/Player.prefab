@@ -204,9 +204,17 @@ MonoBehaviour:
   - Type: 1
     SynchronizeType: 2
     Name: Horizontal
+  - Type: 4
+    SynchronizeType: 2
+    Name: Pick Up
+  - Type: 4
+    SynchronizeType: 2
+    Name: Throw
   m_SynchronizeLayers:
-  - SynchronizeType: 0
+  - SynchronizeType: 2
     LayerIndex: 0
+  - SynchronizeType: 2
+    LayerIndex: 1
 --- !u!114 &8058820302599714818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -904,6 +912,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: 0e32f880f10ddaa4c8d8e155d4a511e6, type: 2}
+    - target: {fileID: 11400004, guid: 412b92d4feeb9c548bfa98f62c4d1022, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 11400002, guid: 412b92d4feeb9c548bfa98f62c4d1022, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 412b92d4feeb9c548bfa98f62c4d1022, type: 3}
