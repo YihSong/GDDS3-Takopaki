@@ -112,7 +112,7 @@ public class Dodgeball : MonoBehaviour
     {
         if (pv.IsMine)
         {
-            if(other.TryGetComponent(out DodgeballTarget target))
+            if(other.TryGetComponent(out DodgeballTarget target) && !beingGrabbed)
             {
                 target.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.AllBuffered, damage);
             }
