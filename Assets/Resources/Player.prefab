@@ -210,6 +210,9 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 2
     Name: Throw
+  - Type: 4
+    SynchronizeType: 2
+    Name: Stun
   m_SynchronizeLayers:
   - SynchronizeType: 2
     LayerIndex: 0
@@ -435,7 +438,9 @@ MonoBehaviour:
   startDashGauge: 2
   dashBar: {fileID: 6545796464432426925}
   lookSensitivity: 5
+  isStunned: 0
   fpsCamera: {fileID: 7514343211638640538}
+  stunDuration: 3.16
   anim: {fileID: 0}
 --- !u!54 &7514343211623398040
 Rigidbody:
