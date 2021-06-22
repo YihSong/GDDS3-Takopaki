@@ -52,6 +52,9 @@ MonoBehaviour:
   - BallGrabbed
   - GrabReleaseBall
   - ShootBall
+  - ChangeColor
+  - FlipColor
+  - LoseTarget
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

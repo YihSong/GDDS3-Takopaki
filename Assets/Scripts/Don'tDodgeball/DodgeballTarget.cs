@@ -9,7 +9,8 @@ public class DodgeballTarget : MonoBehaviour
     [SerializeField] int startHealth;
     int health;
     [SerializeField] Image healthBar;
-    Camera camera;
+    Camera cam;
+    [SerializeField] Ground ground;
 
     private void Start()
     {
@@ -18,7 +19,7 @@ public class DodgeballTarget : MonoBehaviour
 
     private void Update()
     {
-        if(camera == null)
+        if(cam == null)
         {
             foreach (Camera c in FindObjectsOfType<Camera>())
             {
@@ -26,14 +27,14 @@ public class DodgeballTarget : MonoBehaviour
                 if (c.enabled)
                 {
                     Debug.Log("Found our camera");
-                    camera = c;
+                    cam = c;
                     break;
                 }
             }
         }
         else
         {
-            Vector3 lookPos = new Vector3(camera.transform.position.y, healthBar.transform.parent.position.y, camera.transform.position.z);
+            Vector3 lookPos = new Vector3(cam.transform.position.y, healthBar.transform.parent.position.y, cam.transform.position.z);
             healthBar.transform.parent.LookAt(lookPos);
         }
     }
@@ -52,6 +53,10 @@ public class DodgeballTarget : MonoBehaviour
 
     void Die()
     {
+        if (GetComponent<PhotonView>().IsMine)
+        {
+            ground.photonView.RPC("LoseTarget", RpcTarget.AllBuffered);
+        }
         if (transform.parent)
         {
             Destroy(transform.parent.gameObject);
