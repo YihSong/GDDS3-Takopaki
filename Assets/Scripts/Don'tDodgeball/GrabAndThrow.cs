@@ -8,6 +8,8 @@ public class GrabAndThrow : MonoBehaviour
 {
     public PhotonView pv;
 
+    public MovementController movement;
+
     public GameObject ballPositon;
 
     public GameObject ballCommand;
@@ -28,23 +30,30 @@ public class GrabAndThrow : MonoBehaviour
     {
         pv = GetComponent<PhotonView>();
         db = FindObjectOfType<Dodgeball>();
+        movement = GetComponent<MovementController>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (db.beingGrabbed == true && db.pv.IsMine && pv.IsMine)
-        {
-            //crosshair.gameObject.SetActive(true);
-        }
-        else
-        {
-            //crosshair.gameObject.SetActive(false);
-        }
+
+        //if (grabbing == true)
+        //{
+        //    StartCoroutine("PickupToHoldCo");
+        //}
+        //else
+        //{
+        //    movement.anim.SetFloat("Animation Pause", 1f);
+        //}
 
         if (db.beingGrabbed == true && pv.IsMine && db.pv.IsMine && Input.GetButtonDown("Shoot"))
         {
+            movement.anim.SetBool("Throw", true);
             pv.RPC("SendBallFlying", RpcTarget.AllBuffered);
+        }
+        else
+        {
+            movement.anim.SetBool("Throw", false);
         }
 
         if (inRadius == true)
@@ -60,18 +69,25 @@ public class GrabAndThrow : MonoBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E) && !grabbing && !db.beingGrabbed && inRadius)
             {
+                StartCoroutine("PickupToHoldCo");
                 grabbing = true;
                 db.pv.RPC("GrabReleaseBall", RpcTarget.AllBuffered, false, ballPositon.transform.position);
                 db.pv.RPC("EnableDisableRB", RpcTarget.MasterClient, true);
             }
             else if (Input.GetKeyDown(KeyCode.E) && grabbing)
             {
+                movement.anim.SetFloat("Animation Pause", 1f);
                 grabbing = false;
                 db.pv.RPC("GrabReleaseBall", RpcTarget.AllBuffered, false, Vector3.zero);
                 db.pv.RPC("EnableDisableRB", RpcTarget.MasterClient, false);
                 db.pv.RPC("ShootBall", RpcTarget.MasterClient, transform.forward * shootForce);
                 
             }
+            //else
+            //{
+            //    movement.anim.SetBool("Pick Up", false);
+            //    movement.anim.SetBool("Drop", false);
+            //}
 
             if (grabbing && ballPositon.transform.position != prevPos)
             {
@@ -85,6 +101,13 @@ public class GrabAndThrow : MonoBehaviour
     public void SendBallFlying()
     {
 
+    }
+
+    public IEnumerator PickupToHoldCo()
+    {
+        movement.anim.Play("Pick Up");
+        yield return new WaitForSeconds(0.25f);
+        movement.anim.SetFloat("Animation Pause", 0f);
     }
 
     private void OnTriggerEnter(Collider other)

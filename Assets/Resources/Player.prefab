@@ -428,6 +428,7 @@ MonoBehaviour:
   dashBar: {fileID: 6545796464432426925}
   lookSensitivity: 5
   fpsCamera: {fileID: 7514343211638640538}
+  anim: {fileID: 0}
 --- !u!54 &7514343211623398040
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -513,6 +514,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pv: {fileID: 0}
+  movement: {fileID: 0}
   ballPositon: {fileID: 705927109513128794}
   ballCommand: {fileID: 2532855601476412163}
   crosshair: {fileID: 0}
