@@ -22,6 +22,7 @@ public class GrabAndThrow : MonoBehaviour
     bool inRadius;
     bool grabbing;
 
+
     [SerializeField] float shootForce = 50f;
     Vector3 prevPos;
 

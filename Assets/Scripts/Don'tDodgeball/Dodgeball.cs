@@ -10,6 +10,9 @@ public class Dodgeball : MonoBehaviour
 
     [SerializeField]
     Rigidbody rb;
+   
+    public bool isFlying;
+    public float flyingThreshold = 30f;
 
     public GameObject actualBall;
     //GameObject grabCommand;
@@ -40,33 +43,17 @@ public class Dodgeball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (!grabScript.pv.IsMine) return;
-        //if (inRadius == true)
-        //{ 
-        //    if (Input.GetKeyDown(KeyCode.E) && beingGrabbed == false) 
-        //    {
-        //        transform.position = grabScript.ballPositon.transform.position;
-        //        beingGrabbed = true;
-        //        if (PhotonNetwork.IsMasterClient)
-        //        {
-        //            rb.constraints = RigidbodyConstraints.FreezeAll;
-        //        }
-        //    }
-        //    else if (Input.GetKeyDown(KeyCode.E) && beingGrabbed == true)
-        //    {
-        //        transform.position = actualBall.transform.position;
-        //        beingGrabbed = false;
-        //        if (PhotonNetwork.IsMasterClient)
-        //        {
-        //            rb.constraints = RigidbodyConstraints.None;
-        //        }
-        //    }
-        //}
 
-        //if (beingGrabbed)
-        //{
-        //    transform.position = grabScript.ballPositon.transform.position;
-        //}
+        if (rb.velocity.magnitude >= flyingThreshold)
+        {
+            Debug.Log("Ball is Flying");
+            isFlying = true;
+        }
+        else if (rb.velocity.magnitude <= flyingThreshold)
+        {
+            isFlying = false;
+        }
+
     }
 
     [PunRPC]

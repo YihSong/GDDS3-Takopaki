@@ -1,9 +1,11 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
 
 public class MovementController : MonoBehaviour
-{
+{ 
     [SerializeField]
     private float speed = 5f;
     
@@ -23,10 +25,14 @@ public class MovementController : MonoBehaviour
     [SerializeField]
     private float lookSensitivity = 3f;
 
+    [SerializeField]
+    bool isStunned;
 
     [SerializeField]
     GameObject fpsCamera;
 
+    [SerializeField]
+    float stunDuration = 3.16f;
 
     private Vector3 velocity = Vector3.zero;
     private Vector3 rotation = Vector3.zero;
@@ -57,6 +63,7 @@ public class MovementController : MonoBehaviour
         }
     }
 
+    
     // Update is called once per frame
     private void Update()
     {
@@ -130,6 +137,29 @@ public class MovementController : MonoBehaviour
         }
     }
 
+    public IEnumerator StunCo()
+    {
+        speed = 0f;
+        anim.SetBool("Stun", true);
+        yield return new WaitForSeconds(stunDuration);
+        speed = 5f;
+        anim.SetBool("Stun", false);
+        isStunned = false;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!pv.IsMine) return;
+        if (other.TryGetComponent(out Dodgeball d))
+        {
+            if (d.isFlying == true && isStunned == false)
+            {
+                pv.RPC("KenaStun", RpcTarget.AllBuffered);
+                isStunned = true;
+            }
+        }
+    }
+
     void Move(Vector3 movementVelocity)
     {
         velocity = movementVelocity;
@@ -151,4 +181,12 @@ public class MovementController : MonoBehaviour
     {
         dashBar.fillAmount = fill;
     }
+
+    [PunRPC]
+    public void KenaStun()
+    {
+        StartCoroutine("StunCo");
+    }
+
+    
 }
