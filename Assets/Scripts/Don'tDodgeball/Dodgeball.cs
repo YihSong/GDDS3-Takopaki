@@ -23,6 +23,8 @@ public class Dodgeball : MonoBehaviour
     public bool inRadius;
     public bool beingGrabbed;
 
+    [SerializeField] int damage = 10;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -104,5 +106,16 @@ public class Dodgeball : MonoBehaviour
     public void ShootBall(Vector3 force)
     {
         rb.AddForce(force);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (pv.IsMine)
+        {
+            if(other.TryGetComponent(out DodgeballTarget target))
+            {
+                target.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.AllBuffered, damage);
+            }
+        }
     }
 }
