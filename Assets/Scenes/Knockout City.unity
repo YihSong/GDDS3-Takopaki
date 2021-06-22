@@ -10442,7 +10442,7 @@ PrefabInstance:
     - target: {fileID: 8644896202876120325, guid: 7ce30d0b5726dff4fa9970510a69e871,
         type: 3}
       propertyPath: flyingThreshold
-      value: 10
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 8644896202876120327, guid: 7ce30d0b5726dff4fa9970510a69e871,
         type: 3}
