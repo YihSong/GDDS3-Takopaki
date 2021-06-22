@@ -152,7 +152,7 @@ public class MovementController : MonoBehaviour
         if (!pv.IsMine) return;
         if (other.TryGetComponent(out Dodgeball d))
         {
-            if (d.isFlying == true && isStunned == false)
+            if (d.isFlying == true && isStunned == false && !Input.GetKeyDown(KeyCode.E))
             {
                 pv.RPC("KenaStun", RpcTarget.AllBuffered);
                 isStunned = true;
