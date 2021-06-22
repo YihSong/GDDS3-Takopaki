@@ -37,14 +37,14 @@ public class GrabAndThrow : MonoBehaviour
     void Update()
     {
 
-        //if (grabbing == true)
-        //{
-        //    StartCoroutine("PickupToHoldCo");
-        //}
-        //else
-        //{
-        //    movement.anim.SetFloat("Animation Pause", 1f);
-        //}
+        if (grabbing == true)
+        {
+            movement.anim.SetBool("Pick Up", true);
+        }
+        else
+        {
+            movement.anim.SetBool("Pick Up", false);
+        }
 
         if (db.beingGrabbed == true && pv.IsMine && db.pv.IsMine && Input.GetButtonDown("Shoot"))
         {
