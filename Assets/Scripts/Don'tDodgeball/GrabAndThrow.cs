@@ -61,7 +61,7 @@ public class GrabAndThrow : MonoBehaviour
             {
                 grabbing = true;
                 movement.anim.SetBool("Pick Up", true);
-                db.pv.RPC("GrabReleaseBall", RpcTarget.AllBuffered, false, ballPositon.transform.position);
+                db.pv.RPC("GrabReleaseBall", RpcTarget.AllBuffered, true, ballPositon.transform.position);
                 db.pv.RPC("EnableDisableRB", RpcTarget.MasterClient, true);
             }
             else if (Input.GetKeyDown(KeyCode.E) && grabbing)
