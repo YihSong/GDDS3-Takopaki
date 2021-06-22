@@ -55,6 +55,7 @@ MonoBehaviour:
   - ChangeColor
   - FlipColor
   - LoseTarget
+  - KenaStun
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

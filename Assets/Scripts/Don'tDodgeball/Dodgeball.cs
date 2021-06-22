@@ -47,13 +47,19 @@ public class Dodgeball : MonoBehaviour
         if (rb.velocity.magnitude >= flyingThreshold)
         {
             Debug.Log("Ball is Flying");
-            isFlying = true;
+            pv.RPC("SetFlying", RpcTarget.AllBuffered, true);
         }
         else if (rb.velocity.magnitude <= flyingThreshold)
         {
-            isFlying = false;
+            pv.RPC("SetFlying", RpcTarget.AllBuffered, false);
         }
 
+    }
+
+    [PunRPC]
+    public void SetFlying(bool fly)
+    {
+        isFlying = fly;
     }
 
     [PunRPC]

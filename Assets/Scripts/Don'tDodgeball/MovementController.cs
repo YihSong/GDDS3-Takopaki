@@ -154,7 +154,7 @@ public class MovementController : MonoBehaviour
         {
             if (d.isFlying == true && isStunned == false && !Input.GetKeyDown(KeyCode.E))
             {
-                pv.RPC("KenaStun", RpcTarget.AllBuffered);
+                KenaStun();
                 isStunned = true;
             }
         }
