@@ -9,7 +9,6 @@ public class Ground : MonoBehaviourPunCallbacks
     [SerializeField] bool startsRed;
     bool flipped;
     Renderer r;
-    [SerializeField] Ground prevGround;
     [SerializeField] int numOfTargets;
 
     // Start is called before the first frame update
@@ -33,7 +32,6 @@ public class Ground : MonoBehaviourPunCallbacks
             {
                 r.material = red;
                 flipped = false;
-                prevGround.photonView.RPC("FlipColor", RpcTarget.AllBuffered);
             }
             else
             {
@@ -47,7 +45,6 @@ public class Ground : MonoBehaviourPunCallbacks
             {
                 r.material = blue;
                 flipped = false;
-                prevGround.photonView.RPC("FlipColor", RpcTarget.AllBuffered);
             }
             else
             {
