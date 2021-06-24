@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 86958777}
   m_Layer: 0
   m_Name: Blue Ground (1)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -231,7 +231,6 @@ MonoBehaviour:
   blue: {fileID: 2100000, guid: a6f83ad6584409449a23e259f189fd79, type: 2}
   red: {fileID: 2100000, guid: b7caeff8a05235d42998918fae7ccd98, type: 2}
   startsRed: 0
-  prevGround: {fileID: 306269194}
   numOfTargets: 2
 --- !u!114 &86958778
 MonoBehaviour:
@@ -493,7 +492,7 @@ GameObject:
   - component: {fileID: 306269194}
   m_Layer: 0
   m_Name: Red Ground (1)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -587,7 +586,6 @@ MonoBehaviour:
   blue: {fileID: 2100000, guid: a6f83ad6584409449a23e259f189fd79, type: 2}
   red: {fileID: 2100000, guid: b7caeff8a05235d42998918fae7ccd98, type: 2}
   startsRed: 1
-  prevGround: {fileID: 86958777}
   numOfTargets: 2
 --- !u!114 &306269195
 MonoBehaviour:
@@ -1450,7 +1448,7 @@ GameObject:
   - component: {fileID: 706886184}
   m_Layer: 0
   m_Name: Red Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1544,7 +1542,6 @@ MonoBehaviour:
   blue: {fileID: 2100000, guid: a6f83ad6584409449a23e259f189fd79, type: 2}
   red: {fileID: 2100000, guid: b7caeff8a05235d42998918fae7ccd98, type: 2}
   startsRed: 1
-  prevGround: {fileID: 1797104440}
   numOfTargets: 2
 --- !u!114 &706886185
 MonoBehaviour:
@@ -1658,7 +1655,7 @@ GameObject:
   - component: {fileID: 790800613}
   m_Layer: 0
   m_Name: Blue Ground (2)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1752,7 +1749,6 @@ MonoBehaviour:
   blue: {fileID: 2100000, guid: a6f83ad6584409449a23e259f189fd79, type: 2}
   red: {fileID: 2100000, guid: b7caeff8a05235d42998918fae7ccd98, type: 2}
   startsRed: 0
-  prevGround: {fileID: 1204799303}
   numOfTargets: 2
 --- !u!114 &790800614
 MonoBehaviour:
@@ -2646,7 +2642,7 @@ GameObject:
   - component: {fileID: 1204799303}
   m_Layer: 0
   m_Name: Red Ground (2)
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2740,7 +2736,6 @@ MonoBehaviour:
   blue: {fileID: 2100000, guid: a6f83ad6584409449a23e259f189fd79, type: 2}
   red: {fileID: 2100000, guid: b7caeff8a05235d42998918fae7ccd98, type: 2}
   startsRed: 1
-  prevGround: {fileID: 790800613}
   numOfTargets: 2
 --- !u!114 &1204799304
 MonoBehaviour:
@@ -3900,7 +3895,7 @@ GameObject:
   - component: {fileID: 1797104440}
   m_Layer: 0
   m_Name: Blue Ground
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3994,7 +3989,6 @@ MonoBehaviour:
   blue: {fileID: 2100000, guid: a6f83ad6584409449a23e259f189fd79, type: 2}
   red: {fileID: 2100000, guid: b7caeff8a05235d42998918fae7ccd98, type: 2}
   startsRed: 0
-  prevGround: {fileID: 706886184}
   numOfTargets: 2
 --- !u!114 &1797104441
 MonoBehaviour:

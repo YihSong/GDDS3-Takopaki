@@ -441,6 +441,7 @@ MonoBehaviour:
   isStunned: 0
   fpsCamera: {fileID: 7514343211638640538}
   stunDuration: 3.16
+  isGrounded: 0
   anim: {fileID: 0}
 --- !u!54 &7514343211623398040
 Rigidbody:

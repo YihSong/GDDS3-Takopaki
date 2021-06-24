@@ -34,6 +34,10 @@ public class MovementController : MonoBehaviour
     [SerializeField]
     float stunDuration = 3.16f;
 
+    public bool isGrounded;
+    Vector3 jump = new Vector3(0.0f, 2.0f, 0.0f);
+    float jumpForce = 10.0f;
+
     private Vector3 velocity = Vector3.zero;
     private Vector3 rotation = Vector3.zero;
     private float CameraUpAndDownRotation = 0f;
@@ -84,6 +88,16 @@ public class MovementController : MonoBehaviour
             {
                 recharging = true;
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded == true)
+        {
+            rb.AddForce(jump * jumpForce, ForceMode.Impulse);
+            anim.SetBool("Jump", true);
+        }
+        else
+        {
+            anim.SetBool("Jump", false);
         }
 
         if (recharging)
@@ -160,6 +174,19 @@ public class MovementController : MonoBehaviour
         }
     }
 
+    private void OnCollisionStay(Collision collision)
+    {
+        if (!pv.IsMine) return;
+        if (collision.gameObject.tag == "Ground")
+        {
+            pv.RPC("SetGrounded", RpcTarget.AllBuffered, true);
+        }
+        else
+        {
+            pv.RPC("SetGrounded", RpcTarget.AllBuffered, false);
+        }
+    }
+
     void Move(Vector3 movementVelocity)
     {
         velocity = movementVelocity;
@@ -188,5 +215,10 @@ public class MovementController : MonoBehaviour
         StartCoroutine("StunCo");
     }
 
+    [PunRPC]
+    public void SetGrounded(bool onGround)
+    {
+        isGrounded = onGround;
+    }
     
 }
