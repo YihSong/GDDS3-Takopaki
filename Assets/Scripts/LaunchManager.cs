@@ -11,6 +11,7 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     public GameObject ConnectionStatusPanel;
     public GameObject LobbyPanel;
     public GameObject UsernamePanel;
+    public GameObject LobbyInfo;
 
     [SerializeField]
     public InputField  CreateRoomInput, JoinRoomInput, UsernameInput;
@@ -35,6 +36,7 @@ public class LaunchManager : MonoBehaviourPunCallbacks
         ConnectionStatusPanel.SetActive(false);
         LobbyPanel.SetActive(false);
         UsernamePanel.SetActive(false);
+        LobbyInfo.SetActive(false);
     }
 
     // Update is called once per frame
@@ -74,7 +76,11 @@ public class LaunchManager : MonoBehaviourPunCallbacks
         PhotonNetwork.NickName = UsernameInput.text;
         UsernamePanel.SetActive(false);
         LobbyPanel.SetActive(true);
+    }
 
+    public void CloseLobbyInfo()
+    {
+        LobbyInfo.SetActive(false);
     }
 
     #endregion
