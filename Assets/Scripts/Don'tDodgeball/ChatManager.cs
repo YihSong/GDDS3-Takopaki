@@ -8,41 +8,23 @@ using System;
 
 public class ChatManager : MonoBehaviourPun,IPunObservable
 {
-    public GameObject BubbleSpeech;
-    public TextMeshProUGUI ChatText;
+    public GameObject chatTextPrefab;
+    GameObject chatBackground;
 
     InputField ChatInput;
-    private bool DisableSend;
+    [SerializeField]private bool DisableSend;
+
+    MovementController mc;
 
     void Awake()
     {
         ChatInput = GameObject.Find("ChatInputField").GetComponent<InputField>();
+        chatBackground = GameObject.Find("Chat Background");
     }
 
     void Start()
     {
-        if (photonView.IsMine)
-        {
-            if (PhotonNetwork.IsMasterClient) //If we are the master client
-            {
-                ChatText.color = Color.blue; //Means we are on blue side
-            }
-            else
-            {
-                ChatText.color = Color.red; //We are not master client, we are on blue side
-            }
-        }
-        else
-        {
-            if (PhotonNetwork.IsMasterClient) //If we are the master client
-            {
-                ChatText.color = Color.red; //Means the other player is on red side
-            }
-            else
-            {
-                ChatText.color = Color.blue; //We are not master client, other player is on blue side
-            }
-        }
+        mc = GetComponent<MovementController>();
     }
 
     void Update()
@@ -51,19 +33,25 @@ public class ChatManager : MonoBehaviourPun,IPunObservable
         {
             if (ChatInput.isFocused)
             {
-
+                mc.disableInputs = true;
             }
             else
             {
+                mc.disableInputs = false;
+            }
 
+            if (Input.GetKeyDown(KeyCode.Return))
+            {
+                Debug.Log("Pressing enter");
             }
 
             if (!DisableSend && ChatInput.isFocused)
             {
-                if (ChatInput.text != "" && ChatInput.text.Length > 1 && Input.GetKeyDown(KeyCode.Return))
+                Debug.Log("Ready to send");
+                if (ChatInput.text != "" && ChatInput.text.Length > 1 && Input.GetKeyDown(KeyCode.Space))
                 {
+                    Debug.Log("Trying to chat");
                     photonView.RPC("SendMsg", RpcTarget.AllBuffered, ChatInput.text);
-                    BubbleSpeech.SetActive(true);
                     ChatInput.text = "";    //Clear after sned
                     DisableSend = true;
                 }
@@ -74,14 +62,15 @@ public class ChatManager : MonoBehaviourPun,IPunObservable
     [PunRPC]
     void SendMsg(string msg)
     {
-        ChatText.text = msg;
-        StartCoroutine(hideBubbleSpeech());
+        GameObject ct = Instantiate(chatTextPrefab, Vector3.zero, Quaternion.identity, chatBackground.transform);
+        ct.GetComponent<Text>().text = photonView.Owner.NickName + ": " + msg;
+        StartCoroutine(hideBubbleSpeech(ct));
     }
 
-    IEnumerator hideBubbleSpeech()
+    IEnumerator hideBubbleSpeech(GameObject _ct)
     {
         yield return new WaitForSeconds(3);
-        BubbleSpeech.SetActive(false);
+        Destroy(_ct);
         DisableSend = false;
     }
 
@@ -91,10 +80,8 @@ public class ChatManager : MonoBehaviourPun,IPunObservable
         if (stream.IsWriting)
         {
             // Local player can write
-            stream.SendNext(BubbleSpeech.activeSelf);
         }
         else if (stream.IsReading) {
-            BubbleSpeech.SetActive((bool)stream.ReceiveNext());
         }
     }
 }

@@ -48,6 +48,8 @@ public class MovementController : MonoBehaviour
     public Animator anim;
     PhotonView pv;
 
+    public bool disableInputs;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -92,7 +94,7 @@ public class MovementController : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        if (!pv.IsMine) return;
+        if (!pv.IsMine || disableInputs) return;
         //Calculate movement velocity as a 3d vector
         float _xMovement = Input.GetAxis("Horizontal");
         float _zMovement = Input.GetAxis("Vertical");
