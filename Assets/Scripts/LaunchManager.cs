@@ -10,10 +10,12 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     public GameObject EnterGamePanel;
     public GameObject ConnectionStatusPanel;
     public GameObject LobbyPanel;
+    public GameObject UsernamePanel;
 
     [SerializeField]
-    private InputField  CreateRoomInput, JoinRoomInput;
-
+    public InputField  CreateRoomInput, JoinRoomInput, UsernameInput;
+    //[SerializeField] Transform roomListContent;
+    //[SerializeField] GameObject roomListPrefab;
 
     #region Unity Methods
 
@@ -32,6 +34,7 @@ public class LaunchManager : MonoBehaviourPunCallbacks
         EnterGamePanel.SetActive(true);
         ConnectionStatusPanel.SetActive(false);
         LobbyPanel.SetActive(false);
+        UsernamePanel.SetActive(false);
     }
 
     // Update is called once per frame
@@ -52,6 +55,7 @@ public class LaunchManager : MonoBehaviourPunCallbacks
             PhotonNetwork.ConnectUsingSettings();
             ConnectionStatusPanel.SetActive(true);
             EnterGamePanel.SetActive(false);
+            
         }      
     }
 
@@ -59,6 +63,14 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     public void JoinRandomRoom()
     {
         PhotonNetwork.JoinRandomRoom();
+    }
+
+    public void EnterUsername()
+    {
+        PhotonNetwork.NickName = UsernameInput.text;
+        UsernamePanel.SetActive(false);
+        LobbyPanel.SetActive(true);
+
     }
 
     #endregion
@@ -70,8 +82,9 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         Debug.Log(PhotonNetwork.NickName + " Connected to photon server.");
-        LobbyPanel.SetActive(true);
+        //LobbyPanel.SetActive(true);
         ConnectionStatusPanel.SetActive(false);
+        UsernamePanel.SetActive(true);
     }
 
     public override void OnConnected()
@@ -90,7 +103,6 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     {
         Debug.Log(PhotonNetwork.NickName + " joined to " + PhotonNetwork.CurrentRoom.Name);
         PhotonNetwork.LoadLevel(1);
-
     }
 
 
