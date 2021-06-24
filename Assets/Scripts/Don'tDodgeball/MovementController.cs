@@ -62,9 +62,29 @@ public class MovementController : MonoBehaviour
         dashSpeed = 5 * speed;
         dashGauge = startDashGauge;
         pv = GetComponent<PhotonView>();
-        if (!pv.IsMine)
+        if (!pv.IsMine) //If it's the other player
         {
             Destroy(rb);
+            if (PhotonNetwork.IsMasterClient) //If we are the master client
+            {
+                dashBar.color = Color.red; //Means the other player is on red side
+            }
+            else
+            {
+                dashBar.color = Color.blue; //We are not master client, other player is on blue side
+            }
+        }
+
+        else //Our player
+        {
+            if (PhotonNetwork.IsMasterClient) //If we are the master client
+            {
+                dashBar.color = Color.blue; //Means we are on blue side
+            }
+            else
+            {
+                dashBar.color = Color.red; //We are not master client, we are on red side
+            }
         }
     }
 

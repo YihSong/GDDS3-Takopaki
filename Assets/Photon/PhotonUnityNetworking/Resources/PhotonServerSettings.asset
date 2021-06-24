@@ -58,6 +58,7 @@ MonoBehaviour:
   - KenaStun
   - SetFlying
   - SetGrounded
+  - SendMsg
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
