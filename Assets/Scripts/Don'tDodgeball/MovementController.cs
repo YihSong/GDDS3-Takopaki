@@ -67,26 +67,11 @@ public class MovementController : MonoBehaviour
         if (!pv.IsMine) //If it's the other player
         {
             Destroy(rb);
-            if (PhotonNetwork.IsMasterClient) //If we are the master client
-            {
-                dashBar.color = Color.red; //Means the other player is on red side
-            }
-            else
-            {
-                dashBar.color = Color.blue; //We are not master client, other player is on blue side
-            }
         }
 
         else //Our player
         {
-            if (PhotonNetwork.IsMasterClient) //If we are the master client
-            {
-                dashBar.color = Color.blue; //Means we are on blue side
-            }
-            else
-            {
-                dashBar.color = Color.red; //We are not master client, we are on red side
-            }
+            dashBar = GameObject.Find("Dash Bar").GetComponent<Image>();
         }
     }
 
@@ -106,7 +91,7 @@ public class MovementController : MonoBehaviour
         {
             moveSpeed = dashSpeed;
             dashGauge -= Time.deltaTime;
-            pv.RPC("UpdateUI", RpcTarget.AllBuffered, dashGauge / startDashGauge);
+            UpdateUI(dashGauge / startDashGauge);
             if(dashGauge <= 0)
             {
                 recharging = true;
@@ -126,7 +111,7 @@ public class MovementController : MonoBehaviour
         if (recharging)
         {
             dashGauge += Time.deltaTime;
-            pv.RPC("UpdateUI", RpcTarget.AllBuffered, dashGauge / startDashGauge);
+            UpdateUI(dashGauge / startDashGauge);
             if (dashGauge >= startDashGauge)
             {
                 dashGauge = startDashGauge;
@@ -235,7 +220,6 @@ public class MovementController : MonoBehaviour
         CameraUpAndDownRotation = cameraUpAndDownRotation;
     }
 
-    [PunRPC]
     public void UpdateUI(float fill)
     {
         dashBar.fillAmount = fill;
