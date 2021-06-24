@@ -188,6 +188,15 @@ public class MovementController : MonoBehaviour
         }
     }
 
+    private void OnCollisionExit(Collision collision)
+    {
+        if (!pv.IsMine) return;
+        if (collision.gameObject.tag == "Ground")
+        {
+            isGrounded = false;
+        }
+    }
+
     void Move(Vector3 movementVelocity)
     {
         velocity = movementVelocity;
