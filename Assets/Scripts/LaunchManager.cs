@@ -85,6 +85,13 @@ public class LaunchManager : MonoBehaviourPunCallbacks
         //LobbyPanel.SetActive(true);
         ConnectionStatusPanel.SetActive(false);
         UsernamePanel.SetActive(true);
+        PhotonNetwork.JoinLobby(TypedLobby.Default);
+    }
+
+    // Called on entering a lobby on the Master Server. The actual room-list updates will call OnRoomListUpdate.
+    public override void OnJoinedLobby()
+    {
+        Debug.Log("Connected to Lobby!!!");
     }
 
     public override void OnConnected()

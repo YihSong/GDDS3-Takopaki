@@ -62,7 +62,8 @@ public class ChatManager : MonoBehaviourPun,IPunObservable
     [PunRPC]
     void SendMsg(string msg)
     {
-        GameObject ct = Instantiate(chatTextPrefab, Vector3.zero, Quaternion.identity, chatBackground.transform);
+        GameObject ct = Instantiate(chatTextPrefab, Vector2.zero, Quaternion.identity);
+        ct.transform.SetParent(chatBackground.transform, false);
         ct.GetComponent<Text>().text = photonView.Owner.NickName + ": " + msg;
         StartCoroutine(hideBubbleSpeech(ct));
     }

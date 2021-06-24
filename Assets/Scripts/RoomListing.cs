@@ -13,6 +13,7 @@ public class RoomListing : MonoBehaviourPunCallbacks
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
+        Debug.Log("Room list updated");
         foreach (RoomInfo room in roomList)
         {
             if (room.RemovedFromList)
