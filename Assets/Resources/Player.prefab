@@ -371,6 +371,7 @@ MonoBehaviour:
   stunDuration: 3.16
   isGrounded: 0
   anim: {fileID: 0}
+  pv: {fileID: 0}
   disableInputs: 0
 --- !u!54 &7514343211623398040
 Rigidbody:

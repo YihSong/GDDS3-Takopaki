@@ -7,56 +7,86 @@ using Photon.Pun;
 using Photon.Realtime;
 using System.IO;
 
-
 public class GameMaster : MonoBehaviour
 {
-    public int collectiveHealth;
-    public GameObject heart1;
-    public GameObject heart2;
-    public GameObject heart3;
 
     public PhotonView pv;
-
+    [SerializeField] Image scoreBar;
+    int redTargetsLeft;
+    [SerializeField] int redTargets = 12;
+    public enum GameState { PREGAME, INGAME, POSTGAME}
+    public GameState state;
+    [SerializeField] float timeLeft;
+    [SerializeField] float timeLimit = 120f;
+    [SerializeField] Text timeText;
     
 
     void Start()
     {
-        collectiveHealth = 3;
-
         pv = GetComponent<PhotonView>();
-        //if (!PhotonNetwork.IsMasterClient)
-        //{
-        //    Destroy(gameObject);
-        //}
+        redTargetsLeft = 6;
+        if (pv.IsMine)
+        {
+            state = GameState.PREGAME;
+            timeLeft = timeLimit;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        //    if (collectiveHealth == 3)
-        //    {
-        //        heart1.SetActive(true);
-        //        heart2.SetActive(true);
-        //        heart3.SetActive(true);
-        //    }
-        //    else if (collectiveHealth == 2)
-        //    {
-        //        heart1.SetActive(false);
-        //        heart2.SetActive(true);
-        //        heart3.SetActive(true);
-        //    }
-        //    else if (collectiveHealth == 1)
-        //    {
-        //        heart1.SetActive(false);
-        //        heart2.SetActive(false);
-        //        heart3.SetActive(true);
-        //    }
-        //    else if (collectiveHealth <= 0)
-        //    {
-        //        heart1.SetActive(false);
-        //        heart2.SetActive(false);
-        //        heart3.SetActive(false);
-        //    }
-        //}
+        if (pv.IsMine)
+        {
+            switch (state)
+            {
+                case GameState.PREGAME:
+                    if(PhotonNetwork.CountOfPlayersInRooms < 2)
+                    {
+                        FindObjectOfType<MovementController>().disableInputs = true;
+                    }
+                    else
+                    {
+                        foreach(MovementController mc in FindObjectsOfType<MovementController>())
+                        {
+                            mc.pv.RPC("EnableInputs", RpcTarget.AllBuffered, false);
+                        }
+                        state = GameState.INGAME;
+                    }
+                    break;
+                case GameState.INGAME:
+                    timeLeft -= Time.deltaTime;
+                    pv.RPC("UpdateUI", RpcTarget.AllBuffered);
+                    if(timeLeft <= 0)
+                    {
+                        foreach (MovementController mc in FindObjectsOfType<MovementController>())
+                        {
+                            mc.pv.RPC("EnableInputs", RpcTarget.AllBuffered, true);
+                            state = GameState.POSTGAME;
+                        }
+                    }
+                    break;
+                case GameState.POSTGAME:
+                    break;
+            }
+        }
+    }
+
+    public void GainLoseTarget(bool losing)
+    {
+        if (losing)
+        {
+            redTargetsLeft--;
+        }
+        else
+        {
+            redTargetsLeft++;
+        }
+        scoreBar.fillAmount = (float) redTargetsLeft / redTargets;
+    }
+
+    [PunRPC]
+    public void UpdateUI()
+    {
+        timeText.text = "" + (int) timeLeft;
     }
 }

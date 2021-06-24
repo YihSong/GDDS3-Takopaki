@@ -18,7 +18,7 @@ public class Enemies : MonoBehaviour
     {
         photonView = GetComponent<PhotonView>();
         if (!photonView.IsMine) Destroy(GetComponent<Rigidbody>());
-        goal = FindObjectOfType<EndZone>().gameObject;
+        //goal = FindObjectOfType<EndZone>().gameObject;
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
         agent.destination = goal.transform.position;
         health = startHealth;

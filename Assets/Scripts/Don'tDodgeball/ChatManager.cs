@@ -14,6 +14,8 @@ public class ChatManager : MonoBehaviourPun,IPunObservable
     InputField ChatInput;
     [SerializeField]private bool DisableSend;
 
+    GameMaster gameMaster;
+
     MovementController mc;
 
     void Awake()
@@ -25,19 +27,23 @@ public class ChatManager : MonoBehaviourPun,IPunObservable
     void Start()
     {
         mc = GetComponent<MovementController>();
+        gameMaster = FindObjectOfType<GameMaster>();
     }
 
     void Update()
     {
         if (photonView.IsMine)
         {
-            if (ChatInput.isFocused)
+            if(gameMaster.state == GameMaster.GameState.INGAME)
             {
-                mc.disableInputs = true;
-            }
-            else
-            {
-                mc.disableInputs = false;
+                if (ChatInput.isFocused)
+                {
+                    mc.disableInputs = true;
+                }
+                else
+                {
+                    mc.disableInputs = false;
+                }
             }
 
             if (Input.GetKeyDown(KeyCode.Return))

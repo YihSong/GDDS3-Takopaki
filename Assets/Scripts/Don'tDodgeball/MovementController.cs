@@ -46,7 +46,7 @@ public class MovementController : MonoBehaviour
 
     private Rigidbody rb;
     public Animator anim;
-    PhotonView pv;
+    public PhotonView pv;
 
     public bool disableInputs;
 
@@ -231,4 +231,9 @@ public class MovementController : MonoBehaviour
         StartCoroutine("StunCo");
     }
     
+    [PunRPC]
+    public void EnableDisableInput(bool disabling)
+    {
+        disableInputs = disabling;
+    }
 }

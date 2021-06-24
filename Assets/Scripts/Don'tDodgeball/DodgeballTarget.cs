@@ -11,10 +11,13 @@ public class DodgeballTarget : MonoBehaviour
     [SerializeField] Image healthBar;
     Camera cam;
     [SerializeField] Ground ground;
+    [SerializeField] bool isRed;
+    GameMaster gameMaster;
 
     private void Start()
     {
         health = startHealth;
+        gameMaster = FindObjectOfType<GameMaster>();
     }
 
     private void Update()
@@ -53,10 +56,8 @@ public class DodgeballTarget : MonoBehaviour
 
     void Die()
     {
-        if (GetComponent<PhotonView>().IsMine)
-        {
-            ground.photonView.RPC("LoseTarget", RpcTarget.AllBuffered);
-        }
+        ground.LoseTarget();
+        gameMaster.GainLoseTarget(isRed);
         if (transform.parent)
         {
             Destroy(transform.parent.gameObject);
