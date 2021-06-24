@@ -60,6 +60,7 @@ MonoBehaviour:
   - SetGrounded
   - SendMsg
   - EnableDisableInput
+  - EnterLevel
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

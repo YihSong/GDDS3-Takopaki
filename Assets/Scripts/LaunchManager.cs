@@ -14,6 +14,7 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     public GameObject LobbyInfo;
     public GameObject ConnectButton;
 
+    [SerializeField] Text lobbyText;
     [SerializeField]
     public InputField  CreateRoomInput, JoinRoomInput, UsernameInput;
     [SerializeField] Transform playerListContent;
@@ -150,6 +151,19 @@ public class LaunchManager : MonoBehaviourPunCallbacks
         PhotonNetwork.LoadLevel(1);
     }
 
+    public void DisconnectPlayer()
+    {
+        StartCoroutine(Disconnect());
+    }
+
+    IEnumerator Disconnect()
+    {
+        PhotonNetwork.Disconnect();
+        while (PhotonNetwork.IsConnected)
+            yield return null;
+        LobbyInfo.SetActive(false);
+    }
+
 
 
 
@@ -160,6 +174,7 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     public void CreateAndJoinRoom()
     {
         string randomRoomName = "Room " + CreateRoomInput.text;
+        lobbyText.text = CreateRoomInput.text;
 
         RoomOptions roomOptions = new RoomOptions();
         roomOptions.IsOpen = true;
