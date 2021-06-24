@@ -67,6 +67,10 @@ public class LaunchManager : MonoBehaviourPunCallbacks
 
     public void EnterUsername()
     {
+        if(UsernameInput.text == "")
+        {
+            return;
+        }
         PhotonNetwork.NickName = UsernameInput.text;
         UsernamePanel.SetActive(false);
         LobbyPanel.SetActive(true);
