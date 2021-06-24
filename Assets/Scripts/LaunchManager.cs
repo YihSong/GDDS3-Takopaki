@@ -11,11 +11,13 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     public GameObject ConnectionStatusPanel;
     public GameObject LobbyPanel;
     public GameObject UsernamePanel;
+    public GameObject LobbyInfo;
+    public GameObject ConnectButton;
 
     [SerializeField]
     public InputField  CreateRoomInput, JoinRoomInput, UsernameInput;
-    //[SerializeField] Transform roomListContent;
-    //[SerializeField] GameObject roomListPrefab;
+    [SerializeField] Transform playerListContent;
+    [SerializeField] GameObject playerListPrefab;
 
     #region Unity Methods
 
@@ -35,12 +37,20 @@ public class LaunchManager : MonoBehaviourPunCallbacks
         ConnectionStatusPanel.SetActive(false);
         LobbyPanel.SetActive(false);
         UsernamePanel.SetActive(false);
+        LobbyInfo.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (PhotonNetwork.CurrentRoom.PlayerCount >= 2)
+        {
+            ConnectButton.SetActive(true);
+        }
+        else
+        {
+            ConnectButton.SetActive(false);
+        }
     }
 
     #endregion
@@ -74,7 +84,11 @@ public class LaunchManager : MonoBehaviourPunCallbacks
         PhotonNetwork.NickName = UsernameInput.text;
         UsernamePanel.SetActive(false);
         LobbyPanel.SetActive(true);
+    }
 
+    public void CloseLobbyInfo()
+    {
+        LobbyInfo.SetActive(false);
     }
 
     #endregion
@@ -113,7 +127,15 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         Debug.Log(PhotonNetwork.NickName + " joined to " + PhotonNetwork.CurrentRoom.Name);
-        PhotonNetwork.LoadLevel(1);
+
+        Player[] players = PhotonNetwork.PlayerList;
+
+        for (int i = 0; i < players.Length; i++)
+        {
+            Instantiate(playerListPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(players[i]);
+        }
+
+        //PhotonNetwork.LoadLevel(1);
     }
 
 
@@ -121,6 +143,14 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     {
         Debug.Log(newPlayer.NickName + " joined to " + PhotonNetwork.CurrentRoom.Name + " "+ PhotonNetwork.CurrentRoom.PlayerCount);
     }
+
+    [PunRPC]
+    public void EnterLevel()
+    {
+        PhotonNetwork.LoadLevel(1);
+    }
+
+
 
 
     #endregion
@@ -137,6 +167,7 @@ public class LaunchManager : MonoBehaviourPunCallbacks
         roomOptions.MaxPlayers = 2;
 
         PhotonNetwork.CreateRoom(CreateRoomInput.text, roomOptions);
+        LobbyInfo.SetActive(true);
     }
 
     public void Onclick_JoinRoom()
