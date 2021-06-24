@@ -36,7 +36,8 @@ public class MovementController : MonoBehaviour
 
     public bool isGrounded;
     Vector3 jump = new Vector3(0.0f, 2.0f, 0.0f);
-    float jumpForce = 10.0f;
+    float jumpForce = 3.0f;
+    float jumpCD = 2f;
 
     private Vector3 velocity = Vector3.zero;
     private Vector3 rotation = Vector3.zero;
@@ -179,11 +180,11 @@ public class MovementController : MonoBehaviour
         if (!pv.IsMine) return;
         if (collision.gameObject.tag == "Ground")
         {
-            pv.RPC("SetGrounded", RpcTarget.AllBuffered, true);
+            isGrounded = true;
         }
         else
         {
-            pv.RPC("SetGrounded", RpcTarget.AllBuffered, false);
+            isGrounded = false;
         }
     }
 
@@ -213,12 +214,6 @@ public class MovementController : MonoBehaviour
     public void KenaStun()
     {
         StartCoroutine("StunCo");
-    }
-
-    [PunRPC]
-    public void SetGrounded(bool onGround)
-    {
-        isGrounded = onGround;
     }
     
 }
