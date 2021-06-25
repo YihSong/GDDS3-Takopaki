@@ -50,9 +50,9 @@ public class GameMaster : MonoBehaviour
                     }
                     else
                     {
-                        foreach(MovementController mc in FindObjectsOfType<MovementController>())
+                        foreach(PlayerSetup ps in FindObjectsOfType<PlayerSetup>())
                         {
-                            mc.pv.RPC("EnableInputs", RpcTarget.AllBuffered, false);
+                            ps.photonView.RPC("EnableDisableInput", RpcTarget.AllBuffered, false);
                         }
                         state = GameState.INGAME;
                     }

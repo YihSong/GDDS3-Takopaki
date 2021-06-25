@@ -59,5 +59,9 @@ public class PlayerSetup : MonoBehaviourPunCallbacks
         }
     }
 
-    
+    [PunRPC]
+    public void EnableDisableInput(bool disabling)
+    {
+        transform.GetComponent<MovementController>().disableInputs = disabling;
+    }
 }

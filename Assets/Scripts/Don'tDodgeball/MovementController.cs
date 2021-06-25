@@ -230,10 +230,4 @@ public class MovementController : MonoBehaviour
     {
         StartCoroutine("StunCo");
     }
-    
-    [PunRPC]
-    public void EnableDisableInput(bool disabling)
-    {
-        disableInputs = disabling;
-    }
 }
