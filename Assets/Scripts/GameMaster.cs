@@ -30,10 +30,6 @@ public class GameMaster : MonoBehaviour
             state = GameState.PREGAME;
             timeLeft = timeLimit;
         }
-        else
-        {
-            enabled = false;
-        }
     }
 
     // Update is called once per frame
@@ -56,21 +52,21 @@ public class GameMaster : MonoBehaviour
                         }
                         state = GameState.INGAME;
                     }
-                    break;
+                    return;
                 case GameState.INGAME:
                     timeLeft -= Time.deltaTime;
                     pv.RPC("UpdateUI", RpcTarget.AllBuffered);
                     if(timeLeft <= 0)
                     {
-                        foreach (MovementController mc in FindObjectsOfType<MovementController>())
+                        foreach (PlayerSetup ps in FindObjectsOfType<PlayerSetup>())
                         {
-                            mc.pv.RPC("EnableInputs", RpcTarget.AllBuffered, true);
-                            state = GameState.POSTGAME;
+                            ps.photonView.RPC("EnableDisableInput", RpcTarget.AllBuffered, true);
                         }
+                        state = GameState.POSTGAME;
                     }
-                    break;
+                    return;
                 case GameState.POSTGAME:
-                    break;
+                    return;
             }
         }
     }
