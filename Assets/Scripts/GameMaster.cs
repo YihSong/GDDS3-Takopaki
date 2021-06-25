@@ -43,13 +43,17 @@ public class GameMaster : MonoBehaviour
                     if(PhotonNetwork.CountOfPlayersInRooms < 2)
                     {
                         FindObjectOfType<MovementController>().disableInputs = true;
+                        Debug.Log("Less than 2 players");
                     }
                     else
                     {
+                        Debug.Log("Enough players to start");
                         foreach(PlayerSetup ps in FindObjectsOfType<PlayerSetup>())
                         {
                             ps.photonView.RPC("EnableDisableInput", RpcTarget.AllBuffered, false);
+                            Debug.Log("Enabling a player's movement");
                         }
+                        Debug.Log("Changing state");
                         state = GameState.INGAME;
                     }
                     return;
