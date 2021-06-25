@@ -10,6 +10,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     public static RoomManager Instance;
     [SerializeField] GameObject playerManager;
+    public bool redWon = false;
 
     void Awake()
     {
@@ -40,6 +41,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
         if(scene.buildIndex == 1)
         {
             PhotonNetwork.Instantiate(playerManager.name, Vector3.zero, Quaternion.identity);
+        }
+        else if (scene.buildIndex == 2)
+        {
+            FindObjectOfType<EndScreenManager>().SetEndScreen(PhotonNetwork.PlayerList[0].NickName, PhotonNetwork.PlayerList[1].NickName, redWon);
         }
     }
 }

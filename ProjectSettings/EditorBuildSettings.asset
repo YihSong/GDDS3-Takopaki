@@ -11,6 +11,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Knockout City.unity
     guid: 0b1a26751a402bc49a33a40b426b9ec2
+  - enabled: 1
+    path: Assets/Scenes/End Screen.unity
+    guid: f07033006cd647c478c7b5336057e14d
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 29c7759c0410e0141b5425bb2956098e,
       type: 2}

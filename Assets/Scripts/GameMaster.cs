@@ -14,12 +14,12 @@ public class GameMaster : MonoBehaviour
     [SerializeField] Image scoreBar;
     int redTargetsLeft;
     [SerializeField] int redTargets = 12;
-    public enum GameState { PREGAME, INGAME, POSTGAME}
+    public enum GameState { PREGAME, INGAME, POSTGAME, OVERTIME }
     public GameState state;
     [SerializeField] float timeLeft;
     [SerializeField] float timeLimit = 120f;
     [SerializeField] Text timeText;
-    
+
 
     void Start()
     {
@@ -40,7 +40,7 @@ public class GameMaster : MonoBehaviour
             switch (state)
             {
                 case GameState.PREGAME:
-                    if(PhotonNetwork.CurrentRoom.PlayerCount < 2)
+                    if (PhotonNetwork.CurrentRoom.PlayerCount < 2)
                     {
                         FindObjectOfType<MovementController>().disableInputs = true;
                         Debug.Log("Less than 2 players");
@@ -48,7 +48,7 @@ public class GameMaster : MonoBehaviour
                     else
                     {
                         Debug.Log("Enough players to start");
-                        foreach(PlayerSetup ps in FindObjectsOfType<PlayerSetup>())
+                        foreach (PlayerSetup ps in FindObjectsOfType<PlayerSetup>())
                         {
                             ps.photonView.RPC("EnableDisableInput", RpcTarget.AllBuffered, false);
                             Debug.Log("Enabling a player's movement");
@@ -60,19 +60,43 @@ public class GameMaster : MonoBehaviour
                 case GameState.INGAME:
                     timeLeft -= Time.deltaTime;
                     pv.RPC("UpdateUI", RpcTarget.AllBuffered, timeLeft);
-                    if(timeLeft <= 0)
+                    if (timeLeft <= 0)
                     {
-                        foreach (PlayerSetup ps in FindObjectsOfType<PlayerSetup>())
+                        if (scoreBar.fillAmount == 0.5f)
                         {
-                            ps.photonView.RPC("EnableDisableInput", RpcTarget.AllBuffered, true);
+                            pv.RPC("UpdateUIString", RpcTarget.AllBuffered, "OVERTIME!!");
+                            state = GameState.OVERTIME;
                         }
-                        state = GameState.POSTGAME;
+                        else
+                        {
+                            foreach (PlayerSetup ps in FindObjectsOfType<PlayerSetup>())
+                            {
+                                ps.photonView.RPC("EnableDisableInput", RpcTarget.AllBuffered, true);
+                            }
+
+                            state = GameState.POSTGAME;
+                            FindObjectOfType<RoomManager>().redWon = scoreBar.fillAmount > 0.5f;
+                            pv.RPC("EnterLevel", RpcTarget.AllBuffered);
+                        }
                     }
                     return;
                 case GameState.POSTGAME:
                     return;
+                case GameState.OVERTIME:
+                    if(scoreBar.fillAmount != 0.5f)
+                    {
+                        FindObjectOfType<RoomManager>().redWon = scoreBar.fillAmount > 0.5f;
+                        pv.RPC("EnterLevel", RpcTarget.AllBuffered);
+                    }
+                    return;
             }
         }
+    }
+
+    [PunRPC]
+    public void EnterLevel()
+    {
+        PhotonNetwork.LoadLevel(2);
     }
 
     public void GainLoseTarget(bool losing)
@@ -92,5 +116,11 @@ public class GameMaster : MonoBehaviour
     public void UpdateUI(float time)
     {
         timeText.text = "" + (int) time;
+    }
+
+    [PunRPC]
+    public void UpdateUIString(string text)
+    {
+        timeText.text = text;
     }
 }

@@ -61,6 +61,7 @@ MonoBehaviour:
   - SendMsg
   - EnableDisableInput
   - EnterLevel
+  - UpdateUIString
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1
