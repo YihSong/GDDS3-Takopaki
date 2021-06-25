@@ -8,19 +8,24 @@ public class RoomNameBtn : MonoBehaviour
 {
     public Text RoomName;
 
+    public LaunchManager launch;
+
+    [SerializeField] GameObject lobbyMenu;
+
     // Use this for initialization
     void Start()
     {
-
+        launch = FindObjectOfType<LaunchManager>();
+        lobbyMenu = launch.LobbyInfo.gameObject;
         Button btn = GetComponent<Button>();
-
-        btn.onClick.AddListener(() => JoinRoomByName(RoomName.text));
+        btn.onClick.AddListener(() => OpenRoomLobby());
     }
 
 
-    public void JoinRoomByName(string RoomName)
+    public void OpenRoomLobby()
     {
-        PhotonNetwork.JoinRoom(RoomName);
+        PhotonNetwork.JoinRoom(RoomName.text);
+        lobbyMenu.SetActive(true);
     }
 
 }
