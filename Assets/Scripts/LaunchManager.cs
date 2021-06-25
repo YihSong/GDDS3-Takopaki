@@ -19,7 +19,6 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     public InputField  CreateRoomInput, JoinRoomInput, UsernameInput;
     [SerializeField] Transform playerListContent;
     [SerializeField] GameObject playerListPrefab;
-    List<GameObject> playerListItems = new List<GameObject>();
 
     #region Unity Methods
 
@@ -135,8 +134,7 @@ public class LaunchManager : MonoBehaviourPunCallbacks
 
         for (int i = 0; i < players.Length; i++)
         {
-            playerListItems.Add(Instantiate(playerListPrefab, playerListContent));
-            playerListItems[0].GetComponent<PlayerListItem>().SetUp(players[i]);
+            Instantiate(playerListPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(players[i]);
         }
 
         //PhotonNetwork.LoadLevel(1);
@@ -146,18 +144,7 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         Debug.Log(newPlayer.NickName + " joined to " + PhotonNetwork.CurrentRoom.Name + " "+ PhotonNetwork.CurrentRoom.PlayerCount);
-        Player[] players = PhotonNetwork.PlayerList;
-
-        for (int i = 0; i < players.Length; i++)
-        {
-            if(playerListItems.ToArray().Length > 0)
-            {
-                GameObject temp = playerListItems[i];
-                playerListItems.Remove(temp);
-                Destroy(temp);
-            }
-            Instantiate(playerListPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(players[i]);
-        }
+        Instantiate(playerListPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(newPlayer);
     }
 
     [PunRPC]
