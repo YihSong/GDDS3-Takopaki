@@ -32,7 +32,11 @@ public class MovementController : MonoBehaviour
     GameObject fpsCamera;
 
     [SerializeField]
-    float stunDuration = 3.16f;
+    float stunDuration = 3.2f;
+
+    [SerializeField] GameObject stunFx;
+    [SerializeField] GameObject stunText;
+    [SerializeField] GameObject hitFx;
 
     public bool isGrounded;
     Vector3 jump = new Vector3(0.0f, 2.0f, 0.0f);
@@ -54,7 +58,9 @@ public class MovementController : MonoBehaviour
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-
+        stunFx.SetActive(false);
+        stunText.SetActive(false);
+        hitFx.SetActive(false);
 
         anim = GetComponentInChildren<Animator>();
         if (anim.layerCount == 2)
@@ -163,7 +169,12 @@ public class MovementController : MonoBehaviour
     {
         speed = 0f;
         anim.SetBool("Stun", true);
+        stunFx.SetActive(true);
+        stunText.SetActive(true);
         yield return new WaitForSeconds(stunDuration);
+        stunFx.SetActive(false);
+        stunText.SetActive(false);
+        hitFx.SetActive(false);
         speed = 5f;
         anim.SetBool("Stun", false);
         isStunned = false;
@@ -178,6 +189,7 @@ public class MovementController : MonoBehaviour
             {
                 KenaStun();
                 isStunned = true;
+                hitFx.SetActive(true);
             }
         }
     }
