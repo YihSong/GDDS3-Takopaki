@@ -56,7 +56,7 @@ public class GameMaster : MonoBehaviour
                         Debug.Log("Changing state");
                         state = GameState.INGAME;
                     }
-                    return;
+                    break;
                 case GameState.INGAME:
                     timeLeft -= Time.deltaTime;
                     pv.RPC("UpdateUI", RpcTarget.AllBuffered, timeLeft);
@@ -73,28 +73,38 @@ public class GameMaster : MonoBehaviour
                             {
                                 ps.photonView.RPC("EnableDisableInput", RpcTarget.AllBuffered, true);
                             }
-
+                            FindObjectOfType<RoomManager>().photonView.RPC("SetRedWon", RpcTarget.AllBuffered, scoreBar.fillAmount > 0.5f);
+                            if (PhotonNetwork.IsMasterClient)
+                            {
+                                pv.RPC("LoadLevel", RpcTarget.AllBuffered);
+                            }
                             state = GameState.POSTGAME;
-                            FindObjectOfType<RoomManager>().redWon = scoreBar.fillAmount > 0.5f;
-                            pv.RPC("EnterLevel", RpcTarget.AllBuffered);
                         }
                     }
-                    return;
+                    break;
                 case GameState.POSTGAME:
-                    return;
+                    break;
                 case GameState.OVERTIME:
                     if(scoreBar.fillAmount != 0.5f)
                     {
-                        FindObjectOfType<RoomManager>().redWon = scoreBar.fillAmount > 0.5f;
-                        pv.RPC("EnterLevel", RpcTarget.AllBuffered);
+                        foreach (PlayerSetup ps in FindObjectsOfType<PlayerSetup>())
+                        {
+                            ps.photonView.RPC("EnableDisableInput", RpcTarget.AllBuffered, true);
+                        }
+                        FindObjectOfType<RoomManager>().photonView.RPC("SetRedWon", RpcTarget.AllBuffered, scoreBar.fillAmount > 0.5f);
+                        if (PhotonNetwork.IsMasterClient)
+                        {
+                            pv.RPC("LoadLevel", RpcTarget.AllBuffered);
+                        }
+                        state = GameState.POSTGAME;
                     }
-                    return;
+                    break;
             }
         }
     }
 
     [PunRPC]
-    public void EnterLevel()
+    public void LoadLevel()
     {
         PhotonNetwork.LoadLevel(2);
     }

@@ -47,4 +47,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
             FindObjectOfType<EndScreenManager>().SetEndScreen(PhotonNetwork.PlayerList[0].NickName, PhotonNetwork.PlayerList[1].NickName, redWon);
         }
     }
+
+    [PunRPC]
+    public void SetRedWon(bool _redWon)
+    {
+        redWon = _redWon;
+    }
 }

@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using Photon.Pun;
 
-public class EndScreenManager : MonoBehaviour
+public class EndScreenManager : MonoBehaviourPunCallbacks
 {
     public Animator bluePlayer, redPlayer;
     public Text winText;
@@ -38,5 +39,27 @@ public class EndScreenManager : MonoBehaviour
             winText.text = _blueName + " WON";
             winText.color = Color.blue;
         }
+    }
+
+    [PunRPC]
+    public void EnterLevel()
+    {
+        PhotonNetwork.LoadLevel(1);
+    }
+
+    public void PlayAgain()
+    {
+        photonView.RPC("EnterLevel", RpcTarget.AllBuffered);
+    }
+
+    [PunRPC]
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void ClickQuit()
+    {
+        photonView.RPC("QuitGame", RpcTarget.AllBuffered);
     }
 }
