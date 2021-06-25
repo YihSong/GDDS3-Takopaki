@@ -19,6 +19,7 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     public InputField  CreateRoomInput, JoinRoomInput, UsernameInput;
     [SerializeField] Transform playerListContent;
     [SerializeField] GameObject playerListPrefab;
+    List<GameObject> playerListItems;
 
     #region Unity Methods
 
@@ -134,7 +135,9 @@ public class LaunchManager : MonoBehaviourPunCallbacks
 
         for (int i = 0; i < players.Length; i++)
         {
-            Instantiate(playerListPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(players[i]);
+            GameObject go = Instantiate(playerListPrefab, playerListContent);
+            go.GetComponent<PlayerListItem>().SetUp(players[i]);
+            playerListItems.Add(go);
         }
 
         //PhotonNetwork.LoadLevel(1);
@@ -148,6 +151,7 @@ public class LaunchManager : MonoBehaviourPunCallbacks
 
         for (int i = 0; i < players.Length; i++)
         {
+            Destroy(playerListItems[i]);
             Instantiate(playerListPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(players[i]);
         }
     }
@@ -156,6 +160,11 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     public void EnterLevel()
     {
         PhotonNetwork.LoadLevel(1);
+    }
+
+    public void OnClickConnect()
+    {
+        photonView.RPC("EnterLevel", RpcTarget.AllBuffered);
     }
 
     public void DisconnectPlayer()
