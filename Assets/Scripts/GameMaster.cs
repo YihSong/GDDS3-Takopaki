@@ -59,7 +59,7 @@ public class GameMaster : MonoBehaviour
                     return;
                 case GameState.INGAME:
                     timeLeft -= Time.deltaTime;
-                    pv.RPC("UpdateUI", RpcTarget.AllBuffered);
+                    pv.RPC("UpdateUI", RpcTarget.AllBuffered, timeLeft);
                     if(timeLeft <= 0)
                     {
                         foreach (PlayerSetup ps in FindObjectsOfType<PlayerSetup>())
@@ -89,8 +89,8 @@ public class GameMaster : MonoBehaviour
     }
 
     [PunRPC]
-    public void UpdateUI()
+    public void UpdateUI(float time)
     {
-        timeText.text = "" + (int) timeLeft;
+        timeText.text = "" + (int) time;
     }
 }
