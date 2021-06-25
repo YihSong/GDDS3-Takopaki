@@ -12,12 +12,14 @@ public class DodgeballTarget : MonoBehaviour
     Camera cam;
     [SerializeField] Ground ground;
     [SerializeField] bool isRed;
+    [SerializeField] GameObject explosionFx;
     GameMaster gameMaster;
 
     private void Start()
     {
         health = startHealth;
         gameMaster = FindObjectOfType<GameMaster>();
+        explosionFx.SetActive(false);
     }
 
     private void Update()
@@ -50,8 +52,21 @@ public class DodgeballTarget : MonoBehaviour
         healthBar.fillAmount = (float) health / startHealth;
         if(health <= 0)
         {
-            Die();
+            StartCoroutine(BlowUp());
         }
+    }
+
+    IEnumerator BlowUp()
+    {
+        GetComponent<PhotonView>().RPC("Explosion", RpcTarget.AllBuffered);
+        yield return new WaitForSeconds(2.5f);
+        Die();
+    }
+
+    [PunRPC]
+    public void Explosion()
+    {
+        explosionFx.SetActive(true);
     }
 
     void Die()
@@ -67,4 +82,6 @@ public class DodgeballTarget : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+
 }
