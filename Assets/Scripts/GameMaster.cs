@@ -30,6 +30,10 @@ public class GameMaster : MonoBehaviour
             state = GameState.PREGAME;
             timeLeft = timeLimit;
         }
+        else
+        {
+            enabled = false;
+        }
     }
 
     // Update is called once per frame
@@ -40,7 +44,7 @@ public class GameMaster : MonoBehaviour
             switch (state)
             {
                 case GameState.PREGAME:
-                    if(PhotonNetwork.CountOfPlayersInRooms < 2 || FindObjectsOfType<MovementController>().Length < 2)
+                    if(PhotonNetwork.CountOfPlayersInRooms < 2)
                     {
                         FindObjectOfType<MovementController>().disableInputs = true;
                     }
