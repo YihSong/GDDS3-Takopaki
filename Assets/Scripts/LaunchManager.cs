@@ -44,6 +44,7 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
+        if (!PhotonNetwork.IsConnected || !PhotonNetwork.InRoom) return;
         if (PhotonNetwork.CurrentRoom.PlayerCount >= 2)
         {
             ConnectButton.SetActive(true);
