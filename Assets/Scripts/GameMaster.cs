@@ -40,7 +40,7 @@ public class GameMaster : MonoBehaviour
             switch (state)
             {
                 case GameState.PREGAME:
-                    if(PhotonNetwork.CountOfPlayersInRooms < 2)
+                    if(PhotonNetwork.CountOfPlayersInRooms < 2 || FindObjectsOfType<MovementController>().Length < 2)
                     {
                         FindObjectOfType<MovementController>().disableInputs = true;
                     }

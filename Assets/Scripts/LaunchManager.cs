@@ -144,6 +144,12 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     public override void OnPlayerEnteredRoom(Player newPlayer)
     {
         Debug.Log(newPlayer.NickName + " joined to " + PhotonNetwork.CurrentRoom.Name + " "+ PhotonNetwork.CurrentRoom.PlayerCount);
+        Player[] players = PhotonNetwork.PlayerList;
+
+        for (int i = 0; i < players.Length; i++)
+        {
+            Instantiate(playerListPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(players[i]);
+        }
     }
 
     [PunRPC]
