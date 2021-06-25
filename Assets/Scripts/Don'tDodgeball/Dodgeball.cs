@@ -43,7 +43,7 @@ public class Dodgeball : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if (!pv.IsMine) return;
         if (rb.velocity.magnitude >= flyingThreshold)
         {
             Debug.Log("Ball is Flying");

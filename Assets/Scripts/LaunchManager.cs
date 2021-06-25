@@ -151,7 +151,9 @@ public class LaunchManager : MonoBehaviourPunCallbacks
 
         for (int i = 0; i < players.Length; i++)
         {
-            Destroy(playerListItems[i]);
+            GameObject temp = playerListItems[i];
+            playerListItems.Remove(temp);
+            Destroy(temp);
             Instantiate(playerListPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(players[i]);
         }
     }
