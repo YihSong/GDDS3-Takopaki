@@ -19,7 +19,7 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     public InputField  CreateRoomInput, JoinRoomInput, UsernameInput;
     [SerializeField] Transform playerListContent;
     [SerializeField] GameObject playerListPrefab;
-    List<GameObject> playerListItems;
+    List<GameObject> playerListItems = new List<GameObject>();
 
     #region Unity Methods
 
@@ -135,9 +135,8 @@ public class LaunchManager : MonoBehaviourPunCallbacks
 
         for (int i = 0; i < players.Length; i++)
         {
-            GameObject go = Instantiate(playerListPrefab, playerListContent);
-            go.GetComponent<PlayerListItem>().SetUp(players[i]);
-            playerListItems.Add(go);
+            playerListItems.Add(Instantiate(playerListPrefab, playerListContent));
+            playerListItems[0].GetComponent<PlayerListItem>().SetUp(players[i]);
         }
 
         //PhotonNetwork.LoadLevel(1);
