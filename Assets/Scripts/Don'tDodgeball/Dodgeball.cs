@@ -22,6 +22,7 @@ public class Dodgeball : MonoBehaviour
 
     [SerializeField]
     public GrabAndThrow grabScript;
+    [SerializeField] GameObject flamesFx;
 
     public bool inRadius;
     public bool beingGrabbed;
@@ -48,10 +49,12 @@ public class Dodgeball : MonoBehaviour
         {
             Debug.Log("Ball is Flying");
             pv.RPC("SetFlying", RpcTarget.AllBuffered, true);
+            flamesFx.SetActive(true);
         }
         else if (rb.velocity.magnitude <= flyingThreshold)
         {
             pv.RPC("SetFlying", RpcTarget.AllBuffered, false);
+            flamesFx.SetActive(false);
         }
 
     }
