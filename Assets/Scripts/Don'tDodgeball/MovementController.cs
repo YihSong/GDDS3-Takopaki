@@ -66,7 +66,6 @@ public class MovementController : MonoBehaviour
         if (anim.layerCount == 2)
             anim.SetLayerWeight(1, 1);
 
-
         dashSpeed = 5 * speed;
         dashGauge = startDashGauge;
         pv = GetComponent<PhotonView>();
@@ -188,8 +187,8 @@ public class MovementController : MonoBehaviour
             if (d.isFlying == true && isStunned == false && !Input.GetKeyDown(KeyCode.E))
             {
                 KenaStun();
+                pv.RPC("PlayFx", RpcTarget.AllBuffered);
                 isStunned = true;
-                hitFx.SetActive(true);
             }
         }
     }
@@ -237,6 +236,23 @@ public class MovementController : MonoBehaviour
         dashBar.fillAmount = fill;
     }
 
+    public IEnumerator FxCo()
+    {
+        hitFx.SetActive(true);
+        stunFx.SetActive(true);
+        stunText.SetActive(true);
+        yield return new WaitForSeconds(stunDuration);
+        stunFx.SetActive(false);
+        stunText.SetActive(false);
+        hitFx.SetActive(false);
+    }
+
+
+    [PunRPC]
+    public void PlayFx()
+    {
+        StartCoroutine("FxCo");
+    }
     [PunRPC]
     public void KenaStun()
     {

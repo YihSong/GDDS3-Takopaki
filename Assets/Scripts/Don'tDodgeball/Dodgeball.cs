@@ -49,12 +49,12 @@ public class Dodgeball : MonoBehaviour
         {
             Debug.Log("Ball is Flying");
             pv.RPC("SetFlying", RpcTarget.AllBuffered, true);
-            flamesFx.SetActive(true);
+            pv.RPC("SetFire", RpcTarget.AllBuffered);
         }
         else if (rb.velocity.magnitude <= flyingThreshold)
         {
             pv.RPC("SetFlying", RpcTarget.AllBuffered, false);
-            flamesFx.SetActive(false);
+            pv.RPC("OffFire", RpcTarget.AllBuffered);
         }
 
     }
@@ -64,6 +64,17 @@ public class Dodgeball : MonoBehaviour
     {
         isFlying = fly;
     }
+    [PunRPC]
+    public void SetFire()
+    {
+        flamesFx.SetActive(true);
+    }
+    [PunRPC]
+    public void OffFire()
+    {
+        flamesFx.SetActive(false);
+    }
+
 
     [PunRPC]
     public void EnableDisableRB(bool isDisabling)
