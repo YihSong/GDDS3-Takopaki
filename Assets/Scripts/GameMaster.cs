@@ -68,6 +68,7 @@ public class GameMaster : MonoBehaviour
                         {
                             pv.RPC("UpdateUIString", RpcTarget.AllBuffered, "OVERTIME!!");
                             AudioManager.instance.Play("Overtime BGM");
+                            AudioManager.instance.overtime = true;
                             state = GameState.OVERTIME;
                         }
                         else

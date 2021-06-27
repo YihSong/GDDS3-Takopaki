@@ -12,7 +12,6 @@ public class GrabAndThrow : MonoBehaviour
 
     public GameObject ballPositon;
 
-    public GameObject ballCommand;
     public GameObject crosshair;
 
     public Dodgeball db;
@@ -45,15 +44,6 @@ public class GrabAndThrow : MonoBehaviour
         else
         {
             movement.anim.SetBool("Throw", false);
-        }
-
-        if (inRadius == true)
-        {
-            ballCommand.SetActive(true);
-        }
-        else
-        {
-            ballCommand.SetActive(false);
         }
 
         if (pv.IsMine)

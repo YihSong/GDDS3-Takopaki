@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 public class AudioManager : MonoBehaviour
 {
@@ -26,6 +27,7 @@ public class AudioManager : MonoBehaviour
     public Sound[] sounds;
     public static AudioManager instance;
     public bool muted;
+    public bool overtime;
 
     public GameObject muteX;
 
@@ -61,7 +63,6 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         //Background music plays on start
-
     }
 
     public void Play(string name)
@@ -128,7 +129,7 @@ public class AudioManager : MonoBehaviour
             if (sounds[i].name == name)
             {
                 //Play desired sound if not muted
-                if (!muted)
+                if (muted)
                 {
                     sounds[i].source.Pause();
                 }
@@ -152,17 +153,44 @@ public class AudioManager : MonoBehaviour
         //If it is not muted, mute the game
         if (!muted)
         {
-            Pause("BGM");
             muted = true;
-            muteX.SetActive(true);
+            if (SceneManager.GetActiveScene().buildIndex == 0)
+            {
+                Pause("Main Menu BGM");
+            }
+            else if (SceneManager.GetActiveScene().buildIndex == 1)
+            {
+                if (overtime)
+                {
+                    Pause("Overtime BGM");
+                }
+                else
+                {
+                    Pause("In Game BGM");
+                }
+            }
+            //muteX.SetActive(true);
         }
 
         //If it is muted, unmute the game
         else
         {
             muted = false;
-            Play("BGM");
-            muteX.SetActive(false);
+            if (SceneManager.GetActiveScene().buildIndex == 0)
+            {
+                Play("Main Menu BGM");
+            }
+            else if (SceneManager.GetActiveScene().buildIndex == 1)
+            {
+                if (overtime)
+                {
+                    Play("Overtime BGM");
+                }
+                else
+                {
+                    Play("In Game BGM");
+                }
+            }
         }
     }
 
@@ -191,11 +219,7 @@ public class AudioManager : MonoBehaviour
     {
         for (int i = 0; i < sounds.Length; i++)
         {
-            if (sounds[i].name == name)
-            {
-                //Change volume
-                sounds[i].source.volume = Slidervolume;
-            }
+            sounds[i].source.volume = Slidervolume;
         }
     }
 }
