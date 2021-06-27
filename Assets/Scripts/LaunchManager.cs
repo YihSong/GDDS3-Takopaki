@@ -14,6 +14,8 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     public GameObject LobbyInfo;
     public GameObject ConnectButton;
 
+    public AudioManager am;
+
     [SerializeField] Text lobbyText;
     [SerializeField]
     public InputField  CreateRoomInput, JoinRoomInput, UsernameInput;
@@ -34,6 +36,8 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
+        am = FindObjectOfType<AudioManager>();
+        am.Play("Main Menu BGM");
         EnterGamePanel.SetActive(true);
         ConnectionStatusPanel.SetActive(false);
         LobbyPanel.SetActive(false);
