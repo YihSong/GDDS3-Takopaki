@@ -61,7 +61,6 @@ public class AudioManager : MonoBehaviour
     private void Start()
     {
         //Background music plays on start
-        Play("BGM");
 
     }
 

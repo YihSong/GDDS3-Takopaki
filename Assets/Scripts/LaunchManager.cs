@@ -36,7 +36,7 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     // Start is called before the first frame update
     void Start()
     {
-        am = FindObjectOfType<AudioManager>();
+        am = AudioManager.instance;
         am.Play("Main Menu BGM");
         EnterGamePanel.SetActive(true);
         ConnectionStatusPanel.SetActive(false);
