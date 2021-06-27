@@ -45,7 +45,7 @@ public class DodgeballTarget : MonoBehaviour
     }
 
     [PunRPC]
-    public void TakeDamage(int _damage)
+    public void TakeDamage(int _damage) //Since we RPC this, everything that gets called by this doesnt have to be RPCed
     {
         health -= _damage;
         Debug.Log("Taking damage: " + _damage + "Remaining health: " + health);
@@ -58,7 +58,7 @@ public class DodgeballTarget : MonoBehaviour
 
     IEnumerator BlowUp()
     {
-        GetComponent<PhotonView>().RPC("Explosion", RpcTarget.AllBuffered);
+        Explosion();
         yield return new WaitForSeconds(2.5f);
         Die();
     }
@@ -67,6 +67,7 @@ public class DodgeballTarget : MonoBehaviour
     public void Explosion()
     {
         explosionFx.SetActive(true);
+        AudioManager.instance.Play("Explode");
     }
 
     void Die()

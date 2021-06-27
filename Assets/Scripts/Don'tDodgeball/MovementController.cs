@@ -238,6 +238,7 @@ public class MovementController : MonoBehaviour
 
     public IEnumerator FxCo()
     {
+        AudioManager.instance.Play("Boing");
         hitFx.SetActive(true);
         stunFx.SetActive(true);
         stunText.SetActive(true);
