@@ -55,6 +55,7 @@ public class GameMaster : MonoBehaviour
                             Debug.Log("Enabling a player's movement");
                         }
                         Debug.Log("Changing state");
+                        AudioManager.instance.Play("In Game BGM");
                         state = GameState.INGAME;
                     }
                     break;
@@ -66,6 +67,7 @@ public class GameMaster : MonoBehaviour
                         if (scoreBar.fillAmount == 0.5f)
                         {
                             pv.RPC("UpdateUIString", RpcTarget.AllBuffered, "OVERTIME!!");
+                            AudioManager.instance.Play("Overtime BGM");
                             state = GameState.OVERTIME;
                         }
                         else
