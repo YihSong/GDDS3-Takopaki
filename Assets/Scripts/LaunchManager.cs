@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using Photon.Pun;   //access photon classes to connect to server
 using Photon.Realtime;
 
@@ -13,6 +14,9 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     public GameObject UsernamePanel;
     public GameObject LobbyInfo;
     public GameObject ConnectButton;
+    public GameObject Options;
+    public GameObject Instructions;
+    public GameObject Credits;
 
     public AudioManager am;
 
@@ -68,6 +72,7 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     {
         if (!PhotonNetwork.IsConnected)
         {
+            am.Play("Click");
             PhotonNetwork.ConnectUsingSettings();
             ConnectionStatusPanel.SetActive(true);
             EnterGamePanel.SetActive(false);
@@ -83,7 +88,8 @@ public class LaunchManager : MonoBehaviourPunCallbacks
 
     public void EnterUsername()
     {
-        if(UsernameInput.text == "")
+        am.Play("Click");
+        if (UsernameInput.text == "")
         {
             return;
         }
@@ -105,6 +111,7 @@ public class LaunchManager : MonoBehaviourPunCallbacks
 
     public override void OnConnectedToMaster()
     {
+        am.Play("Click");
         Debug.Log(PhotonNetwork.NickName + " Connected to photon server.");
         //LobbyPanel.SetActive(true);
         ConnectionStatusPanel.SetActive(false);
@@ -154,16 +161,19 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     [PunRPC]
     public void EnterLevel()
     {
+        am.Play("Click");
         PhotonNetwork.LoadLevel(1);
     }
 
     public void OnClickConnect()
     {
+        am.Play("Click");
         photonView.RPC("EnterLevel", RpcTarget.AllBuffered);
     }
 
     public void DisconnectPlayer()
     {
+        am.Play("Click");
         StartCoroutine(Disconnect());
     }
 
@@ -173,6 +183,44 @@ public class LaunchManager : MonoBehaviourPunCallbacks
         while (PhotonNetwork.IsConnected)
             yield return null;
         LobbyInfo.SetActive(false);
+    }
+
+    public void OpenInstructions()
+    {
+        am.Play("Click");
+        Instructions.SetActive(true);
+    }
+    public void OpenOptions()
+    {
+        am.Play("Click");
+        Options.SetActive(true);
+    }
+
+    public void CloseInstructions()
+    {
+        am.Play("Click");
+        Instructions.SetActive(false);
+    }
+    public void CloseOptions()
+    {
+        am.Play("Click");
+        Options.SetActive(false);
+    }
+    public void OpenCredits()
+    {
+        am.Play("Click");
+        Credits.SetActive(true);
+    }
+
+    public void CloseCredits()
+    {
+        am.Play("Click");
+        Credits.SetActive(false);
+    }
+    public void QuitApp()
+    {
+        am.Play("Click");
+        Application.Quit();
     }
 
 
