@@ -17,6 +17,8 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     public GameObject Options;
     public GameObject Instructions;
     public GameObject Credits;
+    public GameObject Instructions1;
+    public GameObject Instructions2;
 
     public AudioManager am;
 
@@ -200,6 +202,8 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     {
         am.Play("Click");
         Instructions.SetActive(false);
+        Instructions1.SetActive(true);
+        Instructions2.SetActive(false);
     }
     public void CloseOptions()
     {
@@ -222,6 +226,18 @@ public class LaunchManager : MonoBehaviourPunCallbacks
         am.Play("Click");
         Application.Quit();
     }
+
+    public void instructnext()
+    {
+        Instructions1.SetActive(false);
+        Instructions2.SetActive(true);
+    }
+    public void instructback()
+    {
+        Instructions1.SetActive(true);
+        Instructions2.SetActive(false);
+    }
+
 
 
 
