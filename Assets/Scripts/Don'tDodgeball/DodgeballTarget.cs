@@ -39,7 +39,7 @@ public class DodgeballTarget : MonoBehaviour
         }
         else
         {
-            Vector3 lookPos = new Vector3(cam.transform.position.y, healthBar.transform.parent.position.y, cam.transform.position.z);
+            Vector3 lookPos = new Vector3(cam.transform.position.y, healthBar.transform.parent.position.y, cam.transform.position.z); 
             healthBar.transform.parent.LookAt(lookPos);
         }
     }

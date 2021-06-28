@@ -98,6 +98,7 @@ public class MovementController : MonoBehaviour
         Vector3 _movementHorizontal = transform.right * _xMovement;
         Vector3 _movementVertical = transform.forward * _zMovement;
         float moveSpeed = speed;
+        // Dashing with stamina when holding left shift and send player to recharging when dashgauge hits 0
         if (Input.GetKey(KeyCode.LeftShift) && dashGauge > 0 && !recharging)
         {
             moveSpeed = dashSpeed;
@@ -109,9 +110,10 @@ public class MovementController : MonoBehaviour
             }
         }
 
+        // Jumping when spacebar is pressed
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded == true)
         {
-            rb.AddForce(jump * jumpForce, ForceMode.Impulse);
+            rb.AddForce(jump * jumpForce, ForceMode.Impulse); // apply force to rb upwards
             anim.SetBool("Jump", true);
             AudioManager.instance.Play("Jump" + Random.Range(1, 3));
         }
@@ -125,13 +127,13 @@ public class MovementController : MonoBehaviour
             cameraLockOn.lockOn = !cameraLockOn.lockOn;
             if (!cameraLockOn.lockOn)
             {
-                cameraHolder.localRotation = Quaternion.identity;
+                cameraHolder.localRotation = Quaternion.identity; //rotate camera towards the location of the ball
             }
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            pv.RPC("HappyEmote", RpcTarget.AllBuffered);
+            pv.RPC("HappyEmote", RpcTarget.AllBuffered); 
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -145,7 +147,7 @@ public class MovementController : MonoBehaviour
         }
         if (recharging)
         {
-            dashGauge += Time.deltaTime;
+            dashGauge += Time.deltaTime; //recharge dash meter with each second
             UpdateUI(dashGauge / startDashGauge);
             if (dashGauge >= startDashGauge)
             {
@@ -193,10 +195,10 @@ public class MovementController : MonoBehaviour
             fpsCamera.transform.localEulerAngles = new Vector3(CurrentCameraUpAndDownRotation,0,0);
         }
     }
-
+    
     public IEnumerator StunCo()
     {
-        speed = 0f;
+        speed = 0f; // makes speed 0 to prevent player from moving when stunned
         anim.SetBool("Stun", true);
         stunFx.SetActive(true);
         stunText.SetActive(true);
@@ -216,7 +218,7 @@ public class MovementController : MonoBehaviour
         {
             if (d.isFlying == true && isStunned == false && !Input.GetKeyDown(KeyCode.E))
             {
-                KenaStun();
+                KenaStun(); // stun player when hit by fast moving ball
                 pv.RPC("PlayFx", RpcTarget.AllBuffered);
                 isStunned = true;
             }
@@ -226,7 +228,7 @@ public class MovementController : MonoBehaviour
     private void OnCollisionStay(Collision collision)
     {
         if (!pv.IsMine) return;
-        if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == "Ground") //check if player is on the ground
         {
             isGrounded = true;
         }
@@ -268,7 +270,7 @@ public class MovementController : MonoBehaviour
 
     public IEnumerator FxCo()
     {
-        AudioManager.instance.Play("Boing");
+        AudioManager.instance.Play("Boing"); //play sound effects n fx when hit by fast moving ball
         hitFx.SetActive(true);
         stunFx.SetActive(true);
         stunText.SetActive(true);

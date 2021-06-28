@@ -48,14 +48,14 @@ public class GrabAndThrow : MonoBehaviour
 
         if (pv.IsMine)
         {
-            if (Input.GetKeyDown(KeyCode.E) && !grabbing && !db.beingGrabbed && inRadius)
+            if (Input.GetKeyDown(KeyCode.E) && !grabbing && !db.beingGrabbed && inRadius) // allow player to grab ball when ball is not already grabbed
             {
                 grabbing = true;
                 movement.anim.SetBool("Pick Up", true);
                 db.pv.RPC("GrabReleaseBall", RpcTarget.AllBuffered, true, ballPositon.transform.position);
                 db.pv.RPC("EnableDisableRB", RpcTarget.MasterClient, true);
             }
-            else if (Input.GetKeyDown(KeyCode.E) && grabbing)
+            else if (Input.GetKeyDown(KeyCode.E) && grabbing) //throw ball when ball is grabbed and released
             {
                 grabbing = false;
                 movement.anim.SetBool("Pick Up", false);
@@ -89,7 +89,7 @@ public class GrabAndThrow : MonoBehaviour
         if (!pv.IsMine) return;
         if (other.TryGetComponent(out Dodgeball d))
         {
-            inRadius = true;
+            inRadius = true; //allow player to be able to grab the ball when near
             d.grabScript = this;
         }
     }

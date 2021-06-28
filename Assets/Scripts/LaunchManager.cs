@@ -55,7 +55,7 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     void Update()
     {
         if (!PhotonNetwork.IsConnected || !PhotonNetwork.InRoom) return;
-        if (PhotonNetwork.CurrentRoom.PlayerCount >= 2)
+        if (PhotonNetwork.CurrentRoom.PlayerCount >= 2) //only allow connect when 2 players in lobby
         {
             ConnectButton.SetActive(true);
         }
@@ -72,7 +72,7 @@ public class LaunchManager : MonoBehaviourPunCallbacks
 
     public void ConnectToPhotonServer()
     {
-        if (!PhotonNetwork.IsConnected)
+        if (!PhotonNetwork.IsConnected) //when player connects into a photon server 
         {
             am.Play("Click");
             PhotonNetwork.ConnectUsingSettings();
@@ -91,11 +91,11 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     public void EnterUsername()
     {
         am.Play("Click");
-        if (UsernameInput.text == "")
+        if (UsernameInput.text == "") // cannot proceed without entering a username
         {
             return;
         }
-        PhotonNetwork.NickName = UsernameInput.text;
+        PhotonNetwork.NickName = UsernameInput.text; //set photon nickname to input'd name
         UsernamePanel.SetActive(false);
         LobbyPanel.SetActive(true);
     }
@@ -111,7 +111,7 @@ public class LaunchManager : MonoBehaviourPunCallbacks
 
     #region Photon Callbacks
 
-    public override void OnConnectedToMaster()
+    public override void OnConnectedToMaster() // when player connects into photon server but have not joined room
     {
         am.Play("Click");
         Debug.Log(PhotonNetwork.NickName + " Connected to photon server.");
@@ -135,17 +135,17 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
         base.OnJoinRandomFailed(returnCode, message);
-        Debug.Log(message);
+        Debug.Log(message); //let dev know when error to connect to room
         CreateAndJoinRoom();
     }
 
-    public override void OnJoinedRoom()
+    public override void OnJoinedRoom() 
     {
         Debug.Log(PhotonNetwork.NickName + " joined to " + PhotonNetwork.CurrentRoom.Name);
 
         Player[] players = PhotonNetwork.PlayerList;
 
-        for (int i = 0; i < players.Length; i++)
+        for (int i = 0; i < players.Length; i++) // spawn a player name display for each player in the player list for current room joined
         {
             Instantiate(playerListPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(players[i]);
         }
@@ -154,23 +154,23 @@ public class LaunchManager : MonoBehaviourPunCallbacks
     }
 
 
-    public override void OnPlayerEnteredRoom(Player newPlayer)
+    public override void OnPlayerEnteredRoom(Player newPlayer) // run when a user has joined a photon room
     {
         Debug.Log(newPlayer.NickName + " joined to " + PhotonNetwork.CurrentRoom.Name + " "+ PhotonNetwork.CurrentRoom.PlayerCount);
         Instantiate(playerListPrefab, playerListContent).GetComponent<PlayerListItem>().SetUp(newPlayer);
     }
 
     [PunRPC]
-    public void EnterLevel()
+    public void EnterLevel() // enter gameplayer level 
     {
         am.Play("Click");
         PhotonNetwork.LoadLevel(1);
     }
 
-    public void OnClickConnect()
+    public void OnClickConnect() 
     {
         am.Play("Click");
-        photonView.RPC("EnterLevel", RpcTarget.AllBuffered);
+        photonView.RPC("EnterLevel", RpcTarget.AllBuffered); // ensure both players join load in the scene at the same time
     }
 
     public void DisconnectPlayer()
@@ -187,6 +187,8 @@ public class LaunchManager : MonoBehaviourPunCallbacks
         LobbyInfo.SetActive(false);
     }
 
+    // Below are all functions to navigate through the games UI menu screens
+    //vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
     public void OpenInstructions()
     {
         am.Play("Click");
@@ -238,6 +240,7 @@ public class LaunchManager : MonoBehaviourPunCallbacks
         Instructions2.SetActive(false);
     }
 
+    //--------------------------------------------------------------------------------------
 
 
 
