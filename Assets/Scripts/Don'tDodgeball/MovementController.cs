@@ -294,7 +294,9 @@ public class MovementController : MonoBehaviour
     public void HappyEmote()
     {
         happyEmote.SetActive(true);
+        sadEmote.SetActive(false);
         AudioManager.instance.Play("Laugh" + Random.Range(1, 3));
+        StartCoroutine(HappyCo());
     }
 
     IEnumerator HappyCo()
@@ -307,7 +309,9 @@ public class MovementController : MonoBehaviour
     public void SadEmote()
     {
         sadEmote.SetActive(true);
+        happyEmote.SetActive(false);
         AudioManager.instance.Play("Sad" + Random.Range(1, 3));
+        StartCoroutine(SadCo());
     }
 
     IEnumerator SadCo()
