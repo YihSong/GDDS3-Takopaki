@@ -25,16 +25,22 @@ public class EndScreenManager : MonoBehaviourPunCallbacks
 
     public void SetEndScreen(string _blueName, string _redName, bool redWon)
     {
-        blueName.text = _blueName;
+        //Change usernames in the scene to the player's usernames
+        blueName.text = _blueName; 
         redName.text = _redName;
+
+        //Set the red and blue side characters animations based on wether they won
         bluePlayer.SetBool("Winner", !redWon);
         redPlayer.SetBool("Winner", redWon);
+
+
         if (redWon)
         {
             winText.text = _redName + " WON";
             winText.color = Color.red;
             if (PhotonNetwork.IsMasterClient) //If we are blue
             {
+                //Play random voiceline out of the available ones
                 AudioManager.instance.Play("Lose" + Random.Range(1, 3));
             }
             else
@@ -74,7 +80,7 @@ public class EndScreenManager : MonoBehaviourPunCallbacks
         Application.Quit();
     }
 
-    public void ClickQuit()
+    public void ClickQuit() //Call RPC when we click the button and send it to all clients
     {
         photonView.RPC("QuitGame", RpcTarget.AllBuffered);
     }

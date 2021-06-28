@@ -26,10 +26,10 @@ public class DodgeballTarget : MonoBehaviour
     {
         if(cam == null)
         {
-            foreach (Camera c in FindObjectsOfType<Camera>())
+            foreach (Camera c in FindObjectsOfType<Camera>()) //Find all cameras in scene
             {
                 Debug.Log("Found a camera");
-                if (c.enabled)
+                if (c.enabled) //If camera is enabled, it's the camera on our local client
                 {
                     Debug.Log("Found our camera");
                     cam = c;
@@ -39,8 +39,8 @@ public class DodgeballTarget : MonoBehaviour
         }
         else
         {
-            Vector3 lookPos = new Vector3(cam.transform.position.y, healthBar.transform.parent.position.y, cam.transform.position.z);
-            healthBar.transform.parent.LookAt(lookPos);
+            Vector3 lookPos = new Vector3(cam.transform.position.y, healthBar.transform.parent.position.y, cam.transform.position.z); //Make sure LookAt doesnt make us rotate up or down
+            healthBar.transform.parent.LookAt(lookPos); //Look at the camera on our local client
         }
     }
 
@@ -49,7 +49,7 @@ public class DodgeballTarget : MonoBehaviour
     {
         health -= _damage;
         Debug.Log("Taking damage: " + _damage + "Remaining health: " + health);
-        healthBar.fillAmount = (float) health / startHealth;
+        healthBar.fillAmount = (float) health / startHealth; //Update health manager
         if(health <= 0)
         {
             StartCoroutine(BlowUp());
@@ -58,8 +58,8 @@ public class DodgeballTarget : MonoBehaviour
 
     IEnumerator BlowUp()
     {
-        Explosion();
-        yield return new WaitForSeconds(2.5f);
+        Explosion(); //Explosion fx
+        yield return new WaitForSeconds(2.5f); //Wait for explosion to finish before destroying
         Die();
     }
 
@@ -72,8 +72,8 @@ public class DodgeballTarget : MonoBehaviour
 
     void Die()
     {
-        ground.LoseTarget();
-        gameMaster.GainLoseTarget(isRed);
+        ground.LoseTarget(); //Tell the ground we died so it can change color
+        gameMaster.GainLoseTarget(isRed); //Tell the game master to update targets left based on wether we are red
         if (transform.parent)
         {
             Destroy(transform.parent.gameObject);

@@ -16,10 +16,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         if(Instance)
         {
-            Destroy(gameObject);
+            Destroy(gameObject); //make sure we are the only instance of this in the scene
             return;
         }
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject); //Make this object persist through all scenes
         Instance = this;
 
 
@@ -36,15 +36,15 @@ public class RoomManager : MonoBehaviourPunCallbacks
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-    void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
+    void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode) //Called when a scene is loaded
     {
-        if(scene.buildIndex == 1)
+        if(scene.buildIndex == 1) //Game scene
         {
-            PhotonNetwork.Instantiate(playerManager.name, Vector3.zero, Quaternion.identity);
+            PhotonNetwork.Instantiate(playerManager.name, Vector3.zero, Quaternion.identity); //In the game scene, spawn the player manager, which spawns the player
         }
-        else if (scene.buildIndex == 2)
+        else if (scene.buildIndex == 2) //end scene
         {
-            FindObjectOfType<EndScreenManager>().SetEndScreen(PhotonNetwork.PlayerList[0].NickName, PhotonNetwork.PlayerList[1].NickName, redWon);
+            FindObjectOfType<EndScreenManager>().SetEndScreen(PhotonNetwork.PlayerList[0].NickName, PhotonNetwork.PlayerList[1].NickName, redWon); //In the end scene,sets who won based on the game scene
         }
     }
 

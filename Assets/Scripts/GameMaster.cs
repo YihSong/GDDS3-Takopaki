@@ -42,75 +42,75 @@ public class GameMaster : MonoBehaviour
         {
             switch (state)
             {
-                case GameState.PREGAME:
-                    if (PhotonNetwork.CurrentRoom.PlayerCount < 2)
+                case GameState.PREGAME: //Before the game starts
+                    if (PhotonNetwork.CurrentRoom.PlayerCount < 2) //If we dont have enough players
                     {
-                        FindObjectOfType<MovementController>().disableInputs = true;
+                        FindObjectOfType<MovementController>().disableInputs = true; //Disable player movement
                         Debug.Log("Less than 2 players");
                     }
                     else
                     {
                         Debug.Log("Enough players to start");
-                        foreach (PlayerSetup ps in FindObjectsOfType<PlayerSetup>())
+                        foreach (PlayerSetup ps in FindObjectsOfType<PlayerSetup>()) //Look at all the players in the scene
                         {
-                            ps.photonView.RPC("EnableDisableInput", RpcTarget.AllBuffered, false);
+                            ps.photonView.RPC("EnableDisableInput", RpcTarget.AllBuffered, false); //Enable each player movement
                             Debug.Log("Enabling a player's movement");
                         }
                         Debug.Log("Changing state");
-                        AudioManager.instance.Stop("Main Menu BGM");
-                        AudioManager.instance.Play("In Game BGM");
-                        state = GameState.INGAME;
+                        AudioManager.instance.Stop("Main Menu BGM"); //Stop Main Menu BGM
+                        AudioManager.instance.Play("In Game BGM"); //Play Game BGM
+                        state = GameState.INGAME; //Change state to ingame
                     }
                     break;
-                case GameState.INGAME:
-                    timeLeft -= Time.deltaTime;
-                    pv.RPC("UpdateUI", RpcTarget.AllBuffered, timeLeft);
-                    if (redTargetsLeft <= 0)
+                case GameState.INGAME: //During play time
+                    timeLeft -= Time.deltaTime; //Deduct timeLeft by time passed between frame
+                    pv.RPC("UpdateUI", RpcTarget.AllBuffered, timeLeft); //Update the timer on both clients
+                    if (redTargetsLeft <= 0) //If all red targets got destroyed, red won
                     {
                         foreach (PlayerSetup ps in FindObjectsOfType<PlayerSetup>())
                         {
-                            ps.photonView.RPC("EnableDisableInput", RpcTarget.AllBuffered, true);
-                        }
-                        FindObjectOfType<RoomManager>().photonView.RPC("SetRedWon", RpcTarget.AllBuffered, false);
-                        if (PhotonNetwork.IsMasterClient)
+                            ps.photonView.RPC("EnableDisableInput", RpcTarget.AllBuffered, true); //Disable all players input
+                        } 
+                        FindObjectOfType<RoomManager>().photonView.RPC("SetRedWon", RpcTarget.AllBuffered, false); //Tell the end scene that blue won
+                        if (PhotonNetwork.IsMasterClient) //Make sure only the master client sends the RPC
                         {
-                            pv.RPC("LoadLevel", RpcTarget.AllBuffered);
+                            pv.RPC("LoadLevel", RpcTarget.AllBuffered); //Tell all clients to load the next scene
                         }
                         state = GameState.POSTGAME;
                     }
-                    else if(blueTargetsLeft <= 0)
+                    else if(blueTargetsLeft <= 0) //If all blue targets destroyed, blue lost
                     {
                         foreach (PlayerSetup ps in FindObjectsOfType<PlayerSetup>())
                         {
-                            ps.photonView.RPC("EnableDisableInput", RpcTarget.AllBuffered, true);
+                            ps.photonView.RPC("EnableDisableInput", RpcTarget.AllBuffered, true); //Disable all players input
                         }
-                        FindObjectOfType<RoomManager>().photonView.RPC("SetRedWon", RpcTarget.AllBuffered, true);
-                        if (PhotonNetwork.IsMasterClient)
+                        FindObjectOfType<RoomManager>().photonView.RPC("SetRedWon", RpcTarget.AllBuffered, true); //Tell the end scene that red won
+                        if (PhotonNetwork.IsMasterClient) //Make sure only the master client sends the RPC
                         {
-                            pv.RPC("LoadLevel", RpcTarget.AllBuffered);
+                            pv.RPC("LoadLevel", RpcTarget.AllBuffered); //Tell all clients to load the next scene
                         }
                         state = GameState.POSTGAME;
                     }
-                    if (timeLeft <= 0)
+                    if (timeLeft <= 0) //When play time is over
                     {
-                        if (scoreBar.fillAmount == 0.5f)
+                        if (scoreBar.fillAmount == 0.5f) //If the game is currently in a draw, enter overtime, first to break something wins
                         {
-                            pv.RPC("UpdateUIString", RpcTarget.AllBuffered, "OVERTIME!!");
+                            pv.RPC("UpdateUIString", RpcTarget.AllBuffered, "OVERTIME!!"); //Tell both clients to change timer to OVERTIME
                             AudioManager.instance.Stop("In Game BGM");
                             AudioManager.instance.Play("Overtime BGM");
-                            AudioManager.instance.overtime = true;
+                            AudioManager.instance.overtime = true; //Tell audiomanager we are in overtime for pausing and playing bgm
                             state = GameState.OVERTIME;
                         }
-                        else
+                        else //If the game is not in a draw, someone wins
                         {
                             foreach (PlayerSetup ps in FindObjectsOfType<PlayerSetup>())
                             {
                                 ps.photonView.RPC("EnableDisableInput", RpcTarget.AllBuffered, true);
                             }
-                            FindObjectOfType<RoomManager>().photonView.RPC("SetRedWon", RpcTarget.AllBuffered, scoreBar.fillAmount > 0.5f);
+                            FindObjectOfType<RoomManager>().photonView.RPC("SetRedWon", RpcTarget.AllBuffered, scoreBar.fillAmount > 0.5f); //Tell end screen who won based on score, score calculated by ratio of red targets to blue targets
                             if (PhotonNetwork.IsMasterClient)
                             {
-                                pv.RPC("LoadLevel", RpcTarget.AllBuffered);
+                                pv.RPC("LoadLevel", RpcTarget.AllBuffered); //Tell all clients to load next scene
                             }
                             state = GameState.POSTGAME;
                         }
@@ -119,13 +119,13 @@ public class GameMaster : MonoBehaviour
                 case GameState.POSTGAME:
                     break;
                 case GameState.OVERTIME:
-                    if(scoreBar.fillAmount != 0.5f)
+                    if(scoreBar.fillAmount != 0.5f) //Once someone breaks something, someone won
                     {
                         foreach (PlayerSetup ps in FindObjectsOfType<PlayerSetup>())
                         {
                             ps.photonView.RPC("EnableDisableInput", RpcTarget.AllBuffered, true);
                         }
-                        FindObjectOfType<RoomManager>().photonView.RPC("SetRedWon", RpcTarget.AllBuffered, scoreBar.fillAmount > 0.5f);
+                        FindObjectOfType<RoomManager>().photonView.RPC("SetRedWon", RpcTarget.AllBuffered, scoreBar.fillAmount > 0.5f); //Calculte who won and send to end screen
                         if (PhotonNetwork.IsMasterClient)
                         {
                             pv.RPC("LoadLevel", RpcTarget.AllBuffered);
@@ -184,13 +184,13 @@ public class GameMaster : MonoBehaviour
 
     public void ClickForfeit()
     {
-        if (PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.IsMasterClient) //if we are master client, we are blue
         {
-            Forfeit(true);
+            Forfeit(true); //GameMaster in masterclient handles everything so no RPC if we are master client
         }
-        else
+        else //If we are not master client, we are red
         {
-            pv.RPC("Forfeit", RpcTarget.MasterClient, false);
+            pv.RPC("Forfeit", RpcTarget.MasterClient, false); //Tell the game master in the master client that we forfeit
         }
     }
 
