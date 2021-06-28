@@ -151,7 +151,7 @@ public class GameMaster : MonoBehaviour
         }
         else
         {
-            blueTargetsLeft++;
+            blueTargetsLeft--;
         }
 
         float blue = (float)blueTargetsLeft;
