@@ -45,8 +45,7 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        //Don't destroy AudioManager so music doesn't get interrupted
-        //DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject);
 
         foreach (Sound s in sounds)
         {

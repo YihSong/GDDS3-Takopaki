@@ -55,6 +55,7 @@ public class GameMaster : MonoBehaviour
                             Debug.Log("Enabling a player's movement");
                         }
                         Debug.Log("Changing state");
+                        AudioManager.instance.Stop("Main Menu BGM");
                         AudioManager.instance.Play("In Game BGM");
                         state = GameState.INGAME;
                     }
@@ -62,11 +63,38 @@ public class GameMaster : MonoBehaviour
                 case GameState.INGAME:
                     timeLeft -= Time.deltaTime;
                     pv.RPC("UpdateUI", RpcTarget.AllBuffered, timeLeft);
+                    if (redTargetsLeft == 0)
+                    {
+                        foreach (PlayerSetup ps in FindObjectsOfType<PlayerSetup>())
+                        {
+                            ps.photonView.RPC("EnableDisableInput", RpcTarget.AllBuffered, true);
+                        }
+                        FindObjectOfType<RoomManager>().photonView.RPC("SetRedWon", RpcTarget.AllBuffered, false);
+                        if (PhotonNetwork.IsMasterClient)
+                        {
+                            pv.RPC("LoadLevel", RpcTarget.AllBuffered);
+                        }
+                        state = GameState.POSTGAME;
+                    }
+                    else if(blueTargetsLeft == 0)
+                    {
+                        foreach (PlayerSetup ps in FindObjectsOfType<PlayerSetup>())
+                        {
+                            ps.photonView.RPC("EnableDisableInput", RpcTarget.AllBuffered, true);
+                        }
+                        FindObjectOfType<RoomManager>().photonView.RPC("SetRedWon", RpcTarget.AllBuffered, true);
+                        if (PhotonNetwork.IsMasterClient)
+                        {
+                            pv.RPC("LoadLevel", RpcTarget.AllBuffered);
+                        }
+                        state = GameState.POSTGAME;
+                    }
                     if (timeLeft <= 0)
                     {
                         if (scoreBar.fillAmount == 0.5f)
                         {
                             pv.RPC("UpdateUIString", RpcTarget.AllBuffered, "OVERTIME!!");
+                            AudioManager.instance.Stop("In Game BGM");
                             AudioManager.instance.Play("Overtime BGM");
                             AudioManager.instance.overtime = true;
                             state = GameState.OVERTIME;

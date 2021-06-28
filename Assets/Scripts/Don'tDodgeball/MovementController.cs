@@ -54,6 +54,9 @@ public class MovementController : MonoBehaviour
 
     public bool disableInputs;
 
+    [SerializeField]CameraLockOn cameraLockOn;
+    [SerializeField] Transform cameraHolder;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -113,6 +116,15 @@ public class MovementController : MonoBehaviour
             anim.SetBool("Jump", false);
         }
 
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            cameraLockOn.lockOn = !cameraLockOn.lockOn;
+            if (!cameraLockOn.lockOn)
+            {
+                cameraHolder.localRotation = Quaternion.identity;
+            }
+        }
+
         if (recharging)
         {
             dashGauge += Time.deltaTime;
@@ -142,7 +154,7 @@ public class MovementController : MonoBehaviour
         float _cameraUpDownRotation = Input.GetAxis("Mouse Y")*lookSensitivity;
 
         //Apply rotation
-        RotateCamera(_cameraUpDownRotation);
+        if(!cameraLockOn.lockOn) RotateCamera(_cameraUpDownRotation);
     }
 
     //runs per physics iteration

@@ -60,37 +60,38 @@ MonoBehaviour:
     loop: 1
     clip: {fileID: 8300000, guid: 412c431fcf3c6984b9da96263b8d5f51, type: 3}
     volume: 0.5
-    pitch: 0
+    pitch: 1
     source: {fileID: 0}
   - name: In Game BGM
     loop: 1
     clip: {fileID: 8300000, guid: 156b51d532b93784e9fedce9e59f547e, type: 3}
     volume: 0.5
-    pitch: 0
+    pitch: 1
     source: {fileID: 0}
   - name: Overtime BGM
     loop: 1
     clip: {fileID: 8300000, guid: 7bde5c270a6786c48bf5273faf59e044, type: 3}
     volume: 0.5
-    pitch: 0
+    pitch: 1
     source: {fileID: 0}
   - name: Click
     loop: 0
     clip: {fileID: 8300000, guid: ab2e8ba262ca8b34ebed9863a649a6f9, type: 3}
-    volume: 0.5
-    pitch: 0
+    volume: 0.314
+    pitch: 1
     source: {fileID: 0}
   - name: Explode
     loop: 0
     clip: {fileID: 8300000, guid: a7fdbe5ad6202ed41b04608bddb391ca, type: 3}
     volume: 0.5
-    pitch: 0
+    pitch: 1
     source: {fileID: 0}
   - name: Boing
     loop: 0
     clip: {fileID: 8300000, guid: a7381669bfadcbc4ea93cde7bfd10a1b, type: 3}
     volume: 0.5
-    pitch: 0
+    pitch: 1
     source: {fileID: 0}
   muted: 0
+  overtime: 0
   muteX: {fileID: 0}
