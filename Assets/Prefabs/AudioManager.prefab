@@ -48,30 +48,30 @@ MonoBehaviour:
     loop: 0
     clip: {fileID: 8300000, guid: d7c4040670e28478fbd49fd9b6060ac8, type: 3}
     volume: 0.5
-    pitch: 0
+    pitch: 1
     source: {fileID: 0}
   - name: Laugh1
     loop: 0
     clip: {fileID: 8300000, guid: d42eccd24e0ee4aef80df9398ec0747c, type: 3}
     volume: 0.5
-    pitch: 0
+    pitch: 1
     source: {fileID: 0}
   - name: Main Menu BGM
     loop: 1
     clip: {fileID: 8300000, guid: 412c431fcf3c6984b9da96263b8d5f51, type: 3}
-    volume: 0.5
+    volume: 0.3
     pitch: 1
     source: {fileID: 0}
   - name: In Game BGM
     loop: 1
     clip: {fileID: 8300000, guid: 156b51d532b93784e9fedce9e59f547e, type: 3}
-    volume: 0.5
+    volume: 0.3
     pitch: 1
     source: {fileID: 0}
   - name: Overtime BGM
     loop: 1
     clip: {fileID: 8300000, guid: 7bde5c270a6786c48bf5273faf59e044, type: 3}
-    volume: 0.5
+    volume: 0.3
     pitch: 1
     source: {fileID: 0}
   - name: Click

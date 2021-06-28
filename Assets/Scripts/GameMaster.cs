@@ -154,7 +154,10 @@ public class GameMaster : MonoBehaviour
             blueTargetsLeft++;
         }
 
-        scoreBar.fillAmount = (float) (redTargetsLeft / blueTargetsLeft) / 2f;
+        float blue = (float)blueTargetsLeft;
+        float red = (float)redTargetsLeft;
+
+        scoreBar.fillAmount = (red / blue) / 2f;
     }
 
     [PunRPC]

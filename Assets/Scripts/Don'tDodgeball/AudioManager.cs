@@ -27,7 +27,7 @@ public class AudioManager : MonoBehaviour
     public Sound[] sounds;
     public static AudioManager instance;
     public bool muted;
-    public bool overtime;
+    public bool overtime = false;
 
     public GameObject muteX;
 
