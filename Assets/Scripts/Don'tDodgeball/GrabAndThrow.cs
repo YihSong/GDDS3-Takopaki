@@ -62,7 +62,7 @@ public class GrabAndThrow : MonoBehaviour
                 db.pv.RPC("GrabReleaseBall", RpcTarget.AllBuffered, false, Vector3.zero);
                 db.pv.RPC("EnableDisableRB", RpcTarget.MasterClient, false);
                 db.pv.RPC("ShootBall", RpcTarget.MasterClient, transform.forward * shootForce);
-                
+                AudioManager.instance.Play("Throw" + Random.Range(1, 4));
             }
             //else
             //{

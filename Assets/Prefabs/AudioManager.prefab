@@ -44,15 +44,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
-  - name: Sad Emote
+  - name: Sad1
     loop: 0
-    clip: {fileID: 8300000, guid: 92741238f51f73b4595f314c9a1f4297, type: 3}
+    clip: {fileID: 8300000, guid: d7c4040670e28478fbd49fd9b6060ac8, type: 3}
     volume: 0.5
     pitch: 0
     source: {fileID: 0}
-  - name: Laugh Emote
+  - name: Laugh1
     loop: 0
-    clip: {fileID: 8300000, guid: 7ec888b15c11d2a45bd2808a006490ca, type: 3}
+    clip: {fileID: 8300000, guid: d42eccd24e0ee4aef80df9398ec0747c, type: 3}
     volume: 0.5
     pitch: 0
     source: {fileID: 0}
@@ -89,6 +89,78 @@ MonoBehaviour:
   - name: Boing
     loop: 0
     clip: {fileID: 8300000, guid: a7381669bfadcbc4ea93cde7bfd10a1b, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: Laugh2
+    loop: 0
+    clip: {fileID: 8300000, guid: adf7488d7a7d741409ceb3f11b90852b, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: Throw1
+    loop: 0
+    clip: {fileID: 8300000, guid: 687990b2a12cc4b6db34fdeceb9b8636, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: Throw2
+    loop: 0
+    clip: {fileID: 8300000, guid: 01272370b6a6c46efa539424d1295436, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: Throw3
+    loop: 0
+    clip: {fileID: 8300000, guid: d4192b1c6089a4194ba8d1b217951774, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: Jump1
+    loop: 0
+    clip: {fileID: 8300000, guid: eed2451bbd4264da8b6c27c92df62faf, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: Jump2
+    loop: 0
+    clip: {fileID: 8300000, guid: 6ccbc3d284bd849d49fb1f8f94ab2888, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: Lose1
+    loop: 0
+    clip: {fileID: 8300000, guid: 84ee1f63e62794ce592a506085b8dd87, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: Lose2
+    loop: 0
+    clip: {fileID: 8300000, guid: 8b022f05317f74c7384d83d079aa4428, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: Win1
+    loop: 0
+    clip: {fileID: 8300000, guid: d721cf72523c74b5b937bd0a354fdd40, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: Win2
+    loop: 0
+    clip: {fileID: 8300000, guid: 8e0c119b1b4654fcf8a551a1bbf1f46f, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: Win3
+    loop: 0
+    clip: {fileID: 8300000, guid: 1fd7d2c354c86467cb0e57f86e88cdb9, type: 3}
+    volume: 0.5
+    pitch: 1
+    source: {fileID: 0}
+  - name: Sad2
+    loop: 0
+    clip: {fileID: 8300000, guid: 874dc2aadd4204ec1987fcd17f8d7fb8, type: 3}
     volume: 0.5
     pitch: 1
     source: {fileID: 0}

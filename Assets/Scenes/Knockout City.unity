@@ -562,6 +562,31 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7296626066634861680, guid: 757606ee8d1102744bfb3c187821f4fe,
+        type: 3}
+      propertyPath: sounds.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 7296626066634861680, guid: 757606ee8d1102744bfb3c187821f4fe,
+        type: 3}
+      propertyPath: sounds.Array.data[8].name
+      value: Laugh
+      objectReference: {fileID: 0}
+    - target: {fileID: 7296626066634861680, guid: 757606ee8d1102744bfb3c187821f4fe,
+        type: 3}
+      propertyPath: sounds.Array.data[8].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 7ec888b15c11d2a45bd2808a006490ca, type: 3}
+    - target: {fileID: 7296626066634861680, guid: 757606ee8d1102744bfb3c187821f4fe,
+        type: 3}
+      propertyPath: sounds.Array.data[8].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7296626066634861680, guid: 757606ee8d1102744bfb3c187821f4fe,
+        type: 3}
+      propertyPath: sounds.Array.data[8].pitch
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 757606ee8d1102744bfb3c187821f4fe, type: 3}
 --- !u!114 &69499687 stripped

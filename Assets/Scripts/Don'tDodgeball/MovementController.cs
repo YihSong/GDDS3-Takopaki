@@ -57,6 +57,9 @@ public class MovementController : MonoBehaviour
     [SerializeField]CameraLockOn cameraLockOn;
     [SerializeField] Transform cameraHolder;
 
+    public GameObject sadEmote;
+    public GameObject happyEmote;
+
     // Start is called before the first frame update
     private void Start()
     {
@@ -110,6 +113,7 @@ public class MovementController : MonoBehaviour
         {
             rb.AddForce(jump * jumpForce, ForceMode.Impulse);
             anim.SetBool("Jump", true);
+            AudioManager.instance.Play("Jump" + Random.Range(1, 3));
         }
         else
         {
@@ -125,6 +129,15 @@ public class MovementController : MonoBehaviour
             }
         }
 
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            pv.RPC("HappyEmote", RpcTarget.AllBuffered);
+        }
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            pv.RPC("SadEmote", RpcTarget.AllBuffered);
+        }
         if (recharging)
         {
             dashGauge += Time.deltaTime;
@@ -270,5 +283,31 @@ public class MovementController : MonoBehaviour
     public void KenaStun()
     {
         StartCoroutine("StunCo");
+    }
+
+    [PunRPC]
+    public void HappyEmote()
+    {
+        happyEmote.SetActive(true);
+        AudioManager.instance.Play("Laugh" + Random.Range(1, 3));
+    }
+
+    IEnumerator HappyCo()
+    {
+        yield return new WaitForSeconds(3f);
+        happyEmote.SetActive(false);
+    }
+
+    [PunRPC]
+    public void SadEmote()
+    {
+        sadEmote.SetActive(true);
+        AudioManager.instance.Play("Sad" + Random.Range(1, 3));
+    }
+
+    IEnumerator SadCo()
+    {
+        yield return new WaitForSeconds(3f);
+        sadEmote.SetActive(false);
     }
 }

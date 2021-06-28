@@ -33,11 +33,27 @@ public class EndScreenManager : MonoBehaviourPunCallbacks
         {
             winText.text = _redName + " WON";
             winText.color = Color.red;
+            if (PhotonNetwork.IsMasterClient) //If we are blue
+            {
+                AudioManager.instance.Play("Lose" + Random.Range(1, 3));
+            }
+            else
+            {
+                AudioManager.instance.Play("Win" + Random.Range(1, 4));
+            }
         }
         else
         {
             winText.text = _blueName + " WON";
             winText.color = Color.blue;
+            if (PhotonNetwork.IsMasterClient) //If we are blue
+            {
+                AudioManager.instance.Play("Win" + Random.Range(1, 3));
+            }
+            else
+            {
+                AudioManager.instance.Play("Lose" + Random.Range(1, 4));
+            }
         }
     }
 
