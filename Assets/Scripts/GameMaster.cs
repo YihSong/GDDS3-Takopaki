@@ -173,9 +173,9 @@ public class GameMaster : MonoBehaviour
     }
 
     [PunRPC]
-    public void Forfeit()
+    public void Forfeit(bool blueForfeit)
     {
-        if (PhotonNetwork.IsMasterClient)
+        if (blueForfeit)
         {
             blueTargetsLeft = 0;
         }
@@ -184,7 +184,14 @@ public class GameMaster : MonoBehaviour
 
     public void ClickForfeit()
     {
-        pv.RPC("Forfeit", RpcTarget.MasterClient);
+        if (PhotonNetwork.IsMasterClient)
+        {
+            Forfeit(true);
+        }
+        else
+        {
+            pv.RPC("Forfeit", RpcTarget.MasterClient, false);
+        }
     }
 
     public void ShowSettings()
