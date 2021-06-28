@@ -3768,7 +3768,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 101.93, y: -43.42}
+  m_AnchoredPosition: {x: 101.93, y: -28}
   m_SizeDelta: {x: 363.86877, y: 232.2442}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &866343176
@@ -3812,12 +3812,17 @@ MonoBehaviour:
 
 
 
+    Press [Q] to lock onto the
+    ball''s location when lost!
 
-    Hitting an opponent with
-    the ball will STUN.
 
 
-    Hitting a structure will DEAL DAMAGE to the struction.'
+
+    Hitting an opponent with the ball will STUN.
+
+
+    Hitting
+    a structure will DEAL DAMAGE to the struction.'
 --- !u!222 &866343177
 CanvasRenderer:
   m_ObjectHideFlags: 0
