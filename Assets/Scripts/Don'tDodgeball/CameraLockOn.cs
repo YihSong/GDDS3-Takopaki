@@ -17,7 +17,7 @@ public class CameraLockOn : MonoBehaviour
     {
         if (lockOn)
         {
-            Vector3 dir = dodgeball.transform.position - transform.position;
+            Vector3 dir = dodgeball.transform.position - transform.position; //calculate the angle of player cam from the ball
             dir.Normalize();
             Quaternion targetRotation = Quaternion.LookRotation(dir);
             transform.rotation = targetRotation;

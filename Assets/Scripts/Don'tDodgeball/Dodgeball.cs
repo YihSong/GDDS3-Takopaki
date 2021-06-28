@@ -45,7 +45,7 @@ public class Dodgeball : MonoBehaviour
     void Update()
     {
         if (!pv.IsMine) return;
-        if (rb.velocity.magnitude >= flyingThreshold)
+        if (rb.velocity.magnitude >= flyingThreshold) // when speed of rigidbody on ball is greater than threshhold, it will trigger stun function
         {
             Debug.Log("Ball is Flying");
             pv.RPC("SetFlying", RpcTarget.AllBuffered, true);
@@ -119,7 +119,7 @@ public class Dodgeball : MonoBehaviour
     {
         if (pv.IsMine)
         {
-            if(other.TryGetComponent(out DodgeballTarget target) && !beingGrabbed)
+            if(other.TryGetComponent(out DodgeballTarget target) && !beingGrabbed) //apply damage to structures when ball is flying
             {
                 target.GetComponent<PhotonView>().RPC("TakeDamage", RpcTarget.AllBuffered, damage);
             }
