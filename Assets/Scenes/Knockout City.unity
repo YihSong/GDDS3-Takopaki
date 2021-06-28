@@ -7630,7 +7630,7 @@ MonoBehaviour:
   timeLeft: 0
   timeLimit: 300
   timeText: {fileID: 598636045}
-  settings: {fileID: 0}
+  settings: {fileID: 574882285}
 --- !u!114 &1010834467
 MonoBehaviour:
   m_ObjectHideFlags: 0

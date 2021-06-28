@@ -12,7 +12,7 @@ public class GameMaster : MonoBehaviour
 
     public PhotonView pv;
     [SerializeField] Image scoreBar;
-    int redTargetsLeft;
+    [SerializeField] int redTargetsLeft;
     int blueTargetsLeft;
     [SerializeField] int redTargets = 12;
     public enum GameState { PREGAME, INGAME, POSTGAME, OVERTIME }
@@ -153,7 +153,8 @@ public class GameMaster : MonoBehaviour
         {
             blueTargetsLeft++;
         }
-        scoreBar.fillAmount = (float) (redTargetsLeft / blueTargetsLeft) / 2;
+
+        scoreBar.fillAmount = (float) (redTargetsLeft / blueTargetsLeft) / 2f;
     }
 
     [PunRPC]
