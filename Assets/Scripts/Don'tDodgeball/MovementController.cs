@@ -138,6 +138,11 @@ public class MovementController : MonoBehaviour
         {
             pv.RPC("SadEmote", RpcTarget.AllBuffered);
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            FindObjectOfType<GameMaster>().ShowSettings();
+        }
         if (recharging)
         {
             dashGauge += Time.deltaTime;

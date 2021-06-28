@@ -21,11 +21,13 @@ public class GameMaster : MonoBehaviour
     [SerializeField] float timeLimit = 120f;
     [SerializeField] Text timeText;
 
+    public GameObject settings;
 
     void Start()
     {
         pv = GetComponent<PhotonView>();
         redTargetsLeft = 6;
+        blueTargetsLeft = 6;
         if (pv.IsMine)
         {
             state = GameState.PREGAME;
@@ -63,7 +65,7 @@ public class GameMaster : MonoBehaviour
                 case GameState.INGAME:
                     timeLeft -= Time.deltaTime;
                     pv.RPC("UpdateUI", RpcTarget.AllBuffered, timeLeft);
-                    if (redTargetsLeft == 0)
+                    if (redTargetsLeft <= 0)
                     {
                         foreach (PlayerSetup ps in FindObjectsOfType<PlayerSetup>())
                         {
@@ -76,7 +78,7 @@ public class GameMaster : MonoBehaviour
                         }
                         state = GameState.POSTGAME;
                     }
-                    else if(blueTargetsLeft == 0)
+                    else if(blueTargetsLeft <= 0)
                     {
                         foreach (PlayerSetup ps in FindObjectsOfType<PlayerSetup>())
                         {
@@ -164,5 +166,25 @@ public class GameMaster : MonoBehaviour
     public void UpdateUIString(string text)
     {
         timeText.text = text;
+    }
+
+    [PunRPC]
+    public void Forfeit()
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            blueTargetsLeft = 0;
+        }
+        else redTargetsLeft = 0;
+    }
+
+    public void ClickForfeit()
+    {
+        pv.RPC("Forfeit", RpcTarget.MasterClient);
+    }
+
+    public void ShowSettings()
+    {
+        settings.SetActive(true);
     }
 }
