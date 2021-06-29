@@ -57,8 +57,9 @@ public class GameMaster : MonoBehaviour
                             Debug.Log("Enabling a player's movement");
                         }
                         Debug.Log("Changing state");
-                        AudioManager.instance.Stop("Main Menu BGM"); //Stop Main Menu BGM
-                        AudioManager.instance.Play("In Game BGM"); //Play Game BGM
+                        pv.RPC("PlayIGBgm", RpcTarget.AllBuffered);
+                        //AudioManager.instance.Stop("Main Menu BGM"); //Stop Main Menu BGM
+                        //AudioManager.instance.Play("In Game BGM"); //Play Game BGM
                         state = GameState.INGAME; //Change state to ingame
                     }
                     break;
@@ -180,6 +181,13 @@ public class GameMaster : MonoBehaviour
             blueTargetsLeft = 0;
         }
         else redTargetsLeft = 0;
+    }
+
+    [PunRPC]
+    public void PlayIGBgm()
+    {
+        AudioManager.instance.Stop("Main Menu BGM"); //Stop Main Menu BGM
+        AudioManager.instance.Play("In Game BGM"); //Play Game BGM
     }
 
     public void ClickForfeit()
