@@ -44,8 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ae0b6e28780f5348905e1dc76343a26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawnPos1: {x: 0, y: 1.75, z: -40}
-  spawnPos2: {x: 0, y: 1.75, z: 40}
+  spawnPos1: {x: 0, y: 1.75, z: -35}
+  spawnPos2: {x: 0, y: 1.75, z: 35}
   playerPrefab: {fileID: 7514343211623398034, guid: 0cd15839154d0a441b00313dc881a7b7,
     type: 3}
 --- !u!114 &5541928077134041818
